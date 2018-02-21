@@ -1,4 +1,4 @@
-
+package model;
 public class Task {
 
 	int duedate = 0;
