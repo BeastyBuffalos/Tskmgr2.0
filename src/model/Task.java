@@ -5,7 +5,7 @@ public class Task {
 
 	String name = " ";
 
-	String type = " "; 
+	String type = " ";
 
 	int hourstodo = 0;
 
