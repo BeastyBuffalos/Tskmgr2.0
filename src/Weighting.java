@@ -1,5 +1,4 @@
-import Structures.OrderedPQ;
-
+import model.*;
 public class Weighting {
 	static Task task;
 	

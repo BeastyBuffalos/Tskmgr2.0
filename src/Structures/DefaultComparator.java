@@ -1,6 +1,5 @@
 package Structures;
 
-
 import java.util.Comparator;
 
 public class DefaultComparator<K> implements Comparator<K> {
