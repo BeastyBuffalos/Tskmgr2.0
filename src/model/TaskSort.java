@@ -1,3 +1,4 @@
+package model;
 import Structures.OrderedPQ;
 import Structures.PQEntry;
 import model.*;

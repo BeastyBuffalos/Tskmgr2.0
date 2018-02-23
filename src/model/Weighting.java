@@ -1,4 +1,4 @@
-import model.*;
+package model;
 public class Weighting {
 	static Task task;
 	

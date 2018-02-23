@@ -1,3 +1,4 @@
+package model;
 import Structures.OrderedPQ;
 /*
 public final class Singleton<K, V> {
