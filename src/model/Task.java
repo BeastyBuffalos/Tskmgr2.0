@@ -1,7 +1,10 @@
 package model;
 public class Task {
 
-	int duedate = 0;
+	int duedate = 0; //https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.html
+					//https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.Builder.html
+	
+	int difficulty = 0;
 
 	String name = " ";
 
@@ -11,13 +14,14 @@ public class Task {
 
 	boolean complete = false;
 
-	public Task(String name1, String type1, int due, int hours, boolean comp) {
+	public Task(String name1, String type1, int due, int hours, boolean comp, int diff) {
 		
 		name = name1;
 		type = type1;
 		duedate = due;
 		hourstodo = hours;
 		complete = comp;
+		difficulty = diff;
 
 	}
 
@@ -69,6 +73,18 @@ public class Task {
 
 	}
 
+	public void setDifficulty(int diff) {
+
+		difficulty = diff;
+
+	}
+	
+	public int getDifficulty() {
+
+		return difficulty;
+
+	}
+	
 	public void setType(String typeis) {
 
 		type = typeis;
