@@ -1,7 +1,8 @@
 package model;
 public class Task {
 
-	int duedate = 0;
+	int duedate = 0; //https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.html
+					//https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.Builder.html
 	
 	int difficulty = 0;
 
