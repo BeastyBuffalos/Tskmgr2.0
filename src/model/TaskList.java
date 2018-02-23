@@ -17,10 +17,7 @@ public class TaskList {
 	}
 	
 	public void insertTask(Task task){
-		OrderedPQ pq = Singleton.INSTANCE.getPQ();
-		tasks.insert(Weighting.alg(task.getDifficulty(), task.getDue(), task.getHours(), task.getType(), task.getComplete()),task);
-		Singleton.INSTANCE.setPQ(pq);
-		return pq;
+		tasks.insert(weight(task),task);
 	}
 	
 	public OrderedPQ<K, V> removeTask(Task task){
@@ -46,14 +43,28 @@ public class TaskList {
 			if (removed.getValue() != task)
 				pq2.insert(removed.getKey(), removed.getValue());
 			else{
-				pq.insert(Weighting.alg(task.getDifficulty(), task.getDue(), task.getHours(), task.getType(), task.getComplete()),task);
+				tasks.insert(weight(task),task);
 			}
 		}
 		Singleton.INSTANCE.setPQ(pq2);
 		return pq2;
 	}
 
+	private double weight(Task task){
+		int difficulty = task.getDifficulty();
+		int duedate = task.getDue();
+		int time = task.getHours();
+		String tasktype = task.getType();
+		boolean isComplete = task.getComplete();
+		
+		if (task.getComplete()){
+			return 0;
+		}
 
+		//Temporary weighting, to be adjusted at a later date or possibly by users convienience
+		return (difficulty * 2) + (10 / duedate) + (time * 2);
+	}
+	
 	/**
 	 * 
 	 * @author ejoverwe

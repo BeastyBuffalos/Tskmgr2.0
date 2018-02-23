@@ -13,6 +13,8 @@ public class Task {
 	int hourstodo = 0;
 
 	boolean complete = false;
+	
+	private boolean moved = false;
 
 	public Task(String name1, String type1, int due, int hours, boolean comp, int diff) {
 		
@@ -115,4 +117,8 @@ public class Task {
 
 	}
 
+	protected boolean getMoved()
+	{
+		return moved;
+	}
 }
