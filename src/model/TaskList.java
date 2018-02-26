@@ -10,44 +10,48 @@ import Structures.PQEntry;
  *
  */
 public class TaskList {
-	OrderedPQ tasks = new OrderedPQ();
+	
+	private final Comparator<Task> c = (Task t1, Task t2) -> 
+	{
+		return (weight(t1) < weight(t2)) ? -1 : ((weight(t1) == weight(t2)) ? 0 : -1);
+	};
+	private OrderedPQ<Task, TaskWrapper> tasks = new OrderedPQ<Task, TaskWrapper>(c);
 	
 	public TaskList() {
 		//TODO
 	}
 	
 	public void insertTask(Task task){
-		tasks.insert(weight(task),task);
+		tasks.insert(task, new TaskWrapper(task));
 	}
 	
-	public OrderedPQ<K, V> removeTask(Task task){
-		OrderedPQ pq = Singleton.INSTANCE.getPQ();
-		int size1 = pq.size();
-		OrderedPQ<K,V> pq2 = new OrderedPQ<K,V>();
-		while(!(pq.isEmpty())){
-			PQEntry<K,V> removed = pq.removeMin();
-			if (removed.getValue() != task)
+	public Task removeTask(Task task){
+		int size1 = tasks.size();
+		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task, TaskWrapper>(c);
+		while(!(tasks.isEmpty())){
+			PQEntry<Task,TaskWrapper> removed = tasks.removeMin();
+			if (removed.getValue().get() != task)
 				pq2.insert(removed.getKey(), removed.getValue());
 		}
-		if (pq.size() == size1)
+		if (tasks.size() == size1)
 			System.out.println("Invalid task to remove.");
-		Singleton.INSTANCE.setPQ(pq2);
-		return pq2;
+		tasks = pq2;
+		return task;
 	}
 	
-	public OrderedPQ<K, V> editTask(Task task, String name1, String type1, int due, int hours, boolean comp, int diff){
+	public Task editTask(Task task, String name1, String type1, int due, int hours, boolean comp, int diff){
 		OrderedPQ pq = Singleton.INSTANCE.getPQ();
-		OrderedPQ<K,V> pq2 = new OrderedPQ<K,V>();
+		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task,TaskWrapper>(c);
 		while(!(pq.isEmpty())){
-			PQEntry<K,V> removed = pq.removeMin();
-			if (removed.getValue() != task)
+			PQEntry<Task,TaskWrapper> removed = pq.removeMin();
+			if (removed.getValue().get() != task)
 				pq2.insert(removed.getKey(), removed.getValue());
 			else{
-				tasks.insert(weight(task),task);
+				tasks.insert(task,new TaskWrapper(task));
 			}
 		}
 		Singleton.INSTANCE.setPQ(pq2);
-		return pq2;
+		return task;
 	}
 
 	private double weight(Task task){
