@@ -14,7 +14,9 @@ public class Task {
 
 	boolean complete = false;
 	
-	private boolean moved = false;
+	boolean isOverride = false;
+	
+	double override = 0;
 
 	public Task(String name1, String type1, int due, int hours, boolean comp, int diff) {
 		
