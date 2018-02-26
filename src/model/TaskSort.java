@@ -34,7 +34,7 @@ public class TaskSort<K, V> {
 			if (removed.getValue() != task)
 				pq2.insert(removed.getKey(), removed.getValue());
 			else{
-				pq.insert(Weighting.alg(task.getDifficulty(), task.getDue(), task.getHours(), task.getType(), task.getComplete()),task);
+				//pq2.insert(Weighting.alg(task.getDifficulty(), task.getDue(), task.getHours(), task.getType(), task.getComplete()),task);
 			}
 		}
 		Singleton.INSTANCE.setPQ(pq2);
