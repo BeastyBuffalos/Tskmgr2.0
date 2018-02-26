@@ -39,6 +39,7 @@ public class TaskList {
 		return task;
 	}
 	
+	//TODO
 	public Task editTask(Task task, String name1, String type1, int due, int hours, boolean comp, int diff){
 		OrderedPQ pq = Singleton.INSTANCE.getPQ();
 		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task,TaskWrapper>(c);
