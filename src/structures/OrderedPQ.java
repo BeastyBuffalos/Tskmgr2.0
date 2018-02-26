@@ -1,4 +1,4 @@
-package Structures;
+package structures;
 import java.util.Comparator;
 /**
  * A PriorityQueue based on an ordered Doubly Linked List. 
