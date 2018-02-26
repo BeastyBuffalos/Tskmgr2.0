@@ -2,8 +2,8 @@ package model;
 
 import java.util.*;
 
-import structures.OrderedPQ;
-import structures.PQEntry;
+import Structures.OrderedPQ;
+import Structures.PQEntry;
 
 /**
  * 

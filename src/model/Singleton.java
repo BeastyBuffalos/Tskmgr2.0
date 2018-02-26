@@ -1,5 +1,5 @@
 package model;
-import structures.OrderedPQ;
+import Structures.OrderedPQ;
 
 public enum Singleton{
 
