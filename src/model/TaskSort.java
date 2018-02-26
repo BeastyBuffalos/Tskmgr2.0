@@ -1,7 +1,7 @@
 package model;
-import Structures.OrderedPQ;
-import Structures.PQEntry;
 import model.*;
+import structures.OrderedPQ;
+import structures.PQEntry;
 public class TaskSort<K, V> {
 
 	public OrderedPQ<K, V> insertTask(Task task){
