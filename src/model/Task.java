@@ -4,19 +4,19 @@ public class Task {
 	int duedate = 0; //https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.html
 					//https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.Builder.html
 	
-	int difficulty = 0;
+	private int difficulty = 0;
 
-	String name = " ";
+	private String name = " ";
 
 	String type = " ";
 
-	int hourstodo = 0;
+	private int hourstodo = 0;
 
 	boolean complete = false;
 	
-	boolean isOverride = false;
+	private boolean isOverride = false;
 	
-	double override = 0;
+	private double weightOverride = 0;
 
 	public Task(String name1, String type1, int due, int hours, boolean comp, int diff) {
 		
@@ -119,8 +119,16 @@ public class Task {
 
 	}
 
-	protected boolean getMoved()
+	protected boolean isOverride()
 	{
-		return moved;
+		return isOverride;
+	}
+	
+	public void setWeightOverride(double weight){
+		weightOverride = weight;
+	}
+	
+	public double getWeightOverride(){
+		return weightOverride;
 	}
 }
