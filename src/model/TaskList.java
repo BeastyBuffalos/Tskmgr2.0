@@ -13,7 +13,7 @@ public class TaskList {
 	
 	private final Comparator<Task> c = (Task t1, Task t2) -> 
 	{
-		return (weight(t1) < weight(t2)) ? -1 : ((weight(t1) == weight(t2)) ? 0 : -1);
+		return (weight(t1) < weight(t2)) ? -1 : ((weight(t1) == weight(t2)) ? 0 : 1);
 	};
 	private OrderedPQ<Task, TaskWrapper> tasks = new OrderedPQ<Task, TaskWrapper>(c);
 	
@@ -40,10 +40,11 @@ public class TaskList {
 	}
 	
 	//TODO
-	public Task editTask(Task task, String name1, String type1, int due, int hours, boolean comp, int diff){
-		OrderedPQ pq = Singleton.INSTANCE.getPQ();
+	public Task editTask(Task task, 
+			String name1, String type1, int due, int hours, boolean comp, int diff){
+		Task newTask = task.clone();
 		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task,TaskWrapper>(c);
-		while(!(pq.isEmpty())){
+		while(!(tasks.isEmpty())){
 			PQEntry<Task,TaskWrapper> removed = pq.removeMin();
 			if (removed.getValue().get() != task)
 				pq2.insert(removed.getKey(), removed.getValue());
@@ -51,7 +52,6 @@ public class TaskList {
 				tasks.insert(task,new TaskWrapper(task));
 			}
 		}
-		Singleton.INSTANCE.setPQ(pq2);
 		return task;
 	}
 
@@ -79,7 +79,7 @@ public class TaskList {
 	{
 		private Task t;
 		private int pos = 0;
-		private boolean moved = false; 
+		private boolean moved = false;
 		public TaskWrapper(Task t)
 		{
 			this.t = t;
