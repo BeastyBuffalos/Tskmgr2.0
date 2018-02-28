@@ -1,4 +1,4 @@
-package model;
+package view;
 import java.util.Scanner;
 public class View {
 
@@ -74,8 +74,16 @@ public class View {
 	 protected void edit( String edit, View thetest//, the tasklist
 			 ) {
 		
+		 System.out.println("Which Task would you like to edit?");
 		 
+		 Scanner scanin = new Scanner(System.in);
 		 
+		 String wtask = scanin.nextLine();
+		 
+		 for(int i = 0; i < 25; //the tasklist.size
+				 i++) {
+			 
+		 }
 	 }
 	 
 	 protected void info( String info, View thetest) {
