@@ -1,23 +1,29 @@
 package view;
+import controller.TaskMgrDriver;
 import java.util.Scanner;
 public class View {
 
 	//testingme thetest = new testingme();
 	
-	public View ()
+	private TaskMgrDriver controller;
+	
+	public View ( TaskMgrDriver controller)
 	{
-		
+		this.controller = controller;
 	}
 	
-	 public static void main( String [ ] args ) {
-		
-		 View thetest = new View();
-		 thetest.starter(thetest//, the tasklist
-				 );
-		 
-	 }
+	//remove this method, call starter through 
 	
-	protected void starter( View thetest//, the tasklist
+	
+//	public static void main(String[] args) {
+//
+//		View thetest = new View();
+//		thetest.starter(thetest// , the tasklist
+//		);
+//
+//	}
+
+	public void starter( View thetest//, the tasklist
 			) {
 		Scanner scanin = new Scanner(System.in);
 		 System.out.println("Welcome to TaskManager 2.0, would you like to make a new task,"
@@ -82,6 +88,18 @@ public class View {
 		 
 		 for(int i = 0; i < 25; //the tasklist.size
 				 i++) {
+			
+			 if( wtask.contains("w") //tasklist.getname
+					 ) {
+				 
+				 //
+				 System.out.println("What would you like to change about it? Name, Date, Time Expected");
+				 
+				 String ctask = scanin.nextLine();
+				 
+				 
+				 break;
+			 }
 			 
 		 }
 	 }
