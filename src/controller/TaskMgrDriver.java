@@ -10,14 +10,17 @@ import view.View;
  *
  */
 public class TaskMgrDriver {
-	private TaskList tasks = new TaskList();
-	private View ui = new View();
+	private TaskList tasks;
+	private View ui;
 	
 	/**
 	 * 
 	 */
 	private TaskMgrDriver() {
-		
+		tasks = new TaskList();
+		ui = new View(this);
+		//TODO remainder of initialization code
+		ui.starter(ui);
 	}
 
 	/**
@@ -25,6 +28,6 @@ public class TaskMgrDriver {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+		TaskMgrDriver t = new TaskMgrDriver();
 	}
 }
