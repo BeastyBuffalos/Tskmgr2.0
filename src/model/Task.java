@@ -2,8 +2,8 @@ package model;
 public class Task {
 
 	int duedate = 0; //https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.html
-					//https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.Builder.html
-	
+	//https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.Builder.html
+
 	private int difficulty = 0;
 
 	private String name = " ";
@@ -13,13 +13,13 @@ public class Task {
 	private int hourstodo = 0;
 
 	boolean complete = false;
-	
+
 	private boolean isOverride = false;
-	
+
 	private double weightOverride = 0;
 
 	public Task(String name1, String type1, int due, int hours, boolean comp, int diff) {
-		
+
 		name = name1;
 		type = type1;
 		duedate = due;
@@ -82,13 +82,13 @@ public class Task {
 		difficulty = diff;
 
 	}
-	
+
 	public int getDifficulty() {
 
 		return difficulty;
 
 	}
-	
+
 	public void setType(String typeis) {
 
 		type = typeis;
@@ -119,15 +119,14 @@ public class Task {
 
 	}
 
-	protected boolean isOverride()
-	{
+	protected boolean isOverride(){
 		return isOverride;
 	}
-	
+
 	public void setWeightOverride(double weight){
 		weightOverride = weight;
 	}
-	
+
 	public double getWeightOverride(){
 		return weightOverride;
 	}

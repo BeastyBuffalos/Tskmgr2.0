@@ -1,3 +1,4 @@
+/*
 package model;
 public class Weighting {
 	static Task task;
@@ -16,3 +17,4 @@ public class Weighting {
 		return (difficulty * 2) + (10 / duedate) + (time * 2);
 	}
 }
+*/
