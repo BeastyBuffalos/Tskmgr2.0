@@ -1,5 +1,7 @@
 package view;
 import controller.TaskMgrDriver;
+import model.Task;
+
 import java.util.Scanner;
 public class View {
 
@@ -22,17 +24,16 @@ public class View {
 //		);
 //
 //	}
+	
 
-	public void starter( View thetest//, the tasklist
-			) {
+	public void starter( View thetest, Iterable<Task> taskList) {
 		Scanner scanin = new Scanner(System.in);
 		 System.out.println("Welcome to TaskManager 2.0, would you like to make a new task,"
 		 		+ " or would you like to see your existing tasks?");
 		 String pref = scanin.nextLine();
 		 
 		 if( pref.contains("Existing") || pref.contains("existing")) {
-			 thetest.Exist(pref, thetest//, the tasklist
-					 );
+			 thetest.Exist(pref, thetest, taskList);
 		 } else if ( pref.contains("New") || pref.contains("new")) {
 			 thetest.NewT(pref, thetest);
 		 } else {
@@ -42,8 +43,7 @@ public class View {
 		 scanin.close();
 	}
 	
-	 protected void Exist( String preference, View thetest//, the tasklist
-			 ) {
+	 protected void Exist( String preference, View thetest, Iterable<Task> taskList) {
 		 //System.out.println("Good job, existing stuff");
 		 Scanner scanin = new Scanner(System.in);
 		 System.out.println("Here are the current existing tasks:");
@@ -58,15 +58,13 @@ public class View {
 		 String editinfo = scanin.nextLine();
 		 
 		 if( editinfo.contains("Edit") || editinfo.contains("edit")) {
-			edit(editinfo, thetest//, the tasklist
-					);
+			edit(editinfo, thetest, taskList);
 		 } else if ( editinfo.contains("Info") || editinfo.contains("info")) {
-			 info(editinfo, thetest//, the tasklist
-					 );
+			 info(editinfo, thetest, taskList);
 		 } else {
 			 System.out.println("I'm sorry that is not a valid request. We will return you "
 			 		+ "to the beginning of the program.");
-			 starter(thetest);
+			 starter(thetest, taskList);
 		 }
 		 
 		 scanin.close();
@@ -77,8 +75,7 @@ public class View {
 	 }
 	 
 	 
-	 protected void edit( String edit, View thetest//, the tasklist
-			 ) {
+	 protected void edit( String edit, View thetest, Iterable<Task> taskList) {
 		
 		 System.out.println("Which Task would you like to edit?");
 		 
@@ -97,6 +94,29 @@ public class View {
 				 
 				 String ctask = scanin.nextLine();
 				 
+				 if( ctask.contains("name") || ctask.contains("Name")) {
+					 
+					 
+				 } else if( ctask.contains("date") || ctask.contains("Date")) {
+					 
+					 
+				 } else if( ctask.contains("Time expected") || ctask.contains("time expected") || ctask.contains("Time Expected")) {
+					 
+					 
+				 } else if( ctask.contains("Difficulty") || ctask.contains("difficulty")) {
+					 
+					 
+				 } else if( ctask.contains("Type") || ctask.contains("type")) {
+					 
+					 
+				 } else if( ctask.contains("Complete") || ctask.contains("complete")) {
+					 
+					 
+				 } else {
+					 System.out.println("I'm sorry that is not a valid request. We will return you "
+						 		+ "to the beginning of the program.");
+						 starter(thetest, taskList);
+				 }
 				 
 				 break;
 			 }
@@ -104,7 +124,7 @@ public class View {
 		 }
 	 }
 	 
-	 protected void info( String info, View thetest) {
+	 protected void info( String info, View thetest, Iterable<Task> taskList) {
 		 
 	 }
 }
