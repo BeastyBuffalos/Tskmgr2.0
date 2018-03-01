@@ -72,6 +72,30 @@ public class View {
 	 
 	 protected void NewT ( String preference, View thetest) {
 		 System.out.println("Hey new task, awesome!");
+		 
+		 Scanner scanin = new Scanner(System.in);
+		 
+		 System.out.println("What will the task's name be?");
+		 String taskName = scanin.nextLine();
+		 
+		 System.out.println("What type of task is is?");
+		 String taskType = scanin.nextLine();
+		 
+		 System.out.println("What is the due date?");
+		 String d = scanin.nextLine();
+		 int taskDue = Integer.parseInt(d);
+		 
+		 System.out.println("How many hours do you expect the task to take?");
+		 String h = scanin.nextLine();
+		 int taskHours = Integer.parseInt(h);
+		 
+		 System.out.println("What is the difficulty on a scale of 1 to 10, 10 being most difficult?");
+		 String di = scanin.nextLine();
+		 int taskDiff = Integer.parseInt(di);
+		 
+		 boolean comp = false;
+		 
+		 
 	 }
 	 
 	 
@@ -88,29 +112,62 @@ public class View {
 			
 			 if( wtask.contains("w") //tasklist.getname
 					 ) {
+				 Task task = wtask;
+				 String name = task.getName();
+				 String type = task.getType();
+				 int due = task.getDue();
+				 int hours = task.getHours();
+				 boolean comp = task.getComplete();
+				 int diff = task.getDifficulty();
 				 
-				 //
 				 System.out.println("What would you like to change about it? Name, Date, Time Expected");
 				 
 				 String ctask = scanin.nextLine();
 				 
 				 if( ctask.contains("name") || ctask.contains("Name")) {
-					 
+					 System.out.println("What will the new name be?");
+					 String newName = scanin.nextLine();
+					 TaskMgrDriver.editTask(task, newName, type, due, hours, comp, diff);
+					 System.out.println("Name updated");
 					 
 				 } else if( ctask.contains("date") || ctask.contains("Date")) {
-					 
+					 System.out.println("What will the new date be?");
+					 String date = scanin.nextLine();
+					 int newDate = Integer.parseInt(date);
+					 TaskMgrDriver.editTask(task, name, type, newDate, hours, comp, diff);
+					 System.out.println("Date updated");
 					 
 				 } else if( ctask.contains("Time expected") || ctask.contains("time expected") || ctask.contains("Time Expected")) {
-					 
+					 System.out.println("What is the new time expected?");
+					 String time = scanin.nextLine();
+					 int newTime = Integer.parseInt(time);
+					 TaskMgrDriver.editTask(task, name, type, due, newTime, comp, diff);
+					 System.out.println("Expected time updated");
 					 
 				 } else if( ctask.contains("Difficulty") || ctask.contains("difficulty")) {
-					 
+					 System.out.println("What is the new difficulty?");
+					 String difficulty = scanin.nextLine();
+					 TaskMgrDriver.editTask(task, name, type, due, hours, comp, difficulty);
+					 System.out.println("Difficulty updated");
 					 
 				 } else if( ctask.contains("Type") || ctask.contains("type")) {
-					 
+					 System.out.println("What is the new task type?");
+					 String newType = scanin.nextLine();
+					 TaskMgrDriver.editTask(task, name, newType, due, hours, comp, diff);
+					 System.out.println("Type updated");
 					 
 				 } else if( ctask.contains("Complete") || ctask.contains("complete")) {
-					 
+					 System.out.println("Is the task completed?");
+					 String comp = scanin.nextLine();
+					 if( comp.contains("Yes") || comp.contains("yes") ) {
+						 boolean complete = true;
+						 TaskMgrDriver.editTask(task, name, type, due, hours, complete, diff);
+						 System.out.println("Task marked as completed");
+					 } else {
+						 boolean complete = false;
+						 TaskMgrDriver.editTask(task, name, type, due, hours, complete, diff);
+						 System.out.println("Task marked as not completed");
+					 }
 					 
 				 } else {
 					 System.out.println("I'm sorry that is not a valid request. We will return you "
