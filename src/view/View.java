@@ -6,12 +6,13 @@ import java.util.Scanner;
 public class View {
 
 	//testingme thetest = new testingme();
-	
 	private TaskMgrDriver controller;
+	private Iterable<Task> tasks;
 	
 	public View ( TaskMgrDriver controller)
 	{
 		this.controller = controller;
+		tasks = controller.getTasks();
 	}
 	
 	//remove this method, call starter through 
@@ -26,14 +27,14 @@ public class View {
 //	}
 	
 
-	public void starter( View thetest, Iterable<Task> taskList) {
+	public void starter( View thetest) {
 		Scanner scanin = new Scanner(System.in);
 		 System.out.println("Welcome to TaskManager 2.0, would you like to make a new task,"
 		 		+ " or would you like to see your existing tasks?");
 		 String pref = scanin.nextLine();
 		 
 		 if( pref.contains("Existing") || pref.contains("existing")) {
-			 thetest.Exist(pref, thetest, taskList);
+			 thetest.Exist(pref, thetest);
 		 } else if ( pref.contains("New") || pref.contains("new")) {
 			 thetest.NewT(pref, thetest);
 		 } else {
@@ -43,7 +44,7 @@ public class View {
 		 scanin.close();
 	}
 	
-	 protected void Exist( String preference, View thetest, Iterable<Task> taskList) {
+	 protected void Exist( String preference, View thetest) {
 		 //System.out.println("Good job, existing stuff");
 		 Scanner scanin = new Scanner(System.in);
 		 System.out.println("Here are the current existing tasks:");
@@ -58,13 +59,13 @@ public class View {
 		 String editinfo = scanin.nextLine();
 		 
 		 if( editinfo.contains("Edit") || editinfo.contains("edit")) {
-			edit(editinfo, thetest, taskList);
+			edit(editinfo, thetest);
 		 } else if ( editinfo.contains("Info") || editinfo.contains("info")) {
-			 info(editinfo, thetest, taskList);
+			 info(editinfo, thetest);
 		 } else {
 			 System.out.println("I'm sorry that is not a valid request. We will return you "
 			 		+ "to the beginning of the program.");
-			 starter(thetest, taskList);
+			 starter(thetest);
 		 }
 		 
 		 scanin.close();
@@ -99,7 +100,7 @@ public class View {
 	 }
 	 
 	 
-	 protected void edit( String edit, View thetest, Iterable<Task> taskList) {
+	 protected void edit( String edit, View thetest) {
 		
 		 System.out.println("Which Task would you like to edit?");
 		 
@@ -112,7 +113,7 @@ public class View {
 			
 			 if( wtask.contains("w") //tasklist.getname
 					 ) {
-				 Task task = wtask;
+				 Task task = null;
 				 String name = task.getName();
 				 String type = task.getType();
 				 int due = task.getDue();
@@ -127,52 +128,52 @@ public class View {
 				 if( ctask.contains("name") || ctask.contains("Name")) {
 					 System.out.println("What will the new name be?");
 					 String newName = scanin.nextLine();
-					 TaskMgrDriver.editTask(task, newName, type, due, hours, comp, diff);
+					 controller.editTask(task, newName, type, due, hours, comp, diff);
 					 System.out.println("Name updated");
 					 
 				 } else if( ctask.contains("date") || ctask.contains("Date")) {
 					 System.out.println("What will the new date be?");
 					 String date = scanin.nextLine();
 					 int newDate = Integer.parseInt(date);
-					 TaskMgrDriver.editTask(task, name, type, newDate, hours, comp, diff);
+					 controller.editTask(task, name, type, newDate, hours, comp, diff);
 					 System.out.println("Date updated");
 					 
 				 } else if( ctask.contains("Time expected") || ctask.contains("time expected") || ctask.contains("Time Expected")) {
 					 System.out.println("What is the new time expected?");
 					 String time = scanin.nextLine();
 					 int newTime = Integer.parseInt(time);
-					 TaskMgrDriver.editTask(task, name, type, due, newTime, comp, diff);
+					 controller.editTask(task, name, type, due, newTime, comp, diff);
 					 System.out.println("Expected time updated");
 					 
 				 } else if( ctask.contains("Difficulty") || ctask.contains("difficulty")) {
 					 System.out.println("What is the new difficulty?");
 					 String difficulty = scanin.nextLine();
-					 TaskMgrDriver.editTask(task, name, type, due, hours, comp, difficulty);
+					 controller.editTask(task, name, type, due, hours, comp, diff);
 					 System.out.println("Difficulty updated");
 					 
 				 } else if( ctask.contains("Type") || ctask.contains("type")) {
 					 System.out.println("What is the new task type?");
 					 String newType = scanin.nextLine();
-					 TaskMgrDriver.editTask(task, name, newType, due, hours, comp, diff);
+					 controller.editTask(task, name, newType, due, hours, comp, diff);
 					 System.out.println("Type updated");
 					 
 				 } else if( ctask.contains("Complete") || ctask.contains("complete")) {
 					 System.out.println("Is the task completed?");
-					 String comp = scanin.nextLine();
-					 if( comp.contains("Yes") || comp.contains("yes") ) {
+					 String comp1 = scanin.nextLine();
+					 if( comp1.contains("Yes") || comp1.contains("yes") ) {
 						 boolean complete = true;
-						 TaskMgrDriver.editTask(task, name, type, due, hours, complete, diff);
+						 controller.editTask(task, name, type, due, hours, complete, diff);
 						 System.out.println("Task marked as completed");
 					 } else {
 						 boolean complete = false;
-						 TaskMgrDriver.editTask(task, name, type, due, hours, complete, diff);
+						 controller.editTask(task, name, type, due, hours, complete, diff);
 						 System.out.println("Task marked as not completed");
 					 }
 					 
 				 } else {
 					 System.out.println("I'm sorry that is not a valid request. We will return you "
 						 		+ "to the beginning of the program.");
-						 starter(thetest, taskList);
+						 starter(thetest);
 				 }
 				 
 				 break;
@@ -181,7 +182,7 @@ public class View {
 		 }
 	 }
 	 
-	 protected void info( String info, View thetest, Iterable<Task> taskList) {
+	 protected void info( String info, View thetest) {
 		 
 	 }
 }
