@@ -1,4 +1,4 @@
-	 Initial:
+   Initial:
       At the start of the program, the program prompts to ask if the user would like to add a task or to see existing tasks.
    
         If whatever is entered contains "new" it will enter the creating task state.
