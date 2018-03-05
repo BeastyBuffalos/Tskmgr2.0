@@ -113,7 +113,7 @@ public class View {
 			
 			 if( wtask.contains("w") //tasklist.getname
 					 ) {
-				 Task task = null;
+				 Task task = new Task(wtask, wtask, i, i, false, i);
 				 String name = task.getName();
 				 String type = task.getType();
 				 int due = task.getDue();

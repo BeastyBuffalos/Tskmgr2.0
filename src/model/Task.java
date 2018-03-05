@@ -1,5 +1,7 @@
 package model;
-public class Task {
+
+import java.io.Serializable;
+public class Task implements Serializable {
 
 	int duedate = 0; //https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.html
 	//https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.Builder.html
