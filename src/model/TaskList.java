@@ -47,9 +47,10 @@ public class TaskList {
 			PQEntry<Task,TaskWrapper> removed = tasks.removeMin();
 			if (removed.getValue().get() != task)
 				pq2.insert(removed.getKey(), removed.getValue());
-
+				
 			else{
-				tasks.insert(task,new TaskWrapper(task)); //TODO
+				Task newTask = new Task(name1, type1, due, hours, comp, diff);
+				tasks.insert(newTask,new TaskWrapper(newTask)); 
 			}
 		}
 		return task;
