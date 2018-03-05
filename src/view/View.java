@@ -148,7 +148,8 @@ public class View {
 				 } else if( ctask.contains("Difficulty") || ctask.contains("difficulty")) {
 					 System.out.println("What is the new difficulty?");
 					 String difficulty = scanin.nextLine();
-					 controller.editTask(task, name, type, due, hours, comp, diff);
+					 int newDifficulty = Integer.parseInt(difficulty);
+					 controller.editTask(task, name, type, due, hours, comp, newDifficulty);
 					 System.out.println("Difficulty updated");
 					 
 				 } else if( ctask.contains("Type") || ctask.contains("type")) {
@@ -159,8 +160,8 @@ public class View {
 					 
 				 } else if( ctask.contains("Complete") || ctask.contains("complete")) {
 					 System.out.println("Is the task completed?");
-					 String comp1 = scanin.nextLine();
-					 if( comp1.contains("Yes") || comp1.contains("yes") ) {
+					 String completed = scanin.nextLine();
+					 if( completed.contains("Yes") || completed.contains("yes") ) {
 						 boolean complete = true;
 						 controller.editTask(task, name, type, due, hours, complete, diff);
 						 System.out.println("Task marked as completed");
