@@ -1,1 +1,19 @@
-Test test test
+   Initial:
+      At the start of the program, the program prompts to ask if the user would like to add a task or to see existing tasks.
+   
+        If whatever is entered contains "new" it will enter the creating task state.
+        If whatever is entered contains "existing" it will dump the tasklist.
+        If niether of those are found, it will exit, saying unrecognizable request.
+   
+   New Tasks:
+      If taking a new task, The scanner will prompt for the new tasksname
+      then prompt for its type
+      then for its due date
+      then for how many hours it will take
+      and finally for difficulty
+    
+   Existing Tasks:
+      if checking existing tasks, the console will prompt for whether the user would like to edit a task, or see more info about a task.
+            info: if checking info, nothing happens at the moment.
+            edit: if editing, it allows the chosen task to be edited... currently in development but we are as far as requesting and recognizing thet ask to edit.
+            
