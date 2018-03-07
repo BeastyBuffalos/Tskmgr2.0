@@ -1,12 +1,7 @@
 package structures;
 import java.util.Comparator;
-<<<<<<< HEAD
 import java.util.ListIterator;
-
-import structures.DoublyLinkedList.listIterator;
-=======
 import java.io.Serializable;
->>>>>>> master
 /**
  * A PriorityQueue based on an ordered Doubly Linked List. 
  * @author Eli Hovis
@@ -97,8 +92,8 @@ public class OrderedPQ<K,V> implements Serializable {
 	} 
 	
 	
-	private ListIterator<K,V> getListIterator()
+	public ListIterator<PQEntry<K,V>> getListIterator()
 	{
-		return new listIterator();
+		return opq.getListIterator();
 	}
 }

@@ -116,4 +116,10 @@ public class TaskList {
 
 		public void setMoved(boolean moved) { this.moved = moved; }
 	}
+	
+	private ListIterator<PQEntry<Task, TaskWrapper>> getListIterator()
+	{
+		return tasks.getListIterator();
+	}
+
 }

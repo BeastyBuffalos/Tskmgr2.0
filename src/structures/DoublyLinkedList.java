@@ -1,10 +1,7 @@
 package structures;
 import java.util.Iterator;
-<<<<<<< HEAD
 import java.util.ListIterator;
-=======
 import java.io.Serializable;
->>>>>>> master
 import java.util.NoSuchElementException;
 
 /**
@@ -278,9 +275,9 @@ public class DoublyLinkedList<E> implements Serializable {
 		return new listIterator();
 	}
 	
-	private class listIterator implements ListIterator<E> 
+	private class listIterator<E> implements ListIterator<E> 
 	{
-			Node<E> node = head;
+			Node<E> node = (Node<E>) head;
 
 		@Override
 		public void add(Object arg0) {
