@@ -1,6 +1,10 @@
 package structures;
 import java.util.Iterator;
+<<<<<<< HEAD
 import java.util.ListIterator;
+=======
+import java.io.Serializable;
+>>>>>>> master
 import java.util.NoSuchElementException;
 
 /**
@@ -11,7 +15,7 @@ abstract interface Position<E> {
 	E getElement() throws IllegalStateException;
 }
 
-public class DoublyLinkedList<E>{
+public class DoublyLinkedList<E> implements Serializable {
 	private Node<E> head;		//head of list
 	private Node<E> tail;		//tail of list
 	private int size = 0;		//elements in list
@@ -420,7 +424,7 @@ public class DoublyLinkedList<E>{
 	 * @author Eli Hovis
 	 *
 	 */
-	private static class Node<E> implements Position<E>
+	private static class Node<E> implements Position<E>, Serializable
 	{
 		private E element;
 		private Node<E> previous;

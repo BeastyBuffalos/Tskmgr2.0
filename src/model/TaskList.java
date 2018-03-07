@@ -4,6 +4,7 @@ import java.util.*;
 
 import structures.OrderedPQ;
 import structures.PQEntry;
+import java.io.Serializable;
 
 /**
  * 
@@ -104,7 +105,7 @@ public class TaskList {
 	 * @author ejoverwe
 	 *
 	 */
-	private class TaskWrapper{
+	private class TaskWrapper implements Serializable{
 		private Task t;
 		private boolean moved = false;
 		public TaskWrapper(Task t){
