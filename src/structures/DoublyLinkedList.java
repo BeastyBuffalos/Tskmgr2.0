@@ -1,10 +1,7 @@
 package structures;
 import java.util.Iterator;
-<<<<<<< HEAD
 import java.util.ListIterator;
-=======
 import java.io.Serializable;
->>>>>>> master
 import java.util.NoSuchElementException;
 
 /**
