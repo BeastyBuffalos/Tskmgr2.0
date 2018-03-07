@@ -1,5 +1,8 @@
 package structures;
 import java.util.Comparator;
+import java.util.ListIterator;
+
+import structures.DoublyLinkedList.listIterator;
 /**
  * A PriorityQueue based on an ordered Doubly Linked List. 
  * @author Eli Hovis
@@ -88,4 +91,10 @@ public class OrderedPQ<K,V>{
 			throw new IllegalArgumentException();
 		} 
 	} 
+	
+	
+	private ListIterator<K,V> getListIterator()
+	{
+		return new listIterator();
+	}
 }

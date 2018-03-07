@@ -1,5 +1,6 @@
 package structures;
 import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 /**
@@ -265,6 +266,65 @@ public class DoublyLinkedList<E>{
 			lastChosen = null;
 		}
 	} 
+	
+	
+	
+	public ListIterator<E> getListIterator()
+	{
+		return new listIterator();
+	}
+	
+	private class listIterator implements ListIterator<E> 
+	{
+			Node<E> node = head;
+
+		@Override
+		public void add(Object arg0) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public boolean hasNext() {
+			return node.getNext() != tail;
+		}
+
+		@Override
+		public boolean hasPrevious() {
+			return node.getPrevious() != head;
+		}
+
+		@Override
+		public E next() {
+			node = node.getNext();
+			return node.getElement();
+		}
+
+		@Override
+		public int nextIndex() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public E previous() {
+			node = node.getPrevious();
+			return node.getElement();
+		}
+
+		@Override
+		public int previousIndex() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public void set(Object arg0) {
+			throw new UnsupportedOperationException();
+		}
+	}
 
 	/**
 	 * implements iterable for generic type positions for use in Doublylinkedlists
