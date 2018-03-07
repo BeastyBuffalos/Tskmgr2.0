@@ -92,7 +92,7 @@ public class OrderedPQ<K,V> implements Serializable {
 	} 
 	
 	
-	private ListIterator<PQEntry<K,V>> getListIterator()
+	public ListIterator<PQEntry<K,V>> getListIterator()
 	{
 		return opq.getListIterator();
 	}
