@@ -5,6 +5,7 @@ import java.util.*;
 import structures.OrderedPQ;
 import structures.PQEntry;
 import java.io.Serializable;
+import java.io.*;
 
 /**
  * 
@@ -100,6 +101,12 @@ public class TaskList {
 		
 		return finalPQ;
 	}
+	
+	private void save(String path)
+	{
+		
+	}
+	
 	/**
 	 * 
 	 * @author ejoverwe
@@ -117,9 +124,58 @@ public class TaskList {
 		public void setMoved(boolean moved) { this.moved = moved; }
 	}
 	
-	private ListIterator<PQEntry<Task, TaskWrapper>> getListIterator()
+	public ListIterator<Task> getListIterator()
 	{
-		return tasks.getListIterator();
+		return new ListIterator<Task>() 
+		{
+			private ListIterator<PQEntry<Task, TaskWrapper>> it = tasks.getListIterator();
+			
+			@Override
+			public void add(Task e) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public boolean hasNext() {
+				return it.hasNext();
+			}
+
+			@Override
+			public boolean hasPrevious() {
+				return it.hasPrevious();
+			}
+
+			@Override
+			public Task next() {
+				return it.next().getKey();
+			}
+
+			@Override
+			public int nextIndex() {
+				return 0;
+			}
+
+			@Override
+			public Task previous() {
+				return it.previous().getKey();
+			}
+
+			@Override
+			public int previousIndex() {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public void remove() {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public void set(Task e) {
+				throw new UnsupportedOperationException();
+			}
+			
+		};
 	}
 
 }

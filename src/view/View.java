@@ -1,13 +1,14 @@
 package view;
 import controller.TaskMgrDriver;
 import model.Task;
+import java.util.ListIterator;
 
 import java.util.Scanner;
 public class View {
 
 	//testingme thetest = new testingme();
 	private TaskMgrDriver controller;
-	private Iterable<Task> tasks;
+	private ListIterator<Task> tasks;
 	
 	public View ( TaskMgrDriver controller)
 	{

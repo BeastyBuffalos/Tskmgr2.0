@@ -5,6 +5,7 @@ package controller;
 import model.TaskList;
 import model.Task;
 import view.View;
+import java.util.ListIterator;
 
 /**
  * @author ejoverwe
@@ -32,15 +33,28 @@ public class TaskMgrDriver {
 		TaskMgrDriver t = new TaskMgrDriver();
 	}
 	
-	public Iterable<Task> getTasks()
+	public ListIterator<Task> getTasks()
 	{
-		return () -> {System.out.println("sorry, not finished yet"); return null;};
+		return tasks.getListIterator();
 	}
 	
-	public Iterable<Task> editTask(Task task, 
+	public ListIterator<Task> editTask(Task task, 
 			String name1, String type1, int due, int hours, boolean comp, int diff)
 	{
 		tasks.editTask(task, name1, type1, due, hours, comp, diff);
+		return getTasks();
+	}
+	
+	public ListIterator<Task> addTask(String name, String type, int due, int hours, boolean comp, int diff) 
+	{
+		Task newTask = new Task(name, type, due, hours, comp, diff);
+		tasks.insertTask(newTask);
+		return getTasks();
+	}
+	
+	public ListIterator<Task> removeTask(Task task) 
+	{
+		tasks.removeTask(task);
 		return getTasks();
 	}
 }

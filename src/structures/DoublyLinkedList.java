@@ -280,7 +280,7 @@ public class DoublyLinkedList<E> implements Serializable {
 			Node<E> node = (Node<E>) head;
 
 		@Override
-		public void add(Object arg0) {
+		public void add(E e) {
 			throw new UnsupportedOperationException();
 		}
 
@@ -322,7 +322,7 @@ public class DoublyLinkedList<E> implements Serializable {
 		}
 
 		@Override
-		public void set(Object arg0) {
+		public void set(E e) {
 			throw new UnsupportedOperationException();
 		}
 	}
