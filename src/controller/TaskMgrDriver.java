@@ -44,4 +44,17 @@ public class TaskMgrDriver {
 		tasks.editTask(task, name1, type1, due, hours, comp, diff);
 		return getTasks();
 	}
+	
+	public ListIterator<Task> addTask(String name, String type, int due, int hours, boolean comp, int diff) 
+	{
+		Task newTask = new Task(name, type, due, hours, comp, diff);
+		tasks.insertTask(newTask);
+		return getTasks();
+	}
+	
+	public ListIterator<Task> removeTask(Task task) 
+	{
+		tasks.removeTask(task);
+		return getTasks();
+	}
 }
