@@ -128,6 +128,52 @@ public class TaskList {
 	{
 		return new ListIterator<Task>() 
 		{
+			private ListIterator<PQEntry<Task, TaskWrapper>> it = tasks.getListIterator();
+			
+			@Override
+			public void add(Task e) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public boolean hasNext() {
+				return it.hasNext();
+			}
+
+			@Override
+			public boolean hasPrevious() {
+				return it.hasPrevious();
+			}
+
+			@Override
+			public Task next() {
+				return it.next().getKey();
+			}
+
+			@Override
+			public int nextIndex() {
+				return 0;
+			}
+
+			@Override
+			public Task previous() {
+				return it.previous().getKey();
+			}
+
+			@Override
+			public int previousIndex() {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public void remove() {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public void set(Task e) {
+				throw new UnsupportedOperationException();
+			}
 			
 		};
 	}
