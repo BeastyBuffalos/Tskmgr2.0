@@ -104,7 +104,13 @@ public class TaskList {
 	
 	private void save(String path)
 	{
-		
+		try
+		{
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(path)));
+		}catch(IOException e)
+		{
+			
+		}
 	}
 	
 	/**
