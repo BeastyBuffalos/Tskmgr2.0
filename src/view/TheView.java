@@ -20,7 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class guitypethingie {
+public class TheView {
 
 	public static void starterup(JFrame window) {
 		
