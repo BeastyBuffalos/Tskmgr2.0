@@ -4,7 +4,7 @@
 package controller;
 import model.TaskList;
 import model.Task;
-import view.View;
+import view.CMDView;
 import java.util.ListIterator;
 
 /**
@@ -13,14 +13,14 @@ import java.util.ListIterator;
  */
 public class TaskMgrDriver {
 	private TaskList tasks;
-	private View ui;
+	private CMDView ui;
 	
 	/**
 	 * 
 	 */
 	private TaskMgrDriver() {
 		tasks = new TaskList();
-		ui = new View(this);
+		ui = new CMDView(this);
 		//TODO remainder of initialization code
 		ui.starter(ui);
 	}

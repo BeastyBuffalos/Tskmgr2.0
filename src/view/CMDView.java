@@ -4,13 +4,13 @@ import model.Task;
 import java.util.ListIterator;
 
 import java.util.Scanner;
-public class View {
+public class CMDView {
 
 	//testingme thetest = new testingme();
 	private TaskMgrDriver controller;
 	private ListIterator<Task> tasks;
 	
-	public View ( TaskMgrDriver controller)
+	public CMDView ( TaskMgrDriver controller)
 	{
 		this.controller = controller;
 		tasks = controller.getTasks();
@@ -28,7 +28,7 @@ public class View {
 //	}
 	
 
-	public void starter( View thetest) {
+	public void starter( CMDView thetest) {
 		Scanner scanin = new Scanner(System.in);
 		 System.out.println("Welcome to TaskManager 2.0, would you like to make a new task,"
 		 		+ " or would you like to see your existing tasks?");
@@ -45,7 +45,7 @@ public class View {
 		 scanin.close();
 	}
 	
-	 protected void Exist( String preference, View thetest) {
+	 protected void Exist( String preference, CMDView thetest) {
 		 //System.out.println("Good job, existing stuff");
 		 Scanner scanin = new Scanner(System.in);
 		 System.out.println("Here are the current existing tasks:");
@@ -72,7 +72,7 @@ public class View {
 		 scanin.close();
 	 }
 	 
-	 protected void NewT ( String preference, View thetest) {
+	 protected void NewT ( String preference, CMDView thetest) {
 		 System.out.println("Hey new task, awesome!");
 		 
 		 Scanner scanin = new Scanner(System.in);
@@ -101,7 +101,7 @@ public class View {
 	 }
 	 
 	 
-	 protected void edit( String edit, View thetest) {
+	 protected void edit( String edit, CMDView thetest) {
 		
 		 System.out.println("Which Task would you like to edit?");
 		 
@@ -184,7 +184,7 @@ public class View {
 		 }
 	 }
 	 
-	 protected void info( String info, View thetest) {
+	 protected void info( String info, CMDView thetest) {
 		 
 	 }
 }
