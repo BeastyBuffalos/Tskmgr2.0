@@ -19,8 +19,13 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import controller.TaskMgrDriver;
+import java.util.ListIterator;
+import model.Task;
 
 public class GraphicalView {
+	
+	private static TaskMgrDriver driver;
 
 	public static void starterup(JFrame window) {
 		
@@ -87,8 +92,8 @@ public class GraphicalView {
 		
 	}
 	
-	public static void main(String[] args) {
-	
+	public GraphicalView(TaskMgrDriver driver) {
+		this.driver = driver;
 		JFrame window = new JFrame("Task Manager 2.0");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		starterup(window);
@@ -115,34 +120,15 @@ public class GraphicalView {
 		buttons1.setLayout(new GridLayout(16, 2));
 		buttons1.setPreferredSize(new Dimension((int)1000000,1000000));
 		
-		//this is temporary
-		addLabel("Task 1", buttons1);
-		//addLabel("", buttons1);
-		addLabel("Task 2", buttons1);
-		//addLabel("", buttons1);
-		addLabel("Task 3", buttons1);
-		//addLabel("", buttons1);
-		addLabel("Task 4", buttons1);
-		//addLabel("", buttons1);
-		addLabel("Task 5", buttons1);
-		//addLabel("", buttons1);
-		addLabel("Task 6", buttons1);
-		//addLabel("", buttons1);
-		addLabel("Task 7", buttons1);
-		//addLabel("", buttons1);
-		addLabel("Task 8", buttons1);
 		weltxt1.add(welcome1);
 		
+		//TODO
 		//try something like this
-		/* going to have to call in the list of the tasks
-		 * then do a for loop
-		 * for( int i = 0; i < list.size; i++) {
-		 * String name = list.get(i).getname;
-		 * addAButton(name, buttons1);
-		 * addLabel("", buttons1);
-		 * }
-		 */
-		
+		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext();)
+		{
+			Task t = tasks.next();
+			addLabel(t.getName(), buttons1);
+		}
 		
 		
 		JPanel tasks = new JPanel();
@@ -155,7 +141,20 @@ public class GraphicalView {
 		
 		JPanel textme = new JPanel();
 		
-		addATextField("", textme);
+//		addATextField("", textme);
+
+		JButton removeAllTasks = new JButton("Remove All Tasks");
+		textme.add(removeAllTasks);
+		removeAllTasks.addActionListener( (ActionEvent e) -> {
+			ListIterator<Task> tasklist = driver.getTasks();
+			while(tasklist.hasNext())
+			{
+				Task t = tasklist.next();
+				tasklist = driver.removeTask(t);
+			}
+			window2.setVisible(false);
+			exist();
+		});
 		
 		JPanel back = new JPanel();
 		
@@ -209,12 +208,8 @@ public class GraphicalView {
     }
 	
 	public static void makingtask() {
-		
-		String duedate = "";
-		String name = "";
-		String diff = "";
-		String hours = "";
-		String type = "";
+		int i = 0;
+		String s = "";
 		
 		JFrame window2 = new JFrame();
 		window2.setSize(1200, 800);
@@ -230,51 +225,24 @@ public class GraphicalView {
 		
 		addLabel("The Date Due: ", tasktypes);
 		JTextField listen1 = addATextField("", tasktypes);
-		try {
-			duedate = listen1.getDocument().getText(0, listen1.getDocument().getLength());
-		} catch (BadLocationException e) {
-			
-			e.printStackTrace();
-		}
 		
+		int duedate = i;
 		
 		addLabel("How You Would Rate It's Difficulty: ", tasktypes);
 		JTextField listen2 = addATextField("", tasktypes);
-		try {
-			diff = listen2.getDocument().getText(0, listen2.getDocument().getLength());
-		} catch (BadLocationException e) {
-			
-			e.printStackTrace();
-		}
-		
-		
 		addLabel("How Many Hours You Suspect It Will Take: ", tasktypes);
 		JTextField listen3 = addATextField("", tasktypes);
-		try {
-		    hours = listen3.getDocument().getText(0, listen3.getDocument().getLength());
-		} catch (BadLocationException e) {
-			
-			e.printStackTrace();
-		}
+		
+		
 		
 		addLabel("The Type of Task: ", tasktypes);
 		JTextField listen4 = addATextField("", tasktypes);
-		try {
-			type = listen4.getDocument().getText(0, listen4.getDocument().getLength());
-		} catch (BadLocationException e) {
-			
-			e.printStackTrace();
-		}
+		
 		
 		
 		addLabel("The Name of the Task: ", tasktypes);
 		JTextField listen5 = addATextField("", tasktypes);
-		try {
-			name = listen5.getDocument().getText(0, listen5.getDocument().getLength());
-		} catch (BadLocationException e) {
-			
-			e.printStackTrace();
-		}
+		
 		
 		JPanel enter = new JPanel();
 		enter.setLayout(new BorderLayout());
@@ -305,7 +273,25 @@ public class GraphicalView {
 				
 				//use the getText to get the text for the new task
 				//System.out.println(listen1.getText());
-			
+				try {
+					int duedate = Integer.valueOf(listen1.getDocument().getText(0, listen1.getDocument().getLength()));
+					int diff = Integer.valueOf(listen2.getDocument().getText(0, listen2.getDocument().getLength()));
+					int hours = Integer.valueOf(listen3.getDocument().getText(0, listen3.getDocument().getLength()));
+					String type = listen4.getDocument().getText(0, listen4.getDocument().getLength());
+					String name = listen5.getDocument().getText(0, listen5.getDocument().getLength());
+					driver.addTask(name, type, duedate, hours, false, diff);
+					
+					listen1.setText("");
+					listen2.setText("");
+					listen3.setText("");
+					listen4.setText("");
+					listen5.setText("");
+					
+				} catch (BadLocationException e) {
+					
+					e.printStackTrace();
+				}
+				
 			}
 		
 		
