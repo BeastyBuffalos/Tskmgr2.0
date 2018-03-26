@@ -50,9 +50,18 @@ public class TaskMgrDriver {
 		return getTasks();
 	}
 	
-	public ListIterator<Task> removeTask(Task task) 
+	public ListIterator<Task> removeTask(Task task)
 	{
 		tasks.removeTask(task);
 		return getTasks();
+	}
+	
+	public void loadTasks(String path)
+	{
+		tasks.load(path);
+	}
+	public void saveTasks(String path)
+	{
+		tasks.save(path);
 	}
 }
