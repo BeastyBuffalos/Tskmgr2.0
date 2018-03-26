@@ -1,19 +1,16 @@
    Initial:
-      At the start of the program, the program prompts to ask if the user would like to add a task or to see existing tasks.
-   
-        If whatever is entered contains "new" it will enter the creating task state.
-        If whatever is entered contains "existing" it will dump the tasklist.
-        If niether of those are found, it will exit, saying unrecognizable request.
-   
+      Shows a main menu screen, with a welcome to Task Manager 2.0 title, and two buttons are available to 
+      be clicked. New Tasks, or Existing Tasks.   
    New Tasks:
-      If taking a new task, The scanner will prompt for the new tasksname
-      then prompt for its type
-      then for its due date
-      then for how many hours it will take
-      and finally for difficulty
+      A title card with announce this is where you can make a new task to be included in the task list. 
+      There will be input/text boxes next to the assigned variables that are to be used to create a new task,
+      Due Date, Difficulty, How Many Hours It Will Take, Type of Task, and Name. After filling out each text
+      box, pressing the enter button will empty the boxes, and put the written info into a newly created task.
+      There is also a button in the top right corner, that says "Back to Man Menu". Upon pressing that button,
+      you should be taken back to the main menu screen.
     
    Existing Tasks:
-      if checking existing tasks, the console will prompt for whether the user would like to edit a task, or see more info about a task.
-            info: if checking info, nothing happens at the moment.
-            edit: if editing, it allows the chosen task to be edited... currently in development but we are as far as requesting and recognizing thet ask to edit.
-            
+      A title card announces this is the existing tasks list, showing all previous and newly created tasks from 
+      all sessions. It lists the tasks on the middle left side of the window. On the right, and slightly lower 
+      than the tasks is a remove all tasks button, which will remove all current tasks from the task list. Finally
+      there is another "Back to Main Menu" button, which again, returns you back to the main menu window.
