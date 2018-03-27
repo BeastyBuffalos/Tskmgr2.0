@@ -26,13 +26,21 @@ import model.Task;
 public class GraphicalView {
 	
 	private static TaskMgrDriver driver;
+	
+	private JFrame window;
 
+	public GraphicalView(TaskMgrDriver driver) {
+		this.driver = driver;
+		JFrame window = new JFrame("Task Manager 2.0");
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		starterup(window);
+	}
+	
 	public static void starterup(JFrame window) {
 		
 		JPanel windowpanel = new JPanel();
 		windowpanel.setLayout(new BorderLayout());
-		
-		
+				
 		window.setSize(1200, 800);
 		
 		JPanel weltxt = new JPanel();
@@ -90,13 +98,6 @@ public class GraphicalView {
 		});
 		
 		
-	}
-	
-	public GraphicalView(TaskMgrDriver driver) {
-		this.driver = driver;
-		JFrame window = new JFrame("Task Manager 2.0");
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		starterup(window);
 	}
 	
 	public static void exist( ) {
