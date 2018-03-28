@@ -18,61 +18,93 @@ public class TaskList {
 	{
 		return (weight(t1) < weight(t2)) ? -1 : ((weight(t1) == weight(t2)) ? 0 : 1);
 	};
-	private OrderedPQ<Task, TaskWrapper> tasks = new OrderedPQ<Task, TaskWrapper>(c);
+	private ArrayList<Task> tasks = new ArrayList<>();
 
 	public TaskList() {
 		//TODO
 	}
 
 	public void insertTask(Task task){
-		tasks.insert(task, new TaskWrapper(task));
+		tasks.add(task);
+		
+		// call sorting algorithm
+		
 	}
 
 	public Task removeTask(Task task){
-		int size1 = tasks.size();
-		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task, TaskWrapper>(c);
-		while(!(tasks.isEmpty())){
-			PQEntry<Task,TaskWrapper> removed = tasks.removeMin();
-			if (removed.getValue().get() != task)
-				pq2.insert(removed.getKey(), removed.getValue());
-		}
-		if (tasks.size() == size1)
-			System.out.println("Invalid task to remove.");
-		tasks = pq2;
+		tasks.remove(task);
+		
+		// call sorting algorithm
+		
 		return task;
+		
+//		int size1 = tasks.size();
+//		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task, TaskWrapper>(c);
+//		while(!(tasks.isEmpty())){
+//			PQEntry<Task,TaskWrapper> removed = tasks.removeMin();
+//			if (removed.getValue().get() != task)
+//				pq2.insert(removed.getKey(), removed.getValue());
+//		}
+//		if (tasks.size() == size1)
+//			System.out.println("Invalid task to remove.");
+//		tasks = pq2;
+//		return task;
 	}
 
 	public Task editTask(Task task, 
 			String name1, String type1, int due, int hours, boolean comp, int diff){
-		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task,TaskWrapper>(c);
-		while(!(tasks.isEmpty())){
-			PQEntry<Task,TaskWrapper> removed = tasks.removeMin();
-			if (removed.getValue().get() != task)
-				pq2.insert(removed.getKey(), removed.getValue());
-				
-			else{
-				Task newTask = new Task(name1, type1, due, hours, comp, diff);
-				tasks.insert(newTask,new TaskWrapper(newTask)); 
-			}
-		}
-		return task;
+		
+		Task updated = new Task(name1, type1, due, hours, comp, diff);
+		tasks.remove(task);
+		tasks.add(updated);
+		
+		// call sorting algorithm
+		
+		return updated;
+		
+//		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task,TaskWrapper>(c);
+//		while(!(tasks.isEmpty())){
+//			PQEntry<Task,TaskWrapper> removed = tasks.removeMin();
+//			if (removed.getValue().get() != task)
+//				pq2.insert(removed.getKey(), removed.getValue());
+//				
+//			else{
+//				Task newTask = new Task(name1, type1, due, hours, comp, diff);
+//				tasks.insert(newTask,new TaskWrapper(newTask)); 
+//			}
+//		}
+//		return task;
 	}
 
 	private double weight(Task task){
 		int difficulty = task.getDifficulty();
 		int duedate = task.getDue();
 		int time = task.getHours();
-		String tasktype = task.getType();
-		boolean isComplete = task.getComplete();
 
 		if (task.isOverride()){
 			return task.getWeightOverride();
 		}
-		if (task.getComplete()){
-			return 0;
+		
+		int hours = 0;
+		
+		// set hours to value
+		if (time == 0 || time == 1) 
+		{
+			hours = 1;
+		} 
+		else if (time == 2) 
+		{
+			hours = 2;
+		} 
+		else if (time == 3) 
+		{
+			hours = 3;
+		}
+		else {
+			hours = 4;
 		}
 		//Temporary weighting, to be adjusted at a later date or possibly by users convienience
-		return (difficulty * 2) + (10 / duedate) + (time * 2);
+		return (difficulty) + (duedate / 1000000) + (hours);
 	}
 	
 	public OrderedPQ<Task, TaskWrapper> overrideOrder(OrderedPQ<Task, TaskWrapper> pq, Task task){
