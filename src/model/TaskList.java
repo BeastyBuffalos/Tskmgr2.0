@@ -18,6 +18,7 @@ public class TaskList {
 	{
 		return (weight(t1) < weight(t2)) ? -1 : ((weight(t1) == weight(t2)) ? 0 : 1);
 	};
+	
 	private ArrayList<Task> tasks = new ArrayList<>();
 	private OrderedPQ<Task, TaskWrapper> taskPQ = new OrderedPQ<Task, TaskWrapper>();
 	
@@ -29,6 +30,8 @@ public class TaskList {
 		tasks.add(task);
 		
 		// call sorting algorithm
+		
+		radixsort(tasks);
 		
 	}
 
@@ -108,6 +111,121 @@ public class TaskList {
 		return (difficulty) + (duedate / 1000000) + (hours);
 	}
 	
+	private void radixsort(ArrayList<Task> tasklist) {
+		
+		tasklist.get(0).getDue(); //smallest, then this one third
+		tasklist.get(0).getHours(); //biggest, then this one second
+		tasklist.get(0).getDifficulty(); //biggest, first to be sorted
+		
+		ArrayList<Integer> tempdiff = new ArrayList<Integer>(); //first to sort, biggest
+		ArrayList<Integer> temphou = new ArrayList<Integer>(); //second to sort, biggest
+		ArrayList<Integer> tempdue = new ArrayList<Integer>(); //third to sort, smallest
+		
+		for(int i = 0; i < tasklist.size(); i++) {
+			
+			tempdiff.add(tasklist.get(i).getDifficulty());
+			
+		}
+		
+		for(int i = 0; i < tasklist.size(); i++) {
+			
+			temphou.add(tasklist.get(i).getHours());
+			
+		}
+		
+		
+
+		for(int i = 0; i < tasklist.size(); i++) {
+	
+			tempdue.add(tasklist.get(i).getDue());
+	
+		}
+
+		countsortdiff(tasklist, tempdiff);
+		countsorthour(tasklist, temphou);
+		countsortdue(tasklist, tempdue);
+		
+	}
+	
+	private void countsortdiff(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
+		
+		ArrayList<Task> Rtemp = new ArrayList<Task>();
+		
+		MergeSort.sort(temp);
+		
+		Collections.sort(temp, Collections.reverseOrder());
+		
+		for(int i = 0; i < tasklist.size(); i++) {
+			Rtemp.add(tasklist.get(i));
+		}
+		
+		for(int i = 0; i < temp.size(); i++) {
+			
+			for(int j = 0; j < Rtemp.size(); j++) {
+			
+				if( temp.get(i) == Rtemp.get(j).getDifficulty() ) {
+					
+					tasklist.add(i, Rtemp.get(j));
+					
+				}
+				
+			}
+		}
+		
+	}
+	
+	private void countsorthour(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
+			
+			ArrayList<Task> Rtemp = new ArrayList<Task>();
+			
+			MergeSort.sort(temp);
+			
+			Collections.sort(temp, Collections.reverseOrder());
+			
+			for(int i = 0; i < tasklist.size(); i++) {
+				Rtemp.add(tasklist.get(i));
+			}
+			
+			for(int i = 0; i < temp.size(); i++) {
+				
+				for(int j = 0; j < Rtemp.size(); j++) {
+				
+					if( temp.get(i) == Rtemp.get(j).getHours() ) {
+						
+						tasklist.add(i, Rtemp.get(j));
+						
+					}
+					
+				}
+			}
+			
+		}
+		
+	private void countsortdue(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
+		
+		ArrayList<Task> Rtemp = new ArrayList<Task>();
+		
+		MergeSort.sort(temp);
+		
+		for(int i = 0; i < tasklist.size(); i++) {
+			Rtemp.add(tasklist.get(i));
+		}
+		
+		for(int i = 0; i < temp.size(); i++) {
+			
+			for(int j = 0; j < Rtemp.size(); j++) {
+			
+				if( temp.get(i) == Rtemp.get(j).getDue() ) {
+					
+					tasklist.add(i, Rtemp.get(j));
+					
+				}
+				
+			}
+		}
+		
+	}
+	
 	public OrderedPQ<Task, TaskWrapper> overrideOrder(OrderedPQ<Task, TaskWrapper> pq, Task task){
 		OrderedPQ<Task, TaskWrapper> tempPQ = pq;
 		OrderedPQ<Task, TaskWrapper> finalPQ =  new OrderedPQ<Task, TaskWrapper>();
@@ -135,14 +253,28 @@ public class TaskList {
 		return finalPQ;
 	}
 	
-	private void save(String path)
+	public void save(String path)
 	{
-		try
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));)
 		{
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(path)));
+		oos.writeObject(tasks);
 		}catch(IOException e)
 		{
-			
+			e.printStackTrace();
+		}
+	}
+	
+	public void load(String path)
+	{
+		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));)
+		{
+		tasks = (OrderedPQ<Task, TaskWrapper>) ois.readObject();
+		}catch(IOException e)
+		{
+			e.printStackTrace();
+		}catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
 		}
 	}
 	
