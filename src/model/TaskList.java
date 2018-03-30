@@ -252,14 +252,28 @@ public class TaskList {
 		return finalPQ;
 	}
 	
-	private void save(String path)
+	public void save(String path)
 	{
-		try
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));)
 		{
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(path)));
+		oos.writeObject(tasks);
 		}catch(IOException e)
 		{
-			
+			e.printStackTrace();
+		}
+	}
+	
+	public void load(String path)
+	{
+		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));)
+		{
+		tasks = (OrderedPQ<Task, TaskWrapper>) ois.readObject();
+		}catch(IOException e)
+		{
+			e.printStackTrace();
+		}catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
 		}
 	}
 	
