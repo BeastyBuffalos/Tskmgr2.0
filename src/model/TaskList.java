@@ -18,7 +18,7 @@ public class TaskList {
 	{
 		return (weight(t1) < weight(t2)) ? -1 : ((weight(t1) == weight(t2)) ? 0 : 1);
 	};
-	
+
 	private ArrayList<Task> tasks = new ArrayList<>();
 
 	public TaskList() {
@@ -27,56 +27,56 @@ public class TaskList {
 
 	public void insertTask(Task task){
 		tasks.add(task);
-		
+
 		// call sorting algorithm
-		
+
 		radixsort(tasks);
-		
+
 	}
 
 	public Task removeTask(Task task){
 		tasks.remove(task);
-		
+
 		// call sorting algorithm
-		
+
 		return task;
-		
-//		int size1 = tasks.size();
-//		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task, TaskWrapper>(c);
-//		while(!(tasks.isEmpty())){
-//			PQEntry<Task,TaskWrapper> removed = tasks.removeMin();
-//			if (removed.getValue().get() != task)
-//				pq2.insert(removed.getKey(), removed.getValue());
-//		}
-//		if (tasks.size() == size1)
-//			System.out.println("Invalid task to remove.");
-//		tasks = pq2;
-//		return task;
+
+		//		int size1 = tasks.size();
+		//		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task, TaskWrapper>(c);
+		//		while(!(tasks.isEmpty())){
+		//			PQEntry<Task,TaskWrapper> removed = tasks.removeMin();
+		//			if (removed.getValue().get() != task)
+		//				pq2.insert(removed.getKey(), removed.getValue());
+		//		}
+		//		if (tasks.size() == size1)
+		//			System.out.println("Invalid task to remove.");
+		//		tasks = pq2;
+		//		return task;
 	}
 
 	public Task editTask(Task task, 
 			String name1, String type1, int due, int hours, boolean comp, int diff){
-		
+
 		Task updated = new Task(name1, type1, due, hours, comp, diff);
 		tasks.remove(task);
 		tasks.add(updated);
-		
+
 		// call sorting algorithm
-		
+
 		return updated;
-		
-//		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task,TaskWrapper>(c);
-//		while(!(tasks.isEmpty())){
-//			PQEntry<Task,TaskWrapper> removed = tasks.removeMin();
-//			if (removed.getValue().get() != task)
-//				pq2.insert(removed.getKey(), removed.getValue());
-//				
-//			else{
-//				Task newTask = new Task(name1, type1, due, hours, comp, diff);
-//				tasks.insert(newTask,new TaskWrapper(newTask)); 
-//			}
-//		}
-//		return task;
+
+		//		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task,TaskWrapper>(c);
+		//		while(!(tasks.isEmpty())){
+		//			PQEntry<Task,TaskWrapper> removed = tasks.removeMin();
+		//			if (removed.getValue().get() != task)
+		//				pq2.insert(removed.getKey(), removed.getValue());
+		//				
+		//			else{
+		//				Task newTask = new Task(name1, type1, due, hours, comp, diff);
+		//				tasks.insert(newTask,new TaskWrapper(newTask)); 
+		//			}
+		//		}
+		//		return task;
 	}
 
 	private double weight(Task task){
@@ -87,9 +87,9 @@ public class TaskList {
 		if (task.isOverride()){
 			return task.getWeightOverride();
 		}
-		
+
 		int hours = 0;
-		
+
 		// set hours to value
 		if (time == 0 || time == 1) 
 		{
@@ -109,165 +109,166 @@ public class TaskList {
 		//Temporary weighting, to be adjusted at a later date or possibly by users convienience
 		return (difficulty) + (duedate / 1000000) + (hours);
 	}
-	
+
 	private void radixsort(ArrayList<Task> tasklist) {
-		
+
 		tasklist.get(0).getDue(); //smallest, then this one third
 		tasklist.get(0).getHours(); //biggest, then this one second
 		tasklist.get(0).getDifficulty(); //biggest, first to be sorted
-		
+
 		ArrayList<Integer> tempdiff = new ArrayList<Integer>(); //first to sort, biggest
 		ArrayList<Integer> temphou = new ArrayList<Integer>(); //second to sort, biggest
 		ArrayList<Integer> tempdue = new ArrayList<Integer>(); //third to sort, smallest
-		
-		for(int i = 0; i < tasklist.size(); i++) {
-			
-			tempdiff.add(tasklist.get(i).getDifficulty());
-			
-		}
-		
-		for(int i = 0; i < tasklist.size(); i++) {
-			
-			temphou.add(tasklist.get(i).getHours());
-			
-		}
-		
-		
 
 		for(int i = 0; i < tasklist.size(); i++) {
-	
+
+			tempdiff.add(tasklist.get(i).getDifficulty());
+
+		}
+
+		for(int i = 0; i < tasklist.size(); i++) {
+
+			temphou.add(tasklist.get(i).getHours());
+
+		}
+
+
+
+		for(int i = 0; i < tasklist.size(); i++) {
+
 			tempdue.add(tasklist.get(i).getDue());
-	
+
 		}
 
 		countsortdiff(tasklist, tempdiff);
 		countsorthour(tasklist, temphou);
 		countsortdue(tasklist, tempdue);
-		
+
 	}
-	
+
 	private void countsortdiff(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
-		
+
 		ArrayList<Task> Rtemp = new ArrayList<Task>();
-		
+
 		MergeSort.sort(temp);
-		
+
 		Collections.sort(temp, Collections.reverseOrder());
-		
+
 		for(int i = 0; i < tasklist.size(); i++) {
 			Rtemp.add(tasklist.get(i));
 		}
-		
+
 		for(int i = 0; i < temp.size(); i++) {
-			
+
 			for(int j = 0; j < Rtemp.size(); j++) {
-			
+
 				if( temp.get(i) == Rtemp.get(j).getDifficulty() ) {
-					
+
 					tasklist.add(i, Rtemp.get(j));
-					
+
 				}
-				
+
 			}
 		}
-		
+
 	}
-	
+
 	private void countsorthour(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
-			
-			ArrayList<Task> Rtemp = new ArrayList<Task>();
-			
-			MergeSort.sort(temp);
-			
-			Collections.sort(temp, Collections.reverseOrder());
-			
-			for(int i = 0; i < tasklist.size(); i++) {
-				Rtemp.add(tasklist.get(i));
-			}
-			
-			for(int i = 0; i < temp.size(); i++) {
-				
-				for(int j = 0; j < Rtemp.size(); j++) {
-				
-					if( temp.get(i) == Rtemp.get(j).getHours() ) {
-						
-						tasklist.add(i, Rtemp.get(j));
-						
-					}
-					
-				}
-			}
-			
-		}
-		
-	private void countsortdue(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
-		
+
 		ArrayList<Task> Rtemp = new ArrayList<Task>();
-		
+
 		MergeSort.sort(temp);
-		
+
+		Collections.sort(temp, Collections.reverseOrder());
+
 		for(int i = 0; i < tasklist.size(); i++) {
 			Rtemp.add(tasklist.get(i));
 		}
-		
+
 		for(int i = 0; i < temp.size(); i++) {
-			
+
 			for(int j = 0; j < Rtemp.size(); j++) {
-			
-				if( temp.get(i) == Rtemp.get(j).getDue() ) {
-					
+
+				if( temp.get(i) == Rtemp.get(j).getHours() ) {
+
 					tasklist.add(i, Rtemp.get(j));
-					
+
 				}
-				
+
 			}
 		}
-		
+
 	}
-	
-	public OrderedPQ<Task, TaskWrapper> overrideOrder(OrderedPQ<Task, TaskWrapper> pq, Task task){
-		OrderedPQ<Task, TaskWrapper> tempPQ = pq;
-		OrderedPQ<Task, TaskWrapper> finalPQ =  new OrderedPQ<Task, TaskWrapper>();
-		
-		PQEntry<Task, TaskWrapper> previous = null;
-		PQEntry<Task, TaskWrapper> current = tempPQ.removeMin();
-		PQEntry<Task, TaskWrapper> next = tempPQ.removeMin();
-		
-		
-		
-		if(current.getKey().equals(task))
-			task.setWeightOverride(weight(next.getKey())/2);
-		while(!tempPQ.isEmpty()){
-			finalPQ.insert(previous.getKey(), previous.getValue());
-			previous = current;
-			current = next;
-			next = tempPQ.removeMin();
-			if(current.getKey().equals(task))
-				task.setWeightOverride((weight(next.getKey())+weight(previous.getKey()))/2);
+
+	private void countsortdue(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
+
+		ArrayList<Task> Rtemp = new ArrayList<Task>();
+
+		MergeSort.sort(temp);
+
+		for(int i = 0; i < tasklist.size(); i++) {
+			Rtemp.add(tasklist.get(i));
 		}
-		
-		finalPQ.insert(current.getKey(), current.getValue());
-		finalPQ.insert(next.getKey(), next.getValue());
-		
-		return finalPQ;
+
+		for(int i = 0; i < temp.size(); i++) {
+
+			for(int j = 0; j < Rtemp.size(); j++) {
+
+				if( temp.get(i) == Rtemp.get(j).getDue() ) {
+
+					tasklist.add(i, Rtemp.get(j));
+
+				}
+
+			}
+		}
+
 	}
-	
+
+
+	public ArrayList<Task> overrideOrder(ArrayList<Task> list, int placement){
+		list.get(placement).setOverride(true);
+		Task prior, post;
+		if (placement > 0){
+			prior = list.get(placement - 1);
+			post = list.get(placement + 1);
+
+			int pridue = prior.getDue();
+			int prihrs = prior.getHours();
+			int pridiff = prior.getDifficulty();
+
+			int postdue = post.getDue();
+			int posthrs = post.getHours();
+			int postdiff = post.getDifficulty();
+
+			int diffdelta = (postdiff - pridiff) / 2;
+			int hrsdelta = (posthrs - prihrs) / 2;
+			int duedelta = (postdue - pridue) / 2;
+
+			list.get(placement).setDueDateOverride(postdue - duedelta);
+			list.get(placement).setHrsOverride(posthrs - hrsdelta);
+			list.get(placement).setDifficultyOverride(postdiff - diffdelta);
+		}
+		return list;
+	}
+
+
 	public void save(String path)
 	{
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));)
 		{
-		oos.writeObject(tasks);
+			oos.writeObject(tasks);
 		}catch(IOException e)
 		{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void load(String path)
 	{
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));)
 		{
-		tasks = (OrderedPQ<Task, TaskWrapper>) ois.readObject();
+			tasks = (OrderedPQ<Task, TaskWrapper>) ois.readObject();
 		}catch(IOException e)
 		{
 			e.printStackTrace();
@@ -276,7 +277,7 @@ public class TaskList {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @author ejoverwe
@@ -293,13 +294,13 @@ public class TaskList {
 
 		public void setMoved(boolean moved) { this.moved = moved; }
 	}
-	
+
 	public ListIterator<Task> getListIterator()
 	{
-		return new ListIterator<Task>() 
+		return new ListIterator<Task>()
 		{
 			private ListIterator<PQEntry<Task, TaskWrapper>> it = tasks.getListIterator();
-			
+
 			@Override
 			public void add(Task e) {
 				throw new UnsupportedOperationException();
@@ -344,7 +345,7 @@ public class TaskList {
 			public void set(Task e) {
 				throw new UnsupportedOperationException();
 			}
-			
+
 		};
 	}
 
