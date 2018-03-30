@@ -79,36 +79,7 @@ public class TaskList {
 		//		return task;
 	}
 
-	private double weight(Task task){
-		int difficulty = task.getDifficulty();
-		int duedate = task.getDue();
-		int time = task.getHours();
-
-		if (task.isOverride()){
-			return task.getWeightOverride();
-		}
-
-		int hours = 0;
-
-		// set hours to value
-		if (time == 0 || time == 1) 
-		{
-			hours = 1;
-		} 
-		else if (time == 2) 
-		{
-			hours = 2;
-		} 
-		else if (time == 3) 
-		{
-			hours = 3;
-		}
-		else {
-			hours = 4;
-		}
-		//Temporary weighting, to be adjusted at a later date or possibly by users convienience
-		return (difficulty) + (duedate / 1000000) + (hours);
-	}
+	
 
 	private void radixsort(ArrayList<Task> tasklist) {
 
