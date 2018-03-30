@@ -6,15 +6,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,19 +37,23 @@ public class GraphicalView {
 		JPanel windowpanel = new JPanel();
 		windowpanel.setLayout(new BorderLayout());
 		
-		
 		window.setSize(1200, 800);
 		
 		JPanel weltxt = new JPanel();
 		
-		JLabel welcome = new JLabel("Welcome to TaskManager 2.0!"
-				+ "    What would you like to do today?");
-		JLabel welcome2 = new JLabel("Create a new task, or view existing tasks?");
-		
+		JLabel welcome = new JLabel("<html>Welcome to TaskManager 2.0!	<br/>	<br/>	<br/>	<br/>	<br/>	<html>", SwingConstants.CENTER);
+		JLabel welcome2 = new JLabel("What would you like to do today? Create a new task, or view existing tasks?", SwingConstants.CENTER);
+		welcome.setFont(new Font("Times New Roman", Font.PLAIN, 42));
+		welcome2.setFont(new Font("Times New Roman", Font.PLAIN, 37));
 		JPanel buttons = new JPanel();
 		
 		JButton newtask = new JButton("New Task");
 		JButton existing = new JButton("Existing Tasks");
+		
+		newtask.setFont(newtask.getFont().deriveFont(Font.BOLD, 24));
+		existing.setFont(existing.getFont().deriveFont(Font.BOLD,24));
+		
+		Color backCol = new Color(200, 210, 230);
 		
 		window.setLayout(new CardLayout());
 		
@@ -53,6 +62,7 @@ public class GraphicalView {
 		buttons.add(newtask);
 		buttons.add(existing);
 		
+		
 		weltxt.add(welcome);
 		weltxt.add(welcome2);
 		
@@ -60,7 +70,6 @@ public class GraphicalView {
 		windowpanel.add(weltxt, BorderLayout.CENTER);
 		
 		window.add(windowpanel);
-		
 		
 		window.setVisible(true);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -222,6 +231,7 @@ public class GraphicalView {
 		tasktypes.setPreferredSize(new Dimension((int)10,10));
 		
 		JLabel newtask = new JLabel("Please input the specified information into the designated boxes.");
+		newtask.setFont(new Font("Times New Roman", Font.PLAIN, 32));
 		
 		addLabel("The Date Due: ", tasktypes);
 		JTextField listen1 = addATextField("", tasktypes);

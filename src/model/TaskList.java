@@ -19,7 +19,8 @@ public class TaskList {
 		return (weight(t1) < weight(t2)) ? -1 : ((weight(t1) == weight(t2)) ? 0 : 1);
 	};
 	private ArrayList<Task> tasks = new ArrayList<>();
-
+	private OrderedPQ<Task, TaskWrapper> taskPQ = new OrderedPQ<Task, TaskWrapper>();
+	
 	public TaskList() {
 		//TODO
 	}
@@ -166,7 +167,7 @@ public class TaskList {
 	{
 		return new ListIterator<Task>() 
 		{
-			private ListIterator<PQEntry<Task, TaskWrapper>> it = tasks.getListIterator();
+			private ListIterator<PQEntry<Task, TaskWrapper>> it = taskPQ.getListIterator();
 			
 			@Override
 			public void add(Task e) {
