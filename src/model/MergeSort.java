@@ -5,6 +5,8 @@ import java.util.Arrays;
 
 
 public class MergeSort {
+	
+	private MergeSort() {}
 
 	public static <E extends Comparable<E>> void sort(ArrayList<E> array) {
 

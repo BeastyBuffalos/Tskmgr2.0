@@ -20,7 +20,8 @@ public class TaskList {
 	};
 	
 	private ArrayList<Task> tasks = new ArrayList<>();
-
+	private OrderedPQ<Task, TaskWrapper> taskPQ = new OrderedPQ<Task, TaskWrapper>();
+	
 	public TaskList() {
 		//TODO
 	}
@@ -237,7 +238,7 @@ public class TaskList {
 	{
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));)
 		{
-		tasks = (OrderedPQ<Task, TaskWrapper>) ois.readObject();
+		tasks = (ArrayList<Task>) ois.readObject();
 		}catch(IOException e)
 		{
 			e.printStackTrace();
@@ -268,7 +269,7 @@ public class TaskList {
 	{
 		return new ListIterator<Task>() 
 		{
-			private ListIterator<PQEntry<Task, TaskWrapper>> it = tasks.getListIterator();
+			private ListIterator<Task> it = tasks.listIterator();
 			
 			@Override
 			public void add(Task e) {
@@ -287,7 +288,7 @@ public class TaskList {
 
 			@Override
 			public Task next() {
-				return it.next().getKey();
+				return it.next();
 			}
 
 			@Override
@@ -297,7 +298,7 @@ public class TaskList {
 
 			@Override
 			public Task previous() {
-				return it.previous().getKey();
+				return it.previous();
 			}
 
 			@Override
