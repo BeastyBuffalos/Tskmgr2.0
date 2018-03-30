@@ -29,8 +29,6 @@ public class TaskList {
 	public void insertTask(Task task){
 		tasks.add(task);
 		
-		// call sorting algorithm
-		
 		radixsort(tasks);
 		
 	}
@@ -39,23 +37,10 @@ public class TaskList {
 		
 		tasks.remove(task);
 		
-		// call sorting algorithm
-		
 		radixsort(tasks);
 		
 		return task;
 		
-//		int size1 = tasks.size();
-//		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task, TaskWrapper>(c);
-//		while(!(tasks.isEmpty())){
-//			PQEntry<Task,TaskWrapper> removed = tasks.removeMin();
-//			if (removed.getValue().get() != task)
-//				pq2.insert(removed.getKey(), removed.getValue());
-//		}
-//		if (tasks.size() == size1)
-//			System.out.println("Invalid task to remove.");
-//		tasks = pq2;
-//		return task;
 	}
 
 	public Task editTask(Task task, 
@@ -65,24 +50,9 @@ public class TaskList {
 		tasks.remove(task);
 		tasks.add(updated);
 		
-		// call sorting algorithm
-		
 		radixsort(tasks);
 		
 		return updated;
-		
-//		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task,TaskWrapper>(c);
-//		while(!(tasks.isEmpty())){
-//			PQEntry<Task,TaskWrapper> removed = tasks.removeMin();
-//			if (removed.getValue().get() != task)
-//				pq2.insert(removed.getKey(), removed.getValue());
-//				
-//			else{
-//				Task newTask = new Task(name1, type1, due, hours, comp, diff);
-//				tasks.insert(newTask,new TaskWrapper(newTask)); 
-//			}
-//		}
-//		return task;
 	}
 
 	private void radixsort(ArrayList<Task> tasklist) {
