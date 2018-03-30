@@ -35,9 +35,12 @@ public class TaskList {
 	}
 
 	public Task removeTask(Task task){
+		
 		tasks.remove(task);
 		
 		// call sorting algorithm
+		
+		radixsort(tasks);
 		
 		return task;
 		
@@ -63,6 +66,8 @@ public class TaskList {
 		
 		// call sorting algorithm
 		
+		radixsort(tasks);
+		
 		return updated;
 		
 //		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task,TaskWrapper>(c);
@@ -79,46 +84,11 @@ public class TaskList {
 //		return task;
 	}
 
-	private double weight(Task task){
-		int difficulty = task.getDifficulty();
-		int duedate = task.getDue();
-		int time = task.getHours();
-
-		if (task.isOverride()){
-			return task.getWeightOverride();
-		}
-		
-		int hours = 0;
-		
-		// set hours to value
-		if (time == 0 || time == 1) 
-		{
-			hours = 1;
-		} 
-		else if (time == 2) 
-		{
-			hours = 2;
-		} 
-		else if (time == 3) 
-		{
-			hours = 3;
-		}
-		else {
-			hours = 4;
-		}
-		//Temporary weighting, to be adjusted at a later date or possibly by users convienience
-		return (difficulty) + (duedate / 1000000) + (hours);
-	}
-	
 	private void radixsort(ArrayList<Task> tasklist) {
 		
-		tasklist.get(0).getDue(); //smallest, then this one third
-		tasklist.get(0).getHours(); //biggest, then this one second
-		tasklist.get(0).getDifficulty(); //biggest, first to be sorted
-		
-		ArrayList<Integer> tempdiff = new ArrayList<Integer>(); //first to sort, biggest
-		ArrayList<Integer> temphou = new ArrayList<Integer>(); //second to sort, biggest
-		ArrayList<Integer> tempdue = new ArrayList<Integer>(); //third to sort, smallest
+		ArrayList<Integer> tempdiff = new ArrayList<Integer>(); 
+		ArrayList<Integer> temphou = new ArrayList<Integer>(); 
+		ArrayList<Integer> tempdue = new ArrayList<Integer>(); 
 		
 		for(int i = 0; i < tasklist.size(); i++) {
 			
