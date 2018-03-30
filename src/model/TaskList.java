@@ -20,7 +20,8 @@ public class TaskList {
 	};
 	
 	private ArrayList<Task> tasks = new ArrayList<>();
-
+	private OrderedPQ<Task, TaskWrapper> taskPQ = new OrderedPQ<Task, TaskWrapper>();
+	
 	public TaskList() {
 		//TODO
 	}
