@@ -13,15 +13,11 @@ public class Task implements Serializable {
 	String type = " ";
 
 	private int hourstodo = 0;
-
 	boolean complete = false;
-
 	private boolean isOverride = false;
-
-	private double weightOverride = 0;
-	
-	private double weight;
-
+	private int newHours;
+	private int newDifficulty;
+	private int newDueDate;
 	public Task(String name1, String type1, int due, int hours, boolean comp, int diff) {
 
 		name = name1;
@@ -30,7 +26,6 @@ public class Task implements Serializable {
 		hourstodo = hours;
 		complete = comp;
 		difficulty = diff;
-
 	}
 
 	public void setDue(int due) {
@@ -40,7 +35,9 @@ public class Task implements Serializable {
 	}
 
 	public int getDue() {
-
+		if(isOverride()){
+			return newDueDate;
+		}
 		return duedate;
 
 	}
@@ -64,7 +61,9 @@ public class Task implements Serializable {
 	}
 
 	public int getHours() {
-
+		if(isOverride()){
+			return newHours;
+		}
 		return hourstodo;
 
 	}
@@ -88,7 +87,9 @@ public class Task implements Serializable {
 	}
 
 	public int getDifficulty() {
-
+		if(isOverride()){
+			return newDifficulty;
+		}
 		return difficulty;
 
 	}
@@ -123,25 +124,21 @@ public class Task implements Serializable {
 
 	}
 	
-	void setWeight(double weight)
-	{
-		this.weight = weight;
-	}
 	
-	public double getWeight()
-	{
-		return weight;
-	}
-	
-	protected boolean isOverride(){
+	public boolean isOverride(){
 		return isOverride;
 	}
 
-	public void setWeightOverride(double weight){
-		weightOverride = weight;
+	public void setOverride(boolean override){
+		isOverride = override;
 	}
-
-	public double getWeightOverride(){
-		return weightOverride;
+	public void setHrsOverride(int newHrs){
+		newHours = newHrs;
+	}
+	public void setDifficultyOverride(int newDiff){
+		newDifficulty = newDiff;
+	}
+	public void setDueDateOverride(int newDue){
+		newDueDate = newDue;
 	}
 }
