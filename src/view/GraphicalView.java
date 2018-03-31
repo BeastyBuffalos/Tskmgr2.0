@@ -32,8 +32,8 @@ public class GraphicalView {
 	
 	private static TaskMgrDriver driver;
 	
-	private JFrame window;
-
+	private JFrame frame;
+	
 	public GraphicalView(TaskMgrDriver driver) {
 		this.driver = driver;
 		JFrame window = new JFrame("Task Manager 2.0");
@@ -325,4 +325,70 @@ public class GraphicalView {
 		
 	}
 	
+	private void makeWelcomePanel()
+	{
+		JPanel contentPane = contentPane();
+		
+		//welcome text
+		JPanel weltxt = new JPanel();
+		
+		JLabel welcome = new JLabel("<html>Welcome to TaskManager 2.0!	<br/>	<br/>	<br/>	<br/>	<br/>	<html>", SwingConstants.CENTER);
+		JLabel welcome2 = new JLabel("What would you like to do today? Create a new task, or view existing tasks?", SwingConstants.CENTER);
+		welcome.setFont(new Font("Times New Roman", Font.PLAIN, 42));
+		welcome2.setFont(new Font("Times New Roman", Font.PLAIN, 37));
+		
+		weltxt.add(welcome);
+		weltxt.add(welcome2);
+		contentPane.add(weltxt, BorderLayout.CENTER);
+		
+		//buttons code
+		
+		JPanel buttons = new JPanel();
+		
+		JButton newtask = new JButton("New Task");
+		JButton existing = new JButton("Existing Tasks");
+		newtask.setFont(newtask.getFont().deriveFont(Font.BOLD, 24));
+		existing.setFont(existing.getFont().deriveFont(Font.BOLD,24));
+		newtask.addActionListener((e) -> 
+		{		
+				frame.setVisible(false);
+				makingtask();
+		});
+		
+		existing.addActionListener((e) -> 
+		{
+			frame.setVisible(false);
+				exist();
+		});
+		
+		buttons.setLayout(new FlowLayout());
+		
+		buttons.add(newtask);
+		buttons.add(existing);
+		contentPane.add(buttons, BorderLayout.SOUTH);
+	}
+	
+	private void initialize()
+	{
+		frame = new JFrame("Task Manager 2.0");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JPanel contentPane = contentPane();
+		contentPane.setLayout(new BorderLayout());
+		frame.setSize(1200, 800);
+		
+		
+		//unsorted code
+		Color backCol = new Color(200, 210, 230);
+		frame.setLayout(new CardLayout());
+		
+		
+		//finalization code
+		frame.pack();
+		frame.setVisible(true);
+	}
+	
+	private JPanel contentPane()
+	{
+		return (JPanel) frame.getContentPane();
+	}
 }

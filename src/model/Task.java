@@ -21,6 +21,8 @@ public class Task implements Serializable {
 	private double weightOverride = 0;
 	
 	private double weight;
+	
+	private boolean moved = false;
 
 	public Task(String name1, String type1, int due, int hours, boolean comp, int diff) {
 
@@ -143,5 +145,15 @@ public class Task implements Serializable {
 
 	public double getWeightOverride(){
 		return weightOverride;
+	}
+	
+	void setMoved(boolean moved)
+	{
+		this.moved = moved;
+	}
+	
+	boolean getMoved()
+	{
+		return moved;
 	}
 }
