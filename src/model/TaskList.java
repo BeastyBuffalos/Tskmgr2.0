@@ -14,10 +14,10 @@ import java.io.*;
  */
 public class TaskList {
 
-	private final Comparator<Task> c = (Task t1, Task t2) -> 
-	{
-		return (weight(t1) < weight(t2)) ? -1 : ((weight(t1) == weight(t2)) ? 0 : 1);
-	};
+//	private final Comparator<Task> c = (Task t1, Task t2) -> 
+//	{
+//		return (weight(t1) < weight(t2)) ? -1 : ((weight(t1) == weight(t2)) ? 0 : 1);
+//	};
 	
 	private ArrayList<Task> tasks = new ArrayList<>();
 	private OrderedPQ<Task, TaskWrapper> taskPQ = new OrderedPQ<Task, TaskWrapper>();
@@ -166,32 +166,32 @@ public class TaskList {
 		
 	}
 	
-	public OrderedPQ<Task, TaskWrapper> overrideOrder(OrderedPQ<Task, TaskWrapper> pq, Task task){
-		OrderedPQ<Task, TaskWrapper> tempPQ = pq;
-		OrderedPQ<Task, TaskWrapper> finalPQ =  new OrderedPQ<Task, TaskWrapper>();
-		
-		PQEntry<Task, TaskWrapper> previous = null;
-		PQEntry<Task, TaskWrapper> current = tempPQ.removeMin();
-		PQEntry<Task, TaskWrapper> next = tempPQ.removeMin();
-		
-		
-		
-		if(current.getKey().equals(task))
-			task.setWeightOverride(weight(next.getKey())/2);
-		while(!tempPQ.isEmpty()){
-			finalPQ.insert(previous.getKey(), previous.getValue());
-			previous = current;
-			current = next;
-			next = tempPQ.removeMin();
-			if(current.getKey().equals(task))
-				task.setWeightOverride((weight(next.getKey())+weight(previous.getKey()))/2);
-		}
-		
-		finalPQ.insert(current.getKey(), current.getValue());
-		finalPQ.insert(next.getKey(), next.getValue());
-		
-		return finalPQ;
-	}
+//	public OrderedPQ<Task, TaskWrapper> overrideOrder(OrderedPQ<Task, TaskWrapper> pq, Task task){
+//		OrderedPQ<Task, TaskWrapper> tempPQ = pq;
+//		OrderedPQ<Task, TaskWrapper> finalPQ =  new OrderedPQ<Task, TaskWrapper>();
+//		
+//		PQEntry<Task, TaskWrapper> previous = null;
+//		PQEntry<Task, TaskWrapper> current = tempPQ.removeMin();
+//		PQEntry<Task, TaskWrapper> next = tempPQ.removeMin();
+//		
+//		
+//		
+//		if(current.getKey().equals(task))
+//			task.setWeightOverride(weight(next.getKey())/2);
+//		while(!tempPQ.isEmpty()){
+//			finalPQ.insert(previous.getKey(), previous.getValue());
+//			previous = current;
+//			current = next;
+//			next = tempPQ.removeMin();
+//			if(current.getKey().equals(task))
+//				task.setWeightOverride((weight(next.getKey())+weight(previous.getKey()))/2);
+//		}
+//		
+//		finalPQ.insert(current.getKey(), current.getValue());
+//		finalPQ.insert(next.getKey(), next.getValue());
+//		
+//		return finalPQ;
+//	}
 	
 	public void save(String path)
 	{
