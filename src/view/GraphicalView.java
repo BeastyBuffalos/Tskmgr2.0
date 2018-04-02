@@ -10,8 +10,6 @@ import javax.swing.SwingConstants;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
-
-
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -45,31 +43,26 @@ public class GraphicalView {
 		
 		JPanel windowpanel = new JPanel();
 		windowpanel.setLayout(new BorderLayout());
+				
 		window.setSize(1200, 800);
 		
 		JPanel weltxt = new JPanel();
 		
-		JLabel welcome = new JLabel("<html>Welcome to TaskManager 2.0!	<br/>	<br/>	<br/>	<br/>	<br/>	<html>", SwingConstants.CENTER);
-		JLabel welcome2 = new JLabel("What would you like to do today? Create a new task, or view existing tasks?", SwingConstants.CENTER);
-		welcome.setFont(new Font("Times New Roman", Font.PLAIN, 42));
-		welcome2.setFont(new Font("Times New Roman", Font.PLAIN, 37));
+		JLabel welcome = new JLabel("Welcome to TaskManager 2.0!"
+				+ "    What would you like to do today?");
+		JLabel welcome2 = new JLabel("Create a new task, or view existing tasks?");
+		
 		JPanel buttons = new JPanel();
 		
 		JButton newtask = new JButton("New Task");
 		JButton existing = new JButton("Existing Tasks");
 		
-		newtask.setFont(newtask.getFont().deriveFont(Font.BOLD, 24));
-		existing.setFont(existing.getFont().deriveFont(Font.BOLD,24));
-		
-		Color backCol = new Color(200, 210, 230);
-		
 		window.setLayout(new CardLayout());
 		
-		buttons.setLayout(new FlowLayout());
+		buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 		
 		buttons.add(newtask);
 		buttons.add(existing);
-		
 		
 		weltxt.add(welcome);
 		weltxt.add(welcome2);
@@ -78,6 +71,7 @@ public class GraphicalView {
 		windowpanel.add(weltxt, BorderLayout.CENTER);
 		
 		window.add(windowpanel);
+		
 		
 		window.setVisible(true);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -123,6 +117,8 @@ public class GraphicalView {
 		JLabel welcome1 = new JLabel("Here are the Existing Tasks. Please choose which one "
 				+ "you wish to view by typing in the task name in the given text box.");
 		
+		welcome1.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+		
 		JPanel buttons1 = new JPanel();
 		
 		window2.setLayout(new GridLayout(5,2));
@@ -154,6 +150,9 @@ public class GraphicalView {
 //		addATextField("", textme);
 
 		JButton removeAllTasks = new JButton("Remove All Tasks");
+		removeAllTasks.setFont(removeAllTasks.getFont().deriveFont(Font.BOLD, 24));
+		
+		
 		textme.add(removeAllTasks);
 		removeAllTasks.addActionListener( (ActionEvent e) -> {
 			ListIterator<Task> tasklist = driver.getTasks();
@@ -169,6 +168,7 @@ public class GraphicalView {
 		JPanel back = new JPanel();
 		
 		JButton backtomenu = new JButton("Back To Main Menu");
+		backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 24));
 		
 		back.add(backtomenu);
 		
@@ -221,6 +221,8 @@ public class GraphicalView {
 		int i = 0;
 		String s = "";
 		
+		Font newTaskFont = new Font("Times New Roman", Font.PLAIN, 32);
+		
 		JFrame window2 = new JFrame();
 		window2.setSize(1200, 800);
 		
@@ -228,49 +230,92 @@ public class GraphicalView {
 		windowpanel1.setLayout(new BorderLayout());
 
 		JPanel tasktypes = new JPanel();
-		tasktypes.setLayout(new GridLayout(6,2));
+		tasktypes.setLayout(new GridLayout(6,2, 10, 40));
 		tasktypes.setPreferredSize(new Dimension((int)10,10));
 		
-		JLabel newtask = new JLabel("Please input the specified information into the designated boxes.");
-		newtask.setFont(new Font("Times New Roman", Font.PLAIN, 32));
+		// title
+		JLabel newtask = new JLabel("<html>Please input the specified information into the designated boxes. 	<br/> 	 "
+				+ "<br/>		<html>", SwingConstants.CENTER);
+		newtask.setFont(new Font("Times New Roman", Font.PLAIN, 40));
 		
-		addLabel("The Date Due: ", tasktypes);
-		JTextField listen1 = addATextField("", tasktypes);
+		// due date
+		JLabel dueDate = new JLabel("The Date Due: ", SwingConstants.RIGHT);
+		JTextField listen1 = new JTextField("");
 		
-		int duedate = i;
+		dueDate.setFont(newTaskFont);
+		listen1.setFont(newTaskFont);
 		
-		addLabel("How You Would Rate It's Difficulty: ", tasktypes);
-		JTextField listen2 = addATextField("", tasktypes);
-		addLabel("How Many Hours You Suspect It Will Take: ", tasktypes);
-		JTextField listen3 = addATextField("", tasktypes);
+		tasktypes.add(dueDate);
+		tasktypes.add(listen1);
+		
+		// difficulty
+		JLabel difficulty = new JLabel("How You Would Rate It's Difficulty: ", SwingConstants.RIGHT);
+		JTextField listen2 = new JTextField("");
+		
+		difficulty.setFont(newTaskFont);
+		listen2.setFont(newTaskFont);
+
+
+		
+		tasktypes.add(difficulty);
+		tasktypes.add(listen2);
 		
 		
+		// hours
+		JLabel hours = new JLabel("How You Would Rate It's Difficulty: ", SwingConstants.RIGHT);
+		JTextField listen3 = new JTextField("");
 		
-		addLabel("The Type of Task: ", tasktypes);
-		JTextField listen4 = addATextField("", tasktypes);
+		hours.setFont(newTaskFont);
+		listen3.setFont(newTaskFont);
+		
+		tasktypes.add(hours);
+		tasktypes.add(listen3);
+	
+		
+		// type
+		JLabel type = new JLabel("The Type of Task: ", SwingConstants.RIGHT);
+		JTextField listen4 = new JTextField("");
+		
+		type.setFont(newTaskFont);
+		listen4.setFont(newTaskFont);
+		
+		tasktypes.add(type);
+		tasktypes.add(listen4);
+		
+		// name
+		JLabel name = new JLabel("The Name of the Task: ", SwingConstants.RIGHT);
+		JTextField listen5 = new JTextField("");
+		
+		name.setFont(newTaskFont);
+		listen5.setFont(newTaskFont);
+		
+		tasktypes.add(name);
+		tasktypes.add(listen5);
+		
+		// space for right side of window
+		JLabel space = new JLabel("   				", SwingConstants.RIGHT);
+		space.setFont(new Font("Times New Roman", Font.PLAIN, 90));
 		
 		
-		
-		addLabel("The Name of the Task: ", tasktypes);
-		JTextField listen5 = addATextField("", tasktypes);
-		
-		
+		// buttons
 		JPanel enter = new JPanel();
-		enter.setLayout(new BorderLayout());
+		
 		JButton enterbutton = new JButton("Enter");
-        enterbutton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        enter.add(enterbutton);
-        
-        JPanel back = new JPanel();
+		JButton backtomenu = new JButton("Back");
 		
-		JButton backtomenu = new JButton("Back To Main Menu");
+		enter.setLayout(new FlowLayout(FlowLayout.CENTER, 45, 5));
 		
-		back.add(backtomenu);
+        enterbutton.setFont(enterbutton.getFont().deriveFont(Font.BOLD, 30));
+		backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 30));
+		
+		enter.add(enterbutton);
+		enter.add(backtomenu);
+		
 		
 		windowpanel1.add(tasktypes, BorderLayout.CENTER);
 		windowpanel1.add(newtask, BorderLayout.NORTH);
 		windowpanel1.add(enter, BorderLayout.SOUTH);
-		windowpanel1.add(back, BorderLayout.EAST);
+		windowpanel1.add(space, BorderLayout.EAST);
 		
 		
 		window2.add(windowpanel1);
