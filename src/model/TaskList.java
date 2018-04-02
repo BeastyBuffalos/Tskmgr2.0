@@ -18,11 +18,7 @@ public class TaskList {
 //	{
 //		return (weight(t1) < weight(t2)) ? -1 : ((weight(t1) == weight(t2)) ? 0 : 1);
 //	};
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> 204c7b1407340b42dd71887f59c204738a89cbcc
 	private ArrayList<Task> tasks = new ArrayList<>();
 
 	public TaskList() {
@@ -199,36 +195,6 @@ public class TaskList {
 		}
 
 	}
-<<<<<<< HEAD
-	
-//	public OrderedPQ<Task, TaskWrapper> overrideOrder(OrderedPQ<Task, TaskWrapper> pq, Task task){
-//		OrderedPQ<Task, TaskWrapper> tempPQ = pq;
-//		OrderedPQ<Task, TaskWrapper> finalPQ =  new OrderedPQ<Task, TaskWrapper>();
-//		
-//		PQEntry<Task, TaskWrapper> previous = null;
-//		PQEntry<Task, TaskWrapper> current = tempPQ.removeMin();
-//		PQEntry<Task, TaskWrapper> next = tempPQ.removeMin();
-//		
-//		
-//		
-//		if(current.getKey().equals(task))
-//			task.setWeightOverride(weight(next.getKey())/2);
-//		while(!tempPQ.isEmpty()){
-//			finalPQ.insert(previous.getKey(), previous.getValue());
-//			previous = current;
-//			current = next;
-//			next = tempPQ.removeMin();
-//			if(current.getKey().equals(task))
-//				task.setWeightOverride((weight(next.getKey())+weight(previous.getKey()))/2);
-//		}
-//		
-//		finalPQ.insert(current.getKey(), current.getValue());
-//		finalPQ.insert(next.getKey(), next.getValue());
-//		
-//		return finalPQ;
-//	}
-	
-=======
 
 
 	public ArrayList<Task> overrideOrder(ArrayList<Task> list, int placement){
@@ -257,8 +223,6 @@ public class TaskList {
 		return list;
 	}
 
-
->>>>>>> 204c7b1407340b42dd71887f59c204738a89cbcc
 	public void save(String path)
 	{
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));)
