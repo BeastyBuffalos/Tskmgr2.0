@@ -239,10 +239,16 @@ public class TaskList {
 	{
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));)
 		{
-			tasks = (ArrayList<Task>) ois.readObject();
+			File f = new File(path);
+			if(!f.exists()) //need to verify the file exists
+			{
+				f.createNewFile();
+				save(path);
+			}
+			else tasks = (ArrayList<Task>) ois.readObject();
 		}catch(IOException e)
 		{
-			e.printStackTrace();
+			
 		}catch(ClassNotFoundException e)
 		{
 			e.printStackTrace();
