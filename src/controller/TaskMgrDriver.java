@@ -7,6 +7,7 @@ import model.Task;
 import view.GraphicalView;
 import java.util.ListIterator;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * @author ejoverwe
@@ -23,7 +24,7 @@ public class TaskMgrDriver {
 	private String filepath;
 	
 	{ //filepath initalization
-		String os = System.getProperty("os.name");
+		String os = System.getProperty("os.name").toLowerCase();
 		//determine location of tasklist based on underlying OS
 		filepath = (os.contains("win")) ? winpath : 
 			(os.contains("mac") || os.contains("darwin")) ? macpath : nuxpath;
@@ -34,8 +35,26 @@ public class TaskMgrDriver {
 	 * 
 	 */
 	private TaskMgrDriver() {
-		loadTaskList();
-		ui = new GraphicalView(this);
+		System.out.println(filepath);
+		File f = new File(filepath);
+		if(!f.exists()) 
+		{
+			try
+			{
+				System.out.println("bleh");
+				f.mkdirs();
+				f.createNewFile();
+			}catch(IOException e) 
+			{
+				e.printStackTrace();
+			}
+			saveTaskList();
+		}
+		else
+		{
+			loadTaskList();
+		}
+		//ui = new GraphicalView(this);
 	}
 	
 	private void loadTaskList()

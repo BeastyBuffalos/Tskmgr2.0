@@ -51,6 +51,8 @@ public class GraphicalView {
 		JLabel welcome = new JLabel("Welcome to TaskManager 2.0!"
 				+ "    What would you like to do today?");
 		JLabel welcome2 = new JLabel("Create a new task, or view existing tasks?");
+		welcome.setFont(new Font("Times New Roman", Font.PLAIN, 42));
+		welcome2.setFont(new Font("Times New Roman", Font.PLAIN, 37));
 		
 		JPanel buttons = new JPanel();
 		
