@@ -16,7 +16,7 @@ public class TaskMgrDriver {
 	private TaskList tasks = new TaskList();
 	private GraphicalView ui;
 	
-	private final String taskpath = "\\Tskmgr2.0\\.t";
+	private final String taskpath = "\\Tskmgr2.0\\t.t";
 	private final String winpath = "%AppData%";
 	private final String macpath = "";
 	private final String nuxpath = "";
@@ -58,7 +58,6 @@ public class TaskMgrDriver {
 	
 	public ListIterator<Task> getTasks()
 	{
-		
 		return tasks.getListIterator();
 	}
 	
