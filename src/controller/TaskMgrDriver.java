@@ -16,7 +16,7 @@ public class TaskMgrDriver {
 	private TaskList tasks = new TaskList();
 	private GraphicalView ui;
 	
-	private final String taskpath = "\\Tskmgr2.0\\t.t";
+	private final String taskpath = "\\Tskmgr2.0\\.t";
 	private final String winpath = "%AppData%";
 	private final String macpath = "";
 	private final String nuxpath = "";
@@ -65,6 +65,12 @@ public class TaskMgrDriver {
 			String name1, String type1, int due, int hours, boolean comp, int diff)
 	{
 		tasks.editTask(task, name1, type1, due, hours, comp, diff);
+		saveTaskList();
+		return getTasks();
+	}
+	
+	public ListIterator<Task> overrideTask(int placement){
+		tasks.overrideOrder(placement);
 		saveTaskList();
 		return getTasks();
 	}

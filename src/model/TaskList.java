@@ -12,12 +12,12 @@ import java.io.*;
  * @author ejoverwe
  *
  */
-public class TaskList {
+public class TaskList{
 
-//	private final Comparator<Task> c = (Task t1, Task t2) -> 
-//	{
-//		return (weight(t1) < weight(t2)) ? -1 : ((weight(t1) == weight(t2)) ? 0 : 1);
-//	};
+	//	private final Comparator<Task> c = (Task t1, Task t2) -> 
+	//	{
+	//		return (weight(t1) < weight(t2)) ? -1 : ((weight(t1) == weight(t2)) ? 0 : 1);
+	//	};
 
 	private ArrayList<Task> tasks = new ArrayList<>();
 
@@ -79,7 +79,7 @@ public class TaskList {
 		//		return task;
 	}
 
-	
+
 
 	private void radixsort(ArrayList<Task> tasklist) {
 
@@ -197,13 +197,26 @@ public class TaskList {
 	}
 
 
-	public ArrayList<Task> overrideOrder(ArrayList<Task> list, int placement){
-		list.get(placement).setOverride(true);
-		Task prior, post;
-		if (placement > 0){
-			prior = list.get(placement - 1);
-			post = list.get(placement + 1);
+	public void overrideOrder(int placement){
 
+		Task prior, post;
+
+		if (placement == 0){
+			tasks.get(placement).setDueDateOverride(0);
+			tasks.get(placement).setHrsOverride(9);
+			tasks.get(placement).setDifficultyOverride(9);
+		}
+
+		else if (placement == tasks.size()){
+			tasks.get(placement).setDueDateOverride(9);
+			tasks.get(placement).setHrsOverride(0);
+			tasks.get(placement).setDifficultyOverride(0);
+		}
+
+		else{
+			prior = tasks.get(placement - 1);
+			post = tasks.get(placement + 1);
+			
 			int pridue = prior.getDue();
 			int prihrs = prior.getHours();
 			int pridiff = prior.getDifficulty();
@@ -211,16 +224,26 @@ public class TaskList {
 			int postdue = post.getDue();
 			int posthrs = post.getHours();
 			int postdiff = post.getDifficulty();
+			
+			if(prior.isOverride()){
+				pridue = prior.getDueDateOverride();
+				prihrs = prior.getHrsOverride();
+				pridiff = prior.getDifficultyOverride();
+			}
+			if(post.isOverride()){
+				postdue = post.getDueDateOverride();
+				posthrs = post.getHrsOverride();
+				postdiff = post.getDifficultyOverride();
+			}
 
 			int diffdelta = (postdiff - pridiff) / 2;
 			int hrsdelta = (posthrs - prihrs) / 2;
 			int duedelta = (postdue - pridue) / 2;
 
-			list.get(placement).setDueDateOverride(postdue - duedelta);
-			list.get(placement).setHrsOverride(posthrs - hrsdelta);
-			list.get(placement).setDifficultyOverride(postdiff - diffdelta);
+			tasks.get(placement).setDueDateOverride(postdue - duedelta);
+			tasks.get(placement).setHrsOverride(posthrs - hrsdelta);
+			tasks.get(placement).setDifficultyOverride(postdiff - diffdelta);
 		}
-		return list;
 	}
 
 
@@ -239,16 +262,10 @@ public class TaskList {
 	{
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));)
 		{
-			File f = new File(path);
-			if(!f.exists()) //need to verify the file exists
-			{
-				f.createNewFile();
-				save(path);
-			}
-			else tasks = (ArrayList<Task>) ois.readObject();
+			tasks = (ArrayList<Task>) ois.readObject();
 		}catch(IOException e)
 		{
-			
+			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
 			e.printStackTrace();

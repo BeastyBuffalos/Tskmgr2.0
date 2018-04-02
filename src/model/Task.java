@@ -148,6 +148,15 @@ public class Task implements Serializable {
 		newDueDate = newDue;
 	}
 	
+	public int getHrsOverride(){
+		return newHours;
+	}
+	public int getDifficultyOverride(){
+		return newDifficulty;
+	}
+	public int getDueDateOverride(){
+		return newDueDate;
+	}
 	void setMoved(boolean moved)
 	{
 		this.moved = moved;
