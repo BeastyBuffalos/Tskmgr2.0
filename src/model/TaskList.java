@@ -246,7 +246,6 @@ public class TaskList{
 		}
 	}
 
-
 	public void save(String path)
 	{
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));)
