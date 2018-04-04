@@ -262,7 +262,7 @@ public class GraphicalView {
 		
 		
 		// hours
-		JLabel hours = new JLabel("How You Would Rate It's Difficulty: ", SwingConstants.RIGHT);
+		JLabel hours = new JLabel("How Many Hours It Will Take To Finish: ", SwingConstants.RIGHT);
 		JTextField listen3 = new JTextField("");
 		
 		hours.setFont(newTaskFont);
