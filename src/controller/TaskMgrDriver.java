@@ -17,7 +17,8 @@ public class TaskMgrDriver {
 	private TaskList tasks = new TaskList();
 	private GraphicalView ui;
 	
-	private final String taskpath = "\\Tskmgr2.0\\tasks";
+	private final String netseperator = "\\";
+	private final String unixseperator = "/";
 	private final String macpath = "";
 	private final String nuxpath = "";
 	private String filepath;
@@ -25,9 +26,18 @@ public class TaskMgrDriver {
 	{ //filepath initalization
 		String os = System.getProperty("os.name").toLowerCase();
 		//determine location of tasklist based on underlying OS
-		filepath = (os.contains("win")) ? System.getenv("APPDATA") : 
-			(os.contains("mac") || os.contains("darwin")) ? macpath : nuxpath;
-		filepath += taskpath;
+		String seperator;
+		if(os.contains("win"))
+		{
+			filepath = System.getenv("APPDATA");
+			seperator = netseperator;
+		}
+		else
+		{
+			filepath = os.contains("mac") || os.contains("darwin") ? macpath : nuxpath;
+			seperator = unixseperator;
+		}
+		filepath += seperator + "Tskmgr2.0" + seperator + "tasks";
 	}
 	
 	/**
@@ -51,7 +61,7 @@ public class TaskMgrDriver {
 		{
 			loadTaskList();
 		}
-		ui = new GraphicalView(this);
+		//ui = new GraphicalView(this);
 	}
 	
 	private void loadTaskList()
