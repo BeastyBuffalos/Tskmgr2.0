@@ -17,8 +17,7 @@ public class TaskMgrDriver {
 	private TaskList tasks = new TaskList();
 	private GraphicalView ui;
 	
-	private final String taskpath = "\\Tskmgr2.0\\t.t";
-	private final String winpath = "%AppData%";
+	private final String taskpath = "\\Tskmgr2.0\\tasks";
 	private final String macpath = "";
 	private final String nuxpath = "";
 	private String filepath;
@@ -26,7 +25,7 @@ public class TaskMgrDriver {
 	{ //filepath initalization
 		String os = System.getProperty("os.name").toLowerCase();
 		//determine location of tasklist based on underlying OS
-		filepath = (os.contains("win")) ? winpath : 
+		filepath = (os.contains("win")) ? System.getenv("APPDATA") : 
 			(os.contains("mac") || os.contains("darwin")) ? macpath : nuxpath;
 		filepath += taskpath;
 	}
@@ -35,14 +34,12 @@ public class TaskMgrDriver {
 	 * 
 	 */
 	private TaskMgrDriver() {
-		System.out.println(filepath);
 		File f = new File(filepath);
 		if(!f.exists()) 
 		{
 			try
 			{
-				System.out.println("bleh");
-				f.mkdirs();
+				f.getParentFile().mkdir();
 				f.createNewFile();
 			}catch(IOException e) 
 			{
@@ -54,7 +51,7 @@ public class TaskMgrDriver {
 		{
 			loadTaskList();
 		}
-		//ui = new GraphicalView(this);
+		ui = new GraphicalView(this);
 	}
 	
 	private void loadTaskList()
@@ -84,6 +81,12 @@ public class TaskMgrDriver {
 			String name1, String type1, int due, int hours, boolean comp, int diff)
 	{
 		tasks.editTask(task, name1, type1, due, hours, comp, diff);
+		saveTaskList();
+		return getTasks();
+	}
+	
+	public ListIterator<Task> overrideTask(int placement){
+		tasks.overrideOrder(placement);
 		saveTaskList();
 		return getTasks();
 	}
