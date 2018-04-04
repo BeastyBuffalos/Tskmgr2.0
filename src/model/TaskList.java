@@ -1,8 +1,6 @@
 package model;
 
 import java.util.*;
-import structures.OrderedPQ;
-import structures.PQEntry;
 import java.io.Serializable;
 import java.io.*;
 
@@ -13,11 +11,7 @@ import java.io.*;
  */
 public class TaskList{
 
-	//	private final Comparator<Task> c = (Task t1, Task t2) -> 
-	//	{
-	//		return (weight(t1) < weight(t2)) ? -1 : ((weight(t1) == weight(t2)) ? 0 : 1);
-	//	};
-
+	
 	private ArrayList<Task> tasks = new ArrayList<>();
 
 	public TaskList() {
@@ -26,28 +20,17 @@ public class TaskList{
 
 	public void insertTask(Task task){
 		tasks.add(task);
-		// call sorting algorithm
+		
 		radixsort(tasks);
 	}
 
 	public Task removeTask(Task task){
 		tasks.remove(task);
 
-		// call sorting algorithm
-
+		radixsort(tasks);
+		
 		return task;
 
-		//		int size1 = tasks.size();
-		//		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task, TaskWrapper>(c);
-		//		while(!(tasks.isEmpty())){
-		//			PQEntry<Task,TaskWrapper> removed = tasks.removeMin();
-		//			if (removed.getValue().get() != task)
-		//				pq2.insert(removed.getKey(), removed.getValue());
-		//		}
-		//		if (tasks.size() == size1)
-		//			System.out.println("Invalid task to remove.");
-		//		tasks = pq2;
-		//		return task;
 	}
 
 	public Task editTask(Task task, 
@@ -57,35 +40,18 @@ public class TaskList{
 		tasks.remove(task);
 		tasks.add(updated);
 
-		// call sorting algorithm
+		radixsort(tasks);
 
 		return updated;
-
-		//		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task,TaskWrapper>(c);
-		//		while(!(tasks.isEmpty())){
-		//			PQEntry<Task,TaskWrapper> removed = tasks.removeMin();
-		//			if (removed.getValue().get() != task)
-		//				pq2.insert(removed.getKey(), removed.getValue());
-		//				
-		//			else{
-		//				Task newTask = new Task(name1, type1, due, hours, comp, diff);
-		//				tasks.insert(newTask,new TaskWrapper(newTask)); 
-		//			}
-		//		}
-		//		return task;
 	}
 
 
 
 	private void radixsort(ArrayList<Task> tasklist) {
 
-		tasklist.get(0).getDue(); //smallest, then this one third
-		tasklist.get(0).getHours(); //biggest, then this one second
-		tasklist.get(0).getDifficulty(); //biggest, first to be sorted
-
-		ArrayList<Integer> tempdiff = new ArrayList<Integer>(); //first to sort, biggest
-		ArrayList<Integer> temphou = new ArrayList<Integer>(); //second to sort, biggest
-		ArrayList<Integer> tempdue = new ArrayList<Integer>(); //third to sort, smallest
+		ArrayList<Integer> tempdiff = new ArrayList<Integer>(); 
+		ArrayList<Integer> temphou = new ArrayList<Integer>(); 
+		ArrayList<Integer> tempdue = new ArrayList<Integer>(); 
 
 		for(int i = 0; i < tasklist.size(); i++) {
 
