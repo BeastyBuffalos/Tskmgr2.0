@@ -1,7 +1,6 @@
 package model;
 
 import java.util.*;
-
 import structures.OrderedPQ;
 import structures.PQEntry;
 import java.io.Serializable;
