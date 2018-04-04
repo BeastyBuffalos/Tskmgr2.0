@@ -70,6 +70,9 @@ public class GraphicalView {
 		JButton newtask = new JButton("New Task");
 		JButton existing = new JButton("Existing Tasks");
 		
+		newtask.setFont(newtask.getFont().deriveFont(Font.BOLD, 24));
+		existing.setFont(existing.getFont().deriveFont(Font.BOLD, 24));
+		
 		window.setLayout(new CardLayout());
 		
 		buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
