@@ -424,6 +424,148 @@ public class GraphicalView {
 		frame.setVisible(true);
 	}
 	
+	private void makeTaskCreationPanel() {
+		int i = 0;
+		String s = "";
+		
+		Font newTaskFont = new Font("Times New Roman", Font.PLAIN, 32);
+		
+		JPanel contentpane = contentPane();
+		
+		JPanel windowpanel1 = new JPanel();
+		windowpanel1.setLayout(new BorderLayout());
+
+		JPanel tasktypes = new JPanel();
+		tasktypes.setLayout(new GridLayout(6,2, 10, 40));
+		tasktypes.setPreferredSize(new Dimension((int)10,10));
+		
+		//TASK FIELDS
+		
+		// title
+		JLabel newtask = new JLabel("<html>Please input the specified information into the designated boxes. 	<br/> 	 "
+				+ "<br/>		<html>", SwingConstants.CENTER);
+		newtask.setFont(new Font("Times New Roman", Font.PLAIN, 40));
+		
+		// due date
+		JLabel dueDate = new JLabel("The Date Due: ", SwingConstants.RIGHT);
+		JTextField listen1 = new JTextField("");
+		
+		dueDate.setFont(newTaskFont);
+		listen1.setFont(newTaskFont);
+		
+		tasktypes.add(dueDate);
+		tasktypes.add(listen1);
+		
+		// difficulty
+		JLabel difficulty = new JLabel("How You Would Rate It's Difficulty: ", SwingConstants.RIGHT);
+		JTextField listen2 = new JTextField("");
+		
+		difficulty.setFont(newTaskFont);
+		listen2.setFont(newTaskFont);
+
+
+		
+		tasktypes.add(difficulty);
+		tasktypes.add(listen2);
+		
+		
+		// hours
+		JLabel hours = new JLabel("How Many Hours It Will Take To Finish: ", SwingConstants.RIGHT);
+		JTextField listen3 = new JTextField("");
+		
+		hours.setFont(newTaskFont);
+		listen3.setFont(newTaskFont);
+		
+		tasktypes.add(hours);
+		tasktypes.add(listen3);
+	
+		
+		// type
+		JLabel type = new JLabel("The Type of Task: ", SwingConstants.RIGHT);
+		JTextField listen4 = new JTextField("");
+		
+		type.setFont(newTaskFont);
+		listen4.setFont(newTaskFont);
+		
+		tasktypes.add(type);
+		tasktypes.add(listen4);
+		
+		// name
+		JLabel name = new JLabel("The Name of the Task: ", SwingConstants.RIGHT);
+		JTextField listen5 = new JTextField("");
+		
+		name.setFont(newTaskFont);
+		listen5.setFont(newTaskFont);
+		
+		tasktypes.add(name);
+		tasktypes.add(listen5);
+		
+		// space for right side of window
+		JLabel space = new JLabel("   				", SwingConstants.RIGHT);
+		space.setFont(new Font("Times New Roman", Font.PLAIN, 90));
+		
+		
+		// BUTTONS
+		JPanel enter = new JPanel();
+		
+		JButton enterbutton = new JButton("Enter");
+		JButton backtomenu = new JButton("Back");
+		
+		enter.setLayout(new FlowLayout(FlowLayout.CENTER, 45, 5));
+		
+        enterbutton.setFont(enterbutton.getFont().deriveFont(Font.BOLD, 30));
+		backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 30));
+		
+		enter.add(enterbutton);
+		enter.add(backtomenu);
+		
+		
+		windowpanel1.add(tasktypes, BorderLayout.CENTER);
+		windowpanel1.add(newtask, BorderLayout.NORTH);
+		windowpanel1.add(enter, BorderLayout.SOUTH);
+		windowpanel1.add(space, BorderLayout.EAST);
+		
+		
+		window2.add(windowpanel1);
+		
+		window2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window2.setVisible(true);
+		
+		enterbutton.addActionListener((event) ->
+		{
+				//use the getText to get the text for the new task
+				//System.out.println(listen1.getText());
+				try {
+					int duedate = Integer.valueOf(listen1.getDocument().getText(0, listen1.getDocument().getLength()));
+					int diff = Integer.valueOf(listen2.getDocument().getText(0, listen2.getDocument().getLength()));
+					int hourst = Integer.valueOf(listen3.getDocument().getText(0, listen3.getDocument().getLength()));
+					String typet = listen4.getDocument().getText(0, listen4.getDocument().getLength());
+					String namet = listen5.getDocument().getText(0, listen5.getDocument().getLength());
+					driver.addTask(namet, typet, duedate, hourst, false, diff);
+					
+					listen1.setText("");
+					listen2.setText("");
+					listen3.setText("");
+					listen4.setText("");
+					listen5.setText("");
+					
+				} catch (BadLocationException e) {
+					e.printStackTrace();
+				}
+		
+		
+		});
+		
+		backtomenu.addActionListener((event) ->
+		{
+				window2.setVisible(false);
+				JFrame mainmenu = new JFrame();
+				starterup(mainmenu);
+		});
+		
+		
+	}
+	
 	private JPanel contentPane()
 	{
 		return (JPanel) frame.getContentPane();
