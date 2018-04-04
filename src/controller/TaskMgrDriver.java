@@ -18,8 +18,8 @@ public class TaskMgrDriver {
 	private GraphicalView ui;
 	
 	private final String taskpath = "\\Tskmgr2.0\\tasks";
-	private final String macpath = "";
-	private final String nuxpath = "";
+	private final String macpath = "/Library/Application Support";
+	private final String nuxpath = "~/.";
 	private String filepath;
 	
 	{ //filepath initalization
