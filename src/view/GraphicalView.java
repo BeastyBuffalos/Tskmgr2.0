@@ -132,9 +132,11 @@ public class GraphicalView {
 		
 		//TODO
 		//try something like this
-		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext();)
+		int i = 0;
+		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
 		{
 			Task t = tasks.next();
+			System.out.println(i);
 			addLabel(t.getName(), buttons1);
 		}
 		
@@ -325,19 +327,17 @@ public class GraphicalView {
 		window2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window2.setVisible(true);
 		
-		enterbutton.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent arg0) {
-				
+		enterbutton.addActionListener((event) ->
+		{
 				//use the getText to get the text for the new task
 				//System.out.println(listen1.getText());
 				try {
 					int duedate = Integer.valueOf(listen1.getDocument().getText(0, listen1.getDocument().getLength()));
 					int diff = Integer.valueOf(listen2.getDocument().getText(0, listen2.getDocument().getLength()));
-					int hours = Integer.valueOf(listen3.getDocument().getText(0, listen3.getDocument().getLength()));
-					String type = listen4.getDocument().getText(0, listen4.getDocument().getLength());
-					String name = listen5.getDocument().getText(0, listen5.getDocument().getLength());
-					driver.addTask(name, type, duedate, hours, false, diff);
+					int hourst = Integer.valueOf(listen3.getDocument().getText(0, listen3.getDocument().getLength()));
+					String typet = listen4.getDocument().getText(0, listen4.getDocument().getLength());
+					String namet = listen5.getDocument().getText(0, listen5.getDocument().getLength());
+					driver.addTask(namet, typet, duedate, hourst, false, diff);
 					
 					listen1.setText("");
 					listen2.setText("");
@@ -346,27 +346,17 @@ public class GraphicalView {
 					listen5.setText("");
 					
 				} catch (BadLocationException e) {
-					
 					e.printStackTrace();
 				}
-				
-			}
 		
 		
 		});
 		
-		backtomenu.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent arg0) {
-				
+		backtomenu.addActionListener((event) ->
+		{
 				window2.setVisible(false);
-				
 				JFrame mainmenu = new JFrame();
 				starterup(mainmenu);
-				
-			}
-		
-		
 		});
 		
 		
