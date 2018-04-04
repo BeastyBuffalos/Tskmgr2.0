@@ -122,7 +122,7 @@ public class TaskList{
 
 		MergeSort.sort(temp);
 
-		Collections.sort(temp, Collections.reverseOrder());
+	
 
 		for(int i = 0; i < tasklist.size(); i++) {
 			Rtemp.add(tasklist.get(i));
@@ -140,6 +140,8 @@ public class TaskList{
 
 			}
 		}
+		
+		Collections.sort(tasklist, Collections.reverseOrder());
 
 	}
 
@@ -149,7 +151,6 @@ public class TaskList{
 
 		MergeSort.sort(temp);
 
-		Collections.sort(temp, Collections.reverseOrder());
 
 		for(int i = 0; i < tasklist.size(); i++) {
 			Rtemp.add(tasklist.get(i));
@@ -168,6 +169,8 @@ public class TaskList{
 			}
 		}
 
+		Collections.sort(tasklist, Collections.reverseOrder());
+		
 	}
 
 	private void countsortdue(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
