@@ -39,6 +39,17 @@ public class GraphicalView {
 		starterup(window);
 	}
 	
+//	Drop Box Code for use when I can find a place to put it
+//	String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
+//	JComboBox changescreen = new JComboBox(switchit);
+//	changescreen.setSelectedIndex(2);
+//	changescreen.addActionListener(this);
+	
+//	 public void actionPerformed(ActionEvent e) {
+//	        JComboBox cb = (JComboBox)e.getSource();
+//	        String petName = (String)cb.getSelectedItem();
+//	    }
+	
 	public static void starterup(JFrame window) {
 		
 		JPanel windowpanel = new JPanel();

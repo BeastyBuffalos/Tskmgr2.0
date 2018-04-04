@@ -134,7 +134,7 @@ public class TaskList{
 
 				if( temp.get(i) == Rtemp.get(j).getDifficulty() ) {
 
-					tasklist.add(i, Rtemp.get(j));
+					tasklist.set(i, Rtemp.get(j));
 
 				}
 
@@ -161,7 +161,7 @@ public class TaskList{
 
 				if( temp.get(i) == Rtemp.get(j).getHours() ) {
 
-					tasklist.add(i, Rtemp.get(j));
+					tasklist.set(i, Rtemp.get(j));
 
 				}
 
@@ -186,7 +186,7 @@ public class TaskList{
 
 				if( temp.get(i) == Rtemp.get(j).getDue() ) {
 
-					tasklist.add(i, Rtemp.get(j));
+					tasklist.set(i, Rtemp.get(j));
 
 				}
 
