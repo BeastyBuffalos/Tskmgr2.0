@@ -132,7 +132,7 @@ public class TaskList{
 
 		MergeSort.sort(temp);
 
-		Collections.sort(temp, Collections.reverseOrder());
+	
 
 		for(int i = 0; i < tasklist.size(); i++) {
 			Rtemp.add(tasklist.get(i));
@@ -144,12 +144,14 @@ public class TaskList{
 
 				if( temp.get(i) == Rtemp.get(j).getDifficulty() ) {
 
-					tasklist.add(i, Rtemp.get(j));
+					tasklist.set(i, Rtemp.get(j));
 
 				}
 
 			}
 		}
+		
+		Collections.sort(tasklist, Collections.reverseOrder());
 
 	}
 
@@ -159,7 +161,6 @@ public class TaskList{
 
 		MergeSort.sort(temp);
 
-		Collections.sort(temp, Collections.reverseOrder());
 
 		for(int i = 0; i < tasklist.size(); i++) {
 			Rtemp.add(tasklist.get(i));
@@ -171,13 +172,15 @@ public class TaskList{
 
 				if( temp.get(i) == Rtemp.get(j).getHours() ) {
 
-					tasklist.add(i, Rtemp.get(j));
+					tasklist.set(i, Rtemp.get(j));
 
 				}
 
 			}
 		}
 
+		Collections.sort(tasklist, Collections.reverseOrder());
+		
 	}
 
 	private void countsortdue(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
@@ -196,7 +199,7 @@ public class TaskList{
 
 				if( temp.get(i) == Rtemp.get(j).getDue() ) {
 
-					tasklist.add(i, Rtemp.get(j));
+					tasklist.set(i, Rtemp.get(j));
 
 				}
 
