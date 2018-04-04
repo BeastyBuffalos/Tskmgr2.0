@@ -537,10 +537,7 @@ public class GraphicalView {
 		windowpanel1.add(space, BorderLayout.EAST);
 		
 		
-		window2.add(windowpanel1);
-		
-		window2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window2.setVisible(true);
+		contentpane.add(windowpanel1);
 		
 		enterbutton.addActionListener((event) ->
 		{
@@ -569,7 +566,7 @@ public class GraphicalView {
 		
 		backtomenu.addActionListener((event) ->
 		{
-				window2.setVisible(false);
+				contentpane.setVisible(false);
 				JFrame mainmenu = new JFrame();
 				starterup(mainmenu);
 		});

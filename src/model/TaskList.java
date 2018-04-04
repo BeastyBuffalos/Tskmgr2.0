@@ -19,17 +19,6 @@ public class TaskList{
 	//	};
 
 	private ArrayList<Task> tasks = new ArrayList<>();
-	
-	public static void main(String[] arg0)
-	{
-		TaskList tl = new TaskList();
-		tl.insertTask(new Task("n", "b", 0, 0, false, 0));
-	}
-	
-	void size()
-	{
-		System.out.println(tasks.size());
-	}
 
 	public TaskList() {
 		//TODO
@@ -37,10 +26,8 @@ public class TaskList{
 
 	public void insertTask(Task task){
 		tasks.add(task);
-		size();
 		// call sorting algorithm
 		radixsort(tasks);
-		size();
 	}
 
 	public Task removeTask(Task task){
@@ -120,9 +107,7 @@ public class TaskList{
 
 		}
 		countsortdiff(tasklist, tempdiff);
-		size();
 		countsorthour(tasklist, temphou);
-		size();
 		countsortdue(tasklist, tempdue);
 	}
 
