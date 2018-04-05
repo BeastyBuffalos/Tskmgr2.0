@@ -61,7 +61,7 @@ public class TaskMgrDriver {
 		{
 			loadTaskList();
 		}
-		//ui = new GraphicalView(this);
+		ui = new GraphicalView(this);
 	}
 	
 	private void loadTaskList()

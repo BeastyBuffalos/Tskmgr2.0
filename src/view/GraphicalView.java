@@ -28,15 +28,13 @@ import model.Task;
 
 public class GraphicalView {
 	
-	private static TaskMgrDriver driver;
+	private TaskMgrDriver driver;
 	
 	private JFrame frame;
 	
 	public GraphicalView(TaskMgrDriver driver) {
 		this.driver = driver;
-		JFrame window = new JFrame("Task Manager 2.0");
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		starterup(window);
+		initialize();
 	}
 	
 //	Drop Box Code for use when I can find a place to put it
@@ -50,7 +48,7 @@ public class GraphicalView {
 //	        String petName = (String)cb.getSelectedItem();
 //	    }
 	
-	public static void starterup(JFrame window) {
+	public void starterup(JFrame window) {
 		
 		JPanel windowpanel = new JPanel();
 		windowpanel.setLayout(new BorderLayout());
@@ -119,7 +117,7 @@ public class GraphicalView {
 		
 	}
 	
-	public static void exist( ) {
+	public void exist( ) {
 		
 		JFrame window2 = new JFrame();
 		JPanel windowpanel1 = new JPanel();
@@ -151,7 +149,9 @@ public class GraphicalView {
 		{
 			Task t = tasks.next();
 			System.out.println(i);
-			addLabel(t.getName(), buttons1);
+			JLabel field = new JLabel(t.getName());
+	        field.setAlignmentX(Component.CENTER_ALIGNMENT);
+	        buttons1.add(field);
 		}
 		
 		
@@ -235,7 +235,7 @@ public class GraphicalView {
         return button;
     }
 	
-	public static void makingtask() {
+	public void makingtask() {
 		int i = 0;
 		String s = "";
 		
@@ -376,7 +376,26 @@ public class GraphicalView {
 		
 	}
 	
-	private void makeWelcomePanel()
+	private void initialize()
+	{
+		frame = new JFrame("Task Manager 2.0");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JPanel contentPane = contentPane();
+		contentPane.setLayout(new BorderLayout());
+		frame.setSize(1200, 800);
+		
+		//unsorted code
+		Color backCol = new Color(200, 210, 230);
+		frame.setLayout(new CardLayout());
+		
+		//seet up contents of the window
+		makeWelcomePanel(null);
+		
+		//finalization code
+		frame.setVisible(true);
+	}
+
+	private void makeWelcomePanel(ActionEvent ae)
 	{
 		JPanel contentPane = contentPane();
 		
@@ -390,7 +409,6 @@ public class GraphicalView {
 		
 		weltxt.add(welcome);
 		weltxt.add(welcome2);
-		contentPane.add(weltxt, BorderLayout.CENTER);
 		
 		//buttons code
 		
@@ -400,47 +418,21 @@ public class GraphicalView {
 		JButton existing = new JButton("Existing Tasks");
 		newtask.setFont(newtask.getFont().deriveFont(Font.BOLD, 24));
 		existing.setFont(existing.getFont().deriveFont(Font.BOLD,24));
-		newtask.addActionListener((e) -> 
-		{		
-				frame.setVisible(false);
-				makingtask();
-		});
 		
-		existing.addActionListener((e) -> 
-		{
-			frame.setVisible(false);
-				exist();
-		});
-		
-		buttons.setLayout(new FlowLayout());
+		newtask.addActionListener(this::makeTaskCreationPanel);
+		existing.addActionListener(this::makeExistingTasksPanel);
 		
 		buttons.add(newtask);
 		buttons.add(existing);
-		contentPane.add(buttons, BorderLayout.SOUTH);
-	}
-	
-	private void initialize()
-	{
-		frame = new JFrame("Task Manager 2.0");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel contentPane = contentPane();
-		contentPane.setLayout(new BorderLayout());
-		frame.setSize(1200, 800);
-		
-		
-		//unsorted code
-		Color backCol = new Color(200, 210, 230);
-		frame.setLayout(new CardLayout());
-		
+		buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 		
 		//finalization code
-		frame.pack();
-		frame.setVisible(true);
+		contentPane.add(weltxt, BorderLayout.CENTER);
+		contentPane.add(buttons, BorderLayout.SOUTH);
+		frame.setContentPane(contentPane);
 	}
 	
-	private void makeTaskCreationPanel() {
-		int i = 0;
-		String s = "";
+	private void makeTaskCreationPanel(ActionEvent ae) {
 		
 		Font newTaskFont = new Font("Times New Roman", Font.PLAIN, 32);
 		
@@ -575,6 +567,86 @@ public class GraphicalView {
 		});
 		
 		
+	}
+	
+	private void makeExistingTasksPanel(ActionEvent ae) {
+		
+		JPanel contentpane = contentPane();
+		contentpane.setLayout(new BoxLayout(contentpane, BoxLayout.Y_AXIS));
+		
+		
+		JPanel weltxt1 = new JPanel();
+		
+		JLabel welcome1 = new JLabel("Here are the Existing Tasks. Please choose which one "
+				+ "you wish to view by typing in the task name in the given text box.");
+		
+		welcome1.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+		
+		JPanel buttons1 = new JPanel();
+		
+		contentpane.setLayout(new GridLayout(5,2));
+		
+		buttons1.setLayout(new GridLayout(16, 2));
+		buttons1.setPreferredSize(new Dimension((int)1000000,1000000));
+		
+		weltxt1.add(welcome1);
+		
+		//TODO
+		//try something like this
+		int i = 0;
+		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
+		{
+			Task t = tasks.next();
+			System.out.println(i);
+			JLabel field = new JLabel(t.getName());
+	        field.setAlignmentX(Component.CENTER_ALIGNMENT);
+	        buttons1.add(field);
+		}
+		
+		
+		JPanel tasks = new JPanel();
+		
+		tasks.setLayout(new BoxLayout(tasks, BoxLayout.Y_AXIS));
+		
+		tasks.add(buttons1);
+		
+		contentpane.add(weltxt1);
+		
+		JPanel textme = new JPanel();
+		
+//		addATextField("", textme);
+
+		JButton removeAllTasks = new JButton("Remove All Tasks");
+		removeAllTasks.setFont(removeAllTasks.getFont().deriveFont(Font.BOLD, 24));
+		
+		
+		textme.add(removeAllTasks);
+		
+		removeAllTasks.addActionListener( (ActionEvent e) -> {
+			ListIterator<Task> tasklist = driver.getTasks();
+			while(tasklist.hasNext())
+			{
+				Task t = tasklist.next();
+				tasklist = driver.removeTask(t);
+			}
+			//TODO no, the next two lines are bad. 
+			frame.setVisible(false);
+			exist();
+		});
+		
+		JPanel back = new JPanel();
+		
+		JButton backtomenu = new JButton("Back To Main Menu");
+		backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 24));
+		
+		back.add(backtomenu);
+		
+		contentpane.add(back);
+		
+		contentpane.add(tasks);
+		contentpane.add(textme);
+		
+		backtomenu.addActionListener(this::makeWelcomePanel);
 	}
 	
 	private JPanel contentPane()
