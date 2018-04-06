@@ -29,6 +29,10 @@ public class TaskMgrDriver {
 		String os = System.getProperty("os.name").toLowerCase();
 		//determine location of tasklist based on underlying OS
 		String seperator;
+		
+		if(os.contains("mac")){
+			filepath = System.getProperty("user.home");
+		}
 		if(os.contains("win"))
 		{
 			filepath = System.getenv("APPDATA");
@@ -36,7 +40,7 @@ public class TaskMgrDriver {
 		}
 		else
 		{
-			filepath = os.contains("mac") || os.contains("darwin") ? macpath : nuxpath;
+			filepath += os.contains("mac") || os.contains("darwin") ? macpath : nuxpath;
 			seperator = unixseperator;
 		}
 		filepath += seperator + "Tskmgr2.0" + seperator + "tasks";
