@@ -468,8 +468,6 @@ public class GraphicalView {
 	}
 	
 	private void makeTaskCreationPanel() {
-		int i = 0;
-		String s = "";
 		
 		Font newTaskFont = new Font("Times New Roman", Font.PLAIN, 32);
 		
@@ -610,4 +608,161 @@ public class GraphicalView {
 	{
 		return (JPanel) frame.getContentPane();
 	}
+	
+	public static void main(String[] args) {
+	
+		edittasks(driver);
+		
+	}
+
+	private static void edittasks(TaskMgrDriver driver2) {
+		
+		
+		JFrame tester = new JFrame();
+		
+		//for( int i = 0; i < driver2.getTasks().)
+		
+//		String name = new String("Task Name");
+//		
+//		JLabel name1 = new JLabel(name);
+		
+		Font newTaskFont = new Font("Times New Roman", Font.PLAIN, 32);
+		
+		//JPanel contentpane = (JPanel) frame.getContentPane();
+		
+		JPanel windowpanel1 = new JPanel();
+		windowpanel1.setLayout(new BorderLayout());
+
+		JPanel tasktypes = new JPanel();
+		tasktypes.setLayout(new GridLayout(6,2, 10, 40));
+		tasktypes.setPreferredSize(new Dimension((int)10,10));
+		
+		//TASK FIELDS
+		
+		// name
+		JLabel name2 = new JLabel("The Name of the Task: ", SwingConstants.RIGHT);
+		JTextField listen5 = new JTextField("The Name Of The Task");
+				
+		name2.setFont(newTaskFont);
+		listen5.setFont(newTaskFont);
+						
+		tasktypes.add(name2);
+		tasktypes.add(listen5);
+				
+		
+		// title
+		JLabel newtask = new JLabel("<html>Please change the information, that you wish to edit, in the appropriate boxes. 	<br/> 	 "
+				+ "<br/>		<html>", SwingConstants.CENTER);
+		newtask.setFont(new Font("Times New Roman", Font.PLAIN, 40));
+		
+		// due date
+		JLabel dueDate = new JLabel("The Date Due: ", SwingConstants.RIGHT);
+		JTextField listen1 = new JTextField("The Current Date It Is Due");
+		
+		dueDate.setFont(newTaskFont);
+		listen1.setFont(newTaskFont);
+		
+		tasktypes.add(dueDate);
+		tasktypes.add(listen1);
+		
+		// difficulty
+		JLabel difficulty = new JLabel("How You Would Rate It's Difficulty: ", SwingConstants.RIGHT);
+		JTextField listen2 = new JTextField("The Current Difficulty Rating");
+		
+		difficulty.setFont(newTaskFont);
+		listen2.setFont(newTaskFont);
+
+
+		
+		tasktypes.add(difficulty);
+		tasktypes.add(listen2);
+		
+		
+		// hours
+		JLabel hours = new JLabel("How Many Hours It Will Take To Finish: ", SwingConstants.RIGHT);
+		JTextField listen3 = new JTextField("The Current Amount of Hours It Will Take");
+		
+		hours.setFont(newTaskFont);
+		listen3.setFont(newTaskFont);
+		
+		tasktypes.add(hours);
+		tasktypes.add(listen3);
+	
+		
+		// type
+		JLabel type = new JLabel("The Type of Task: ", SwingConstants.RIGHT);
+		JTextField listen4 = new JTextField("The Current Type of Task");
+		
+		type.setFont(newTaskFont);
+		listen4.setFont(newTaskFont);
+		
+		tasktypes.add(type);
+		tasktypes.add(listen4);
+		
+		JLabel space = new JLabel("   				", SwingConstants.RIGHT);
+		space.setFont(new Font("Times New Roman", Font.PLAIN, 90));
+		
+		// BUTTONS
+		JPanel enter = new JPanel();
+		
+		JButton enterbutton = new JButton("Enter");
+		JButton backtomenu = new JButton("Back");
+		
+		enter.setLayout(new FlowLayout(FlowLayout.CENTER, 45, 5));
+		
+        enterbutton.setFont(enterbutton.getFont().deriveFont(Font.BOLD, 30));
+		backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 30));
+		
+		enter.add(enterbutton);
+		enter.add(backtomenu);
+		
+		
+		windowpanel1.add(tasktypes, BorderLayout.CENTER);
+		windowpanel1.add(newtask, BorderLayout.NORTH);
+		windowpanel1.add(enter, BorderLayout.SOUTH);
+		windowpanel1.add(space, BorderLayout.EAST);
+		
+		tester.add(windowpanel1);
+		
+		tester.setVisible(true);
+		tester.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//contentpane.add(windowpanel1);
+		
+		enterbutton.addActionListener((event) ->
+		{
+				//use the getText to get the text for the new task
+				//System.out.println(listen1.getText());
+				try {
+					int duedate = Integer.valueOf(listen1.getDocument().getText(0, listen1.getDocument().getLength()));
+					int diff = Integer.valueOf(listen2.getDocument().getText(0, listen2.getDocument().getLength()));
+					int hourst = Integer.valueOf(listen3.getDocument().getText(0, listen3.getDocument().getLength()));
+					String typet = listen4.getDocument().getText(0, listen4.getDocument().getLength());
+					String namet = listen5.getDocument().getText(0, listen5.getDocument().getLength());
+					
+				//	driver.editTask(driver, name, typet, duedate, hourst, false, diff);
+					
+					listen1.setText("");
+					listen2.setText("");
+					listen3.setText("");
+					listen4.setText("");
+					listen5.setText("");
+					
+				} catch (BadLocationException e) {
+					e.printStackTrace();
+				}
+		
+		
+		});
+		
+//		backtomenu.addActionListener((event) ->
+//		{
+//				contentpane.setVisible(false);
+//				JFrame mainmenu = new JFrame();
+//				starterup(mainmenu);
+//		});
+		
+		
+	}
+		
+	
 }
