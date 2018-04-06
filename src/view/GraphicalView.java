@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -84,6 +85,34 @@ public class GraphicalView {
 		windowpanel.add(buttons, BorderLayout.SOUTH);
 		windowpanel.add(weltxt, BorderLayout.CENTER);
 		
+		String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
+		JComboBox changescreen = new JComboBox(switchit);
+		changescreen.setSelectedIndex(0);
+		//changescreen.addActionListener(this);
+		
+		JPanel dropdown = new JPanel();
+		dropdown.setLayout(new GridLayout(0,8));
+		
+		JLabel blank = new JLabel("");
+		JLabel blank1 = new JLabel("");
+		JLabel blank2 = new JLabel("");
+		JLabel blank3 = new JLabel("");
+		JLabel blank4 = new JLabel("");
+		JLabel blank5 = new JLabel("");
+		JLabel blank6 = new JLabel("");
+		JLabel blank7 = new JLabel("");
+		
+		dropdown.add(changescreen);
+		dropdown.add(blank);
+		dropdown.add(blank1);
+		dropdown.add(blank2);
+		dropdown.add(blank3);
+		dropdown.add(blank4);
+		dropdown.add(blank5);
+		dropdown.add(blank6);
+		dropdown.add(blank7);
+		
+		windowpanel.add(dropdown, BorderLayout.NORTH);
 		window.add(windowpanel);
 		
 		
