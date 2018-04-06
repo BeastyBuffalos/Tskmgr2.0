@@ -175,16 +175,23 @@ public class GraphicalView {
 		
 		//TODO
 		//try something like this
+		
 		int i = 0;
+		int count = 0;
 		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
 		{
 			Task t = tasks.next();
-			//addLabel(t.getName(), buttons1);
 			JLabel nt = new JLabel((i + 1) + ": " + t.getName(), SwingConstants.CENTER);
 			nt.setFont(new Font("Times New Roman", Font.PLAIN, 32));
 			buttons1.add(nt);
+			count++;
 		}
 		
+		if (count == 0) {
+			JLabel none = new JLabel("No tasks to display", SwingConstants.CENTER);
+			buttons1.add(none);
+			none.setFont(new Font("Times New Roman", Font.PLAIN, 32));
+		}
 		
 		JPanel tasks = new JPanel();
 		
