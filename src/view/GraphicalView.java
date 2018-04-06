@@ -179,8 +179,10 @@ public class GraphicalView {
 		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
 		{
 			Task t = tasks.next();
-			System.out.println(i);
-			addLabel(t.getName(), buttons1);
+			//addLabel(t.getName(), buttons1);
+			JLabel nt = new JLabel(t.getName(), SwingConstants.CENTER);
+			nt.setFont(new Font("Times New Roman", Font.PLAIN, 32));
+			buttons1.add(nt);
 		}
 		
 		
