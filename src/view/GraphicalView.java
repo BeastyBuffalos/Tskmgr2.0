@@ -180,7 +180,7 @@ public class GraphicalView {
 		{
 			Task t = tasks.next();
 			//addLabel(t.getName(), buttons1);
-			JLabel nt = new JLabel(t.getName(), SwingConstants.CENTER);
+			JLabel nt = new JLabel((i + 1) + ": " + t.getName(), SwingConstants.CENTER);
 			nt.setFont(new Font("Times New Roman", Font.PLAIN, 32));
 			buttons1.add(nt);
 		}
