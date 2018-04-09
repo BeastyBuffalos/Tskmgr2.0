@@ -21,6 +21,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import controller.TaskMgrDriver;
+import javafx.scene.layout.Border;
+
 import java.util.ListIterator;
 import model.Task;
 
@@ -171,11 +173,7 @@ public class GraphicalView {
 		weltxt1.add(welcome1);
 		
 		//TODO
-<<<<<<< HEAD
-=======
-		//try something like this
-		
->>>>>>> 11552989b28fe5de48974db9d394d8974c4c7ae3
+
 		int i = 0;
 		int count = 0;
 		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
@@ -345,7 +343,44 @@ public class GraphicalView {
 		enter.add(enterbutton);
 		enter.add(backtomenu);
 		
-		
+//		
+//		String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
+//		JComboBox changescreen = new JComboBox(switchit);
+//		changescreen.setSelectedIndex(0);
+//		//changescreen.addActionListener(this);
+//		
+//		
+//		
+//		JPanel dropdown = new JPanel();
+//		dropdown.setLayout(new GridLayout(0,2));
+//		
+//		JLabel blank = new JLabel("");
+//		JLabel blank1 = new JLabel("");
+//		JLabel blank2 = new JLabel("");
+//		JLabel blank3 = new JLabel("");
+//		JLabel blank4 = new JLabel("");
+//		JLabel blank5 = new JLabel("");
+//		JLabel blank6 = new JLabel("");
+//		JLabel blank7 = new JLabel("");
+//		
+//		dropdown.add(changescreen);
+//		
+//		blank.setBorder(border);
+//		blank.setFont(blank.getFont().deriveFont(Font.BOLD, 1));
+//		blank1.setFont(blank1.getFont().deriveFont(Font.BOLD, 1));
+//		blank2.setFont(blank2.getFont().deriveFont(Font.BOLD, 1));
+//		dropdown.add(blank);
+//		dropdown.add(blank1);
+//		dropdown.add(blank2);
+//		
+////		dropdown.add(blank4);
+////		dropdown.add(blank5);
+////		dropdown.add(blank6);
+////		dropdown.add(blank7);
+//		
+//		dropdown.add(newtask);
+//		dropdown.add(blank3);
+//		
 		windowpanel1.add(tasktypes, BorderLayout.CENTER);
 		windowpanel1.add(newtask, BorderLayout.NORTH);
 		windowpanel1.add(enter, BorderLayout.SOUTH);
