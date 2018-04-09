@@ -3,6 +3,7 @@ package model;
 import java.util.*;
 import java.io.Serializable;
 import java.io.*;
+import java.util.function.IntSupplier;
 
 /**
  * 
@@ -102,8 +103,23 @@ public class TaskList{
 			}
 		}
 		
-		Collections.sort(tasklist, Collections.reverseOrder());
-
+		Collections.sort(tasklist, Collections.reverseOrder(this::compareDiff));
+	}
+	
+	private int taskComparator(Task a, Task b, IntSupplier sa, IntSupplier sb)
+	{
+		return (sa.getAsInt() > sb.getAsInt()) ? -1 : 
+			(sa.getAsInt() < sb.getAsInt()) ? 1 : 0;
+	}
+	
+	private int compareDiff(Task a, Task b)
+	{
+		return taskComparator(a, b, a::getDifficulty, b::getDifficulty);
+	}
+	
+	private int compareHour(Task a, Task b)
+	{
+		return taskComparator(a, b, a::getHours, b::getHours);
 	}
 
 	private void countsorthour(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
@@ -130,7 +146,7 @@ public class TaskList{
 			}
 		}
 
-		Collections.sort(tasklist, Collections.reverseOrder());
+		Collections.sort(tasklist, Collections.reverseOrder(this::compareHour));
 		
 	}
 
