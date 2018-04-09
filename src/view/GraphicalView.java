@@ -538,8 +538,22 @@ public class GraphicalView {
 		contentPane.setLayout(new BorderLayout());
 
 		JPanel tasktypes = new JPanel();
-		tasktypes.setLayout(new GridLayout(6,2, 10, 40));
+		tasktypes.setLayout(new GridLayout(6,2, 12, 40));
 		tasktypes.setPreferredSize(new Dimension((int)10,10));
+		
+		// title
+		JLabel newtask = new JLabel("<html>Please input the specified "
+				+ "<html>", SwingConstants.RIGHT);
+		newtask.setFont(new Font("Times New Roman", Font.PLAIN, 35));
+		
+		tasktypes.add(newtask);
+		
+		JLabel newtask2 = new JLabel("<html>information into the designated boxes. "
+				+ "<html>", SwingConstants.LEFT);
+		newtask2.setFont(new Font("Times New Roman", Font.PLAIN, 35));
+		
+	
+		tasktypes.add(newtask2);
 		
 		//TASK FIELDS
 		
@@ -553,10 +567,7 @@ public class GraphicalView {
 		tasktypes.add(name);
 		tasktypes.add(listen5);
 		
-		// title
-		JLabel newtask = new JLabel("<html>Please input the specified information into the designated boxes. 	<br/> 	 "
-				+ "<br/>		<html>", SwingConstants.CENTER);
-		newtask.setFont(new Font("Times New Roman", Font.PLAIN, 40));
+		
 		
 		// due date
 		JLabel dueDate = new JLabel("The Date Due: ", SwingConstants.RIGHT);
@@ -623,7 +634,32 @@ public class GraphicalView {
 		enter.add(backtomenu);
 		
 		
+		String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
+		JComboBox changescreen = new JComboBox(switchit);
+		changescreen.setSelectedIndex(0);
+		//changescreen.addActionListener(this);
 		
+		JPanel dropdown = new JPanel();
+		dropdown.setLayout(new GridLayout(0,8));
+		
+		JLabel blank = new JLabel("");
+		JLabel blank1 = new JLabel("");
+		JLabel blank2 = new JLabel("");
+		JLabel blank3 = new JLabel("");
+		JLabel blank4 = new JLabel("");
+		JLabel blank5 = new JLabel("");
+		JLabel blank6 = new JLabel("");
+		JLabel blank7 = new JLabel("");
+		
+		dropdown.add(changescreen);
+		dropdown.add(blank);
+		dropdown.add(blank1);
+		dropdown.add(blank2);
+		dropdown.add(blank3);
+		dropdown.add(blank4);
+		dropdown.add(blank5);
+		dropdown.add(blank6);
+		dropdown.add(blank7);
 		
 		enterbutton.addActionListener((event) ->
 		{
@@ -654,8 +690,9 @@ public class GraphicalView {
 		
 		
 		//finalization code
+		
 		contentPane.add(tasktypes, BorderLayout.CENTER);
-		contentPane.add(newtask, BorderLayout.NORTH);
+		contentPane.add(dropdown, BorderLayout.NORTH);
 		contentPane.add(enter, BorderLayout.SOUTH);
 		contentPane.add(space, BorderLayout.EAST);
 		contentPane.validate();
