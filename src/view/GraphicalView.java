@@ -431,33 +431,67 @@ public class GraphicalView {
 		//welcome text
 		JPanel weltxt = new JPanel();
 		
-		JLabel welcome = new JLabel("<html>Welcome to TaskManager 2.0!	<br/>	<br/>	<br/>	<br/>	<br/>	<html>", SwingConstants.CENTER);
-		JLabel welcome2 = new JLabel("What would you like to do today? Create a new task, or view existing tasks?", SwingConstants.CENTER);
+		JLabel welcome = new JLabel("Welcome to TaskManager 2.0!"
+				+ "    What would you like to do today?");
+		JLabel welcome2 = new JLabel("Create a new task, or view existing tasks?");
 		welcome.setFont(new Font("Times New Roman", Font.PLAIN, 42));
 		welcome2.setFont(new Font("Times New Roman", Font.PLAIN, 37));
-		
-		weltxt.add(welcome);
-		weltxt.add(welcome2);
-		
-		//buttons code
 		
 		JPanel buttons = new JPanel();
 		
 		JButton newtask = new JButton("New Task");
 		JButton existing = new JButton("Existing Tasks");
-		newtask.setFont(newtask.getFont().deriveFont(Font.BOLD, 24));
-		existing.setFont(existing.getFont().deriveFont(Font.BOLD,24));
 		
-		newtask.addActionListener(this::makeTaskCreationPanel);
-		existing.addActionListener(this::makeExistingTasksPanel);
+		newtask.setFont(newtask.getFont().deriveFont(Font.BOLD, 24));
+		existing.setFont(existing.getFont().deriveFont(Font.BOLD, 24));
+		
+		frame.setLayout(new CardLayout());
+		
+		buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 		
 		buttons.add(newtask);
 		buttons.add(existing);
-		buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+		
+		weltxt.add(welcome);
+		weltxt.add(welcome2);
+		
+		contentPane.add(buttons, BorderLayout.SOUTH);
+		contentPane.add(weltxt, BorderLayout.CENTER);
+		
+		String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
+		JComboBox changescreen = new JComboBox(switchit);
+		changescreen.setSelectedIndex(0);
+		//changescreen.addActionListener(this);
+		
+		JPanel dropdown = new JPanel();
+		dropdown.setLayout(new GridLayout(0,8));
+		
+		JLabel blank = new JLabel("");
+		JLabel blank1 = new JLabel("");
+		JLabel blank2 = new JLabel("");
+		JLabel blank3 = new JLabel("");
+		JLabel blank4 = new JLabel("");
+		JLabel blank5 = new JLabel("");
+		JLabel blank6 = new JLabel("");
+		JLabel blank7 = new JLabel("");
+		
+		dropdown.add(changescreen);
+		dropdown.add(blank);
+		dropdown.add(blank1);
+		dropdown.add(blank2);
+		dropdown.add(blank3);
+		dropdown.add(blank4);
+		dropdown.add(blank5);
+		dropdown.add(blank6);
+		dropdown.add(blank7);
+		
+		contentPane.add(dropdown, BorderLayout.NORTH);
+		frame.setContentPane(contentPane);
 		
 		//finalization code
 		contentPane.add(weltxt, BorderLayout.CENTER);
 		contentPane.add(buttons, BorderLayout.SOUTH);
+		contentPane.validate();
 		frame.setContentPane(contentPane);
 	}
 	
