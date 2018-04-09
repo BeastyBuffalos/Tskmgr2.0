@@ -410,37 +410,23 @@ public class GraphicalView {
 		//initalization code
 		frame.setVisible(false);
 		
+		//
 		JPanel contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout());
 		
-		//welcome text
-		JPanel weltxt = new JPanel();
 		
-		JLabel welcome = new JLabel("Welcome to TaskManager 2.0!"
-				+ "    What would you like to do today?");
-		JLabel welcome2 = new JLabel("Create a new task, or view existing tasks?");
-		welcome.setFont(new Font("Times New Roman", Font.PLAIN, 42));
-		welcome2.setFont(new Font("Times New Roman", Font.PLAIN, 37));
-		
-		JPanel buttons = new JPanel();
-		
-		JButton newtask = new JButton("New Task");
-		JButton existing = new JButton("Existing Tasks");
-		
-		newtask.setFont(newtask.getFont().deriveFont(Font.BOLD, 24));
-		existing.setFont(existing.getFont().deriveFont(Font.BOLD, 24));
-		
-		buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
-		
-		buttons.add(newtask);
-		buttons.add(existing);
-		
-		weltxt.add(welcome);
-		weltxt.add(welcome2);
-		
-		contentPane.add(buttons, BorderLayout.SOUTH);
-		contentPane.add(weltxt, BorderLayout.CENTER);
-		
+		//finalization code
+		contentPane.add(makeDropDownMenu(), BorderLayout.NORTH);
+		contentPane.add(makeWelcomeText(), BorderLayout.CENTER);
+		contentPane.add(makeMainButtons(), BorderLayout.SOUTH);
+		contentPane.validate();
+		frame.setContentPane(contentPane);
+		frame.setVisible(true);
+	}
+	
+	private JPanel makeDropDownMenu()
+	{
+		//dropdown menu code
 		String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
 		JComboBox changescreen = new JComboBox(switchit);
 		changescreen.setSelectedIndex(0);
@@ -467,18 +453,42 @@ public class GraphicalView {
 		dropdown.add(blank5);
 		dropdown.add(blank6);
 		dropdown.add(blank7);
+		return dropdown;
+	}
+	
+	private JPanel makeWelcomeText()
+	{
+		//welcome text
+		JPanel weltxt = new JPanel();
 		
+		JLabel welcome = new JLabel("Welcome to TaskManager 2.0!"
+				+ "    What would you like to do today?");
+		JLabel welcome2 = new JLabel("Create a new task, or view existing tasks?");
+		welcome.setFont(new Font("Times New Roman", Font.PLAIN, 42));
+		welcome2.setFont(new Font("Times New Roman", Font.PLAIN, 37));
+		weltxt.add(welcome);
+		weltxt.add(welcome2);
+		return weltxt;
+	}
+	
+	private JPanel makeMainButtons()
+	{
+		//buttons code
+		JPanel buttons = new JPanel();
+		
+		JButton newtask = new JButton("New Task");
+		JButton existing = new JButton("Existing Tasks");
+		
+		newtask.setFont(newtask.getFont().deriveFont(Font.BOLD, 24));
+		existing.setFont(existing.getFont().deriveFont(Font.BOLD, 24));
+		
+		buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+		
+		buttons.add(newtask);
+		buttons.add(existing);
 		newtask.addActionListener(this::makeTaskCreationPanel);
 		existing.addActionListener(this::makeExistingTasksPanel);
-		
-		
-		//finalization code
-		contentPane.add(dropdown, BorderLayout.NORTH);
-		contentPane.add(weltxt, BorderLayout.CENTER);
-		contentPane.add(buttons, BorderLayout.SOUTH);
-		contentPane.validate();
-		frame.setContentPane(contentPane);
-		frame.setVisible(true);
+		return buttons;
 	}
 	
 	private void makeTaskCreationPanel(ActionEvent ae) {
