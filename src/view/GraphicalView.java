@@ -409,7 +409,7 @@ public class GraphicalView {
 	{
 		frame = new JFrame("Task Manager 2.0");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel contentPane = contentPane();
+		JPanel contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout());
 		frame.setSize(1200, 800);
 		
@@ -426,7 +426,11 @@ public class GraphicalView {
 
 	private void makeWelcomePanel(ActionEvent ae)
 	{
-		JPanel contentPane = contentPane();
+		//initalization code
+		frame.setVisible(false);
+		
+		JPanel contentPane = new JPanel();
+		contentPane.setLayout(new BorderLayout());
 		
 		//welcome text
 		JPanel weltxt = new JPanel();
@@ -444,8 +448,6 @@ public class GraphicalView {
 		
 		newtask.setFont(newtask.getFont().deriveFont(Font.BOLD, 24));
 		existing.setFont(existing.getFont().deriveFont(Font.BOLD, 24));
-		
-		frame.setLayout(new CardLayout());
 		
 		buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 		
@@ -485,24 +487,30 @@ public class GraphicalView {
 		dropdown.add(blank6);
 		dropdown.add(blank7);
 		
-		contentPane.add(dropdown, BorderLayout.NORTH);
-		frame.setContentPane(contentPane);
+		newtask.addActionListener(this::makeTaskCreationPanel);
+		existing.addActionListener(this::makeExistingTasksPanel);
+		
 		
 		//finalization code
+		contentPane.add(dropdown, BorderLayout.NORTH);
 		contentPane.add(weltxt, BorderLayout.CENTER);
 		contentPane.add(buttons, BorderLayout.SOUTH);
 		contentPane.validate();
 		frame.setContentPane(contentPane);
+		frame.setVisible(true);
 	}
 	
 	private void makeTaskCreationPanel(ActionEvent ae) {
 		
+		//initialization code
+		frame.setVisible(false);
+		
+		//content pane code
+		
 		Font newTaskFont = new Font("Times New Roman", Font.PLAIN, 32);
 		
-		JPanel contentpane = contentPane();
-		
-		JPanel windowpanel1 = new JPanel();
-		windowpanel1.setLayout(new BorderLayout());
+		JPanel contentPane = new JPanel();
+		contentPane.setLayout(new BorderLayout());
 
 		JPanel tasktypes = new JPanel();
 		tasktypes.setLayout(new GridLayout(6,2, 10, 40));
@@ -589,13 +597,7 @@ public class GraphicalView {
 		enter.add(backtomenu);
 		
 		
-		windowpanel1.add(tasktypes, BorderLayout.CENTER);
-		windowpanel1.add(newtask, BorderLayout.NORTH);
-		windowpanel1.add(enter, BorderLayout.SOUTH);
-		windowpanel1.add(space, BorderLayout.EAST);
 		
-		
-		contentpane.add(windowpanel1);
 		
 		enterbutton.addActionListener((event) ->
 		{
@@ -622,19 +624,25 @@ public class GraphicalView {
 		
 		});
 		
-		backtomenu.addActionListener((event) ->
-		{
-				contentpane.setVisible(false);
-				JFrame mainmenu = new JFrame();
-				starterup(mainmenu);
-		});
+		backtomenu.addActionListener(this::makeWelcomePanel);
 		
 		
+		//finalization code
+		contentPane.add(tasktypes, BorderLayout.CENTER);
+		contentPane.add(newtask, BorderLayout.NORTH);
+		contentPane.add(enter, BorderLayout.SOUTH);
+		contentPane.add(space, BorderLayout.EAST);
+		contentPane.validate();
+		frame.setContentPane(contentPane);
+		frame.setVisible(true);
 	}
 	
 	private void makeExistingTasksPanel(ActionEvent ae) {
+		//initialization code
+		frame.setVisible(false);
 		
-		JPanel contentpane = contentPane();
+		//contentpane code
+		JPanel contentpane = new JPanel();
 		contentpane.setLayout(new BoxLayout(contentpane, BoxLayout.Y_AXIS));
 		
 		
@@ -710,10 +718,10 @@ public class GraphicalView {
 		contentpane.add(textme);
 		
 		backtomenu.addActionListener(this::makeWelcomePanel);
-	}
-	
-	private JPanel contentPane()
-	{
-		return (JPanel) frame.getContentPane();
+		
+		//finalization code
+		contentpane.validate();
+		frame.setContentPane(contentpane);
+		frame.setVisible(true);
 	}
 }
