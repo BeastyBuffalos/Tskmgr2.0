@@ -9,13 +9,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.PlainDocument;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -174,12 +171,10 @@ public class GraphicalView {
 		weltxt1.add(welcome1);
 		
 		//TODO
-		//try something like this
 		int i = 0;
 		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
 		{
 			Task t = tasks.next();
-			//addLabel(t.getName(), buttons1);
 			JLabel nt = new JLabel((i + 1) + ": " + t.getName(), SwingConstants.CENTER);
 			nt.setFont(new Font("Times New Roman", Font.PLAIN, 32));
 			buttons1.add(nt);
@@ -195,8 +190,6 @@ public class GraphicalView {
 		windowpanel1.add(weltxt1);
 		
 		JPanel textme = new JPanel();
-		
-//		addATextField("", textme);
 
 		JButton removeAllTasks = new JButton("Remove All Tasks");
 		removeAllTasks.setFont(removeAllTasks.getFont().deriveFont(Font.BOLD, 24));
@@ -246,29 +239,10 @@ public class GraphicalView {
 		
 	}
 	
-	private static void addAButton(String text, Container container) {
-        JButton button = new JButton(text);
-        button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        container.add(button);
-    }
-
-	private static void addLabel(String text, Container container) {
-        JLabel field = new JLabel(text);
-        field.setAlignmentX(Component.CENTER_ALIGNMENT);
-        container.add(field);
-    }
 	
-	private static JTextField addATextField(String text, Container container) {
-		PlainDocument doc =  new PlainDocument();
-		JTextField button = new JTextField(doc, text, 1);
-        button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        container.add(button);
-        return button;
-    }
 	
 	public static void makingtask() {
-		int i = 0;
-		String s = "";
+		
 		
 		Font newTaskFont = new Font("Times New Roman", Font.PLAIN, 32);
 		
@@ -281,6 +255,16 @@ public class GraphicalView {
 		JPanel tasktypes = new JPanel();
 		tasktypes.setLayout(new GridLayout(6,2, 10, 40));
 		tasktypes.setPreferredSize(new Dimension((int)10,10));
+		
+		// name
+		JLabel name = new JLabel("The Name of the Task: ", SwingConstants.RIGHT);
+		JTextField listen5 = new JTextField("");
+				
+		name.setFont(newTaskFont);
+		listen5.setFont(newTaskFont);
+				
+		tasktypes.add(name);
+		tasktypes.add(listen5);
 		
 		// title
 		JLabel newtask = new JLabel("<html>Please input the specified information into the designated boxes. 	<br/> 	 "
@@ -304,8 +288,6 @@ public class GraphicalView {
 		difficulty.setFont(newTaskFont);
 		listen2.setFont(newTaskFont);
 
-
-		
 		tasktypes.add(difficulty);
 		tasktypes.add(listen2);
 		
@@ -331,15 +313,6 @@ public class GraphicalView {
 		tasktypes.add(type);
 		tasktypes.add(listen4);
 		
-		// name
-		JLabel name = new JLabel("The Name of the Task: ", SwingConstants.RIGHT);
-		JTextField listen5 = new JTextField("");
-		
-		name.setFont(newTaskFont);
-		listen5.setFont(newTaskFont);
-		
-		tasktypes.add(name);
-		tasktypes.add(listen5);
 		
 		// space for right side of window
 		JLabel space = new JLabel("   				", SwingConstants.RIGHT);
@@ -484,6 +457,16 @@ public class GraphicalView {
 		
 		//TASK FIELDS
 		
+		// name
+		JLabel name = new JLabel("The Name of the Task: ", SwingConstants.RIGHT);
+		JTextField listen5 = new JTextField("");
+				
+		name.setFont(newTaskFont);
+		listen5.setFont(newTaskFont);
+				
+		tasktypes.add(name);
+		tasktypes.add(listen5);
+		
 		// title
 		JLabel newtask = new JLabel("<html>Please input the specified information into the designated boxes. 	<br/> 	 "
 				+ "<br/>		<html>", SwingConstants.CENTER);
@@ -533,15 +516,6 @@ public class GraphicalView {
 		tasktypes.add(type);
 		tasktypes.add(listen4);
 		
-		// name
-		JLabel name = new JLabel("The Name of the Task: ", SwingConstants.RIGHT);
-		JTextField listen5 = new JTextField("");
-		
-		name.setFont(newTaskFont);
-		listen5.setFont(newTaskFont);
-		
-		tasktypes.add(name);
-		tasktypes.add(listen5);
 		
 		// space for right side of window
 		JLabel space = new JLabel("   				", SwingConstants.RIGHT);
