@@ -688,23 +688,40 @@ public class GraphicalView {
 		
 		weltxt1.add(welcome1);
 		
-		//TODO
-		//try something like this
+
+		String[] switchit = new String[100];
 		int i = 0;
 		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
 		{
 			Task t = tasks.next();
-			JLabel nt = new JLabel((i + 1) + ": " + t.getName(), SwingConstants.CENTER);
-			nt.setFont(new Font("Times New Roman", Font.PLAIN, 32));
-			buttons1.add(nt);
+			System.out.println(t.getName());
+			switchit[i] = t.getName();
 		}
-		
-		
+
+		JComboBox changetask = new JComboBox(switchit);
+		changetask.setSelectedIndex(-1);
+		changetask.addActionListener((ActionEvent e) -> {
+			Task chosentask = null;
+			int j = 0;
+			Object item = changetask.getSelectedItem();
+			for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); j++)
+			{
+				Task t = tasks.next();
+				if (t.getName() == item){
+					System.out.println(item + " item");
+					chosentask = t;
+					break;
+				}
+			}
+
+			//ENTER NEW PAGE SWITCH INFO HERE FOR EDITING TASKS 
+			//pass the chosentask variable as the argument for the task to edit
+		});
 		JPanel tasks = new JPanel();
 		
 		tasks.setLayout(new BoxLayout(tasks, BoxLayout.Y_AXIS));
 		
-		tasks.add(buttons1);
+		tasks.add(changetask);
 		
 		contentpane.add(weltxt1);
 		
