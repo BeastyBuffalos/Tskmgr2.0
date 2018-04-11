@@ -47,16 +47,7 @@ public class GraphicalView {
 		this.driver = driver;
 		initialize();
 	}
-	
-//	Drop Box Code for use when I can find a place to put it
-//	String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
-//	JComboBox changescreen = new JComboBox(switchit);
-//	changescreen.setSelectedIndex(2);
-//	changescreen.addActionListener(this);
-//	 public void actionPerformed(ActionEvent e) {
-//	        JComboBox cb = (JComboBox)e.getSource();
-//	        String petName = (String)cb.getSelectedItem();
-//	    }
+
 	
 	private void initialize()
 	{
@@ -103,26 +94,10 @@ public class GraphicalView {
 		//changescreen.addActionListener(this);
 		
 		JPanel dropdown = new JPanel();
-		dropdown.setLayout(new GridLayout(0,8));
-		
-		JLabel blank = new JLabel("");
-		JLabel blank1 = new JLabel("");
-		JLabel blank2 = new JLabel("");
-		JLabel blank3 = new JLabel("");
-		JLabel blank4 = new JLabel("");
-		JLabel blank5 = new JLabel("");
-		JLabel blank6 = new JLabel("");
-		JLabel blank7 = new JLabel("");
+		dropdown.setLayout(new GridLayout(0,13));
 		
 		dropdown.add(changescreen);
-		dropdown.add(blank);
-		dropdown.add(blank1);
-		dropdown.add(blank2);
-		dropdown.add(blank3);
-		dropdown.add(blank4);
-		dropdown.add(blank5);
-		dropdown.add(blank6);
-		dropdown.add(blank7);
+		
 		return dropdown;
 	}
 	
@@ -193,7 +168,7 @@ public class GraphicalView {
 		Font newTaskFont = new Font("Times New Roman", Font.PLAIN, 32);
 		name.setFont(newTaskFont);
 		nameField.setFont(newTaskFont);
-				
+		
 		tasktypes.add(name);
 		tasktypes.add(nameField);
 		
@@ -257,35 +232,10 @@ public class GraphicalView {
 		backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 30));
 		
 		enter.add(enterbutton);
-		enter.add(backtomenu);
+		enter.add(backtomenu);		
 		
+		JPanel dropdown = makeDropDownMenu();
 		
-		String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
-		JComboBox changescreen = new JComboBox(switchit);
-		changescreen.setSelectedIndex(0);
-		//changescreen.addActionListener(this);
-		
-		JPanel dropdown = new JPanel();
-		dropdown.setLayout(new GridLayout(0,8));
-		
-		JLabel blank = new JLabel("");
-		JLabel blank1 = new JLabel("");
-		JLabel blank2 = new JLabel("");
-		JLabel blank3 = new JLabel("");
-		JLabel blank4 = new JLabel("");
-		JLabel blank5 = new JLabel("");
-		JLabel blank6 = new JLabel("");
-		JLabel blank7 = new JLabel("");
-		
-		dropdown.add(changescreen);
-		dropdown.add(blank);
-		dropdown.add(blank1);
-		dropdown.add(blank2);
-		dropdown.add(blank3);
-		dropdown.add(blank4);
-		dropdown.add(blank5);
-		dropdown.add(blank6);
-		dropdown.add(blank7);
 		
 		enterbutton.addActionListener((event) ->
 		{
@@ -317,7 +267,7 @@ public class GraphicalView {
 		
 		//finalization code
 		newtaskPanel.add(tasktypes, BorderLayout.CENTER);
-		newtaskPanel.add(newtask, BorderLayout.NORTH);
+		newtaskPanel.add(dropdown, BorderLayout.NORTH);
 		newtaskPanel.add(enter, BorderLayout.SOUTH);
 		newtaskPanel.add(space, BorderLayout.EAST);
 		newtaskPanel.validate();
@@ -325,6 +275,7 @@ public class GraphicalView {
 	}
 	
 	private void makeExistingTasksPanel(ActionEvent ae) {
+
 			//initialization code
 			frame.setVisible(false);
 			
