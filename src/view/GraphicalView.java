@@ -50,17 +50,7 @@ public class GraphicalView {
 		this.driver = driver;
 		initialize();
 	}
-	
-//	Drop Box Code for use when I can find a place to put it
-//	String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
-//	JComboBox changescreen = new JComboBox(switchit);
-//	changescreen.setSelectedIndex(2);
-//	changescreen.addActionListener(this);
-	
-//	 public void actionPerformed(ActionEvent e) {
-//	        JComboBox cb = (JComboBox)e.getSource();
-//	        String petName = (String)cb.getSelectedItem();
-//	    }
+
 	
 	private void initialize()
 	{
@@ -99,26 +89,10 @@ public class GraphicalView {
 		//changescreen.addActionListener(this);
 		
 		JPanel dropdown = new JPanel();
-		dropdown.setLayout(new GridLayout(0,8));
-		
-		JLabel blank = new JLabel("");
-		JLabel blank1 = new JLabel("");
-		JLabel blank2 = new JLabel("");
-		JLabel blank3 = new JLabel("");
-		JLabel blank4 = new JLabel("");
-		JLabel blank5 = new JLabel("");
-		JLabel blank6 = new JLabel("");
-		JLabel blank7 = new JLabel("");
+		dropdown.setLayout(new GridLayout(0,13));
 		
 		dropdown.add(changescreen);
-		dropdown.add(blank);
-		dropdown.add(blank1);
-		dropdown.add(blank2);
-		dropdown.add(blank3);
-		dropdown.add(blank4);
-		dropdown.add(blank5);
-		dropdown.add(blank6);
-		dropdown.add(blank7);
+		
 		return dropdown;
 	}
 	
@@ -266,32 +240,9 @@ public class GraphicalView {
 		enter.add(backtomenu);
 		
 		
-		String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
-		JComboBox changescreen = new JComboBox(switchit);
-		changescreen.setSelectedIndex(0);
-		//changescreen.addActionListener(this);
 		
-		JPanel dropdown = new JPanel();
-		dropdown.setLayout(new GridLayout(0,8));
+		JPanel dropdown = makeDropDownMenu();
 		
-		JLabel blank = new JLabel("");
-		JLabel blank1 = new JLabel("");
-		JLabel blank2 = new JLabel("");
-		JLabel blank3 = new JLabel("");
-		JLabel blank4 = new JLabel("");
-		JLabel blank5 = new JLabel("");
-		JLabel blank6 = new JLabel("");
-		JLabel blank7 = new JLabel("");
-		
-		dropdown.add(changescreen);
-		dropdown.add(blank);
-		dropdown.add(blank1);
-		dropdown.add(blank2);
-		dropdown.add(blank3);
-		dropdown.add(blank4);
-		dropdown.add(blank5);
-		dropdown.add(blank6);
-		dropdown.add(blank7);
 		
 		enterbutton.addActionListener((event) ->
 		{
@@ -343,6 +294,16 @@ public class GraphicalView {
 		
 		JPanel weltxt1 = new JPanel();
 		
+		String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
+		JComboBox changescreen = new JComboBox(switchit);
+		changescreen.setSelectedIndex(0);
+		//changescreen.addActionListener(this);
+		
+		JPanel dropdown = new JPanel();
+		dropdown.setLayout(new GridLayout(0,13));
+		dropdown.add(changescreen);
+		
+		
 		JLabel welcome1 = new JLabel("Here are the Existing Tasks. Please choose which one "
 				+ "you wish to view by typing in the task name in the given text box.");
 		
@@ -355,10 +316,10 @@ public class GraphicalView {
 		buttons1.setLayout(new GridLayout(16, 2));
 		buttons1.setPreferredSize(new Dimension((int)1000000,1000000));
 		
+		weltxt1.add(dropdown);
 		weltxt1.add(welcome1);
 		
 		//TODO
-		//try something like this
 		int i = 0;
 		int count = 0;
 		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
