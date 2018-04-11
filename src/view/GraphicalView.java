@@ -33,23 +33,7 @@ public class GraphicalView {
 	private TaskMgrDriver driver;
 
 	private JFrame frame;
-<<<<<<< HEAD
 
-=======
-	
-	private JPanel mainmenu = new JPanel();
-	{
-		mainmenu.setLayout(new BorderLayout());
-		//finalization code
-		mainmenu.add(makeDropDownMenu(), BorderLayout.NORTH);
-		mainmenu.add(makeWelcomeText(), BorderLayout.CENTER);
-		mainmenu.add(makeMainButtons(), BorderLayout.SOUTH);
-		mainmenu.validate();
-	}
-	
-	private JPanel newtasks = makeTaskCreation();
-	
->>>>>>> origin/master
 	public GraphicalView(TaskMgrDriver driver) {
 		this.driver = driver;
 		initialize();
@@ -460,58 +444,20 @@ public class GraphicalView {
 		frame.setLayout(new CardLayout());
 
 		//seet up contents of the window
-<<<<<<< HEAD
 		makeWelcomePanel(null);
 
-=======
-		welcomePane(null);
-		
->>>>>>> origin/master
 		//finalization code
 		frame.setVisible(true);
 	}
 
-	private void welcomePane(ActionEvent ae)
+	private void makeWelcomePanel(ActionEvent ae)
 	{
 		//initalization code
 		frame.setVisible(false);
-<<<<<<< HEAD
 
 		JPanel contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout());
 
-=======
-		frame.setContentPane(mainmenu);
-		frame.setVisible(true);
-	}
-	
-	private void taskCreationPane(ActionEvent ae) 
-	{
-		//initialization code
-		frame.setVisible(false);
-		frame.setContentPane(newtasks);
-		frame.setVisible(true);
-	}
-
-	private JPanel makeDropDownMenu()
-	{
-		//dropdown menu code
-		String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
-		JComboBox changescreen = new JComboBox(switchit);
-		changescreen.setSelectedIndex(0);
-		//changescreen.addActionListener(this);
-		
-		JPanel dropdown = new JPanel();
-		dropdown.setLayout(new GridLayout(0,13));
-		
-		dropdown.add(changescreen);
-		
-		return dropdown;
-	}
-	
-	private JPanel makeWelcomeText()
-	{
->>>>>>> origin/master
 		//welcome text
 		JPanel weltxt = new JPanel();
 
@@ -533,7 +479,6 @@ public class GraphicalView {
 
 		buttons.add(newtask);
 		buttons.add(existing);
-<<<<<<< HEAD
 
 		weltxt.add(welcome);
 		weltxt.add(welcome2);
@@ -569,9 +514,6 @@ public class GraphicalView {
 		dropdown.add(blank7);
 
 		newtask.addActionListener(this::makeTaskCreationPanel);
-=======
-		newtask.addActionListener(this::taskCreationPane);
->>>>>>> origin/master
 		existing.addActionListener(this::makeExistingTasksPanel);
 
 
@@ -583,7 +525,6 @@ public class GraphicalView {
 		frame.setContentPane(contentPane);
 		frame.setVisible(true);
 	}
-<<<<<<< HEAD
 
 	private void makeTaskCreationPanel(ActionEvent ae) {
 
@@ -597,20 +538,9 @@ public class GraphicalView {
 		JPanel contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout());
 
-=======
-	
-	private JPanel makeTaskCreation()
-	{
-		//content pane code
-		JPanel newtaskPanel = new JPanel();
-		newtaskPanel.setLayout(new BorderLayout());
-		
-		//TASK FIELDS
->>>>>>> origin/master
 		JPanel tasktypes = new JPanel();
 		tasktypes.setLayout(new GridLayout(6,2, 10, 40));
 		tasktypes.setPreferredSize(new Dimension((int)10,10));
-<<<<<<< HEAD
 
 		//TASK FIELDS
 
@@ -674,77 +604,6 @@ public class GraphicalView {
 		tasktypes.add(listen4);
 
 
-=======
-		
-		// title
-		JLabel newtask = new JLabel("<html>Please input the specified inf"
-				+ "<html>", SwingConstants.RIGHT);
-		newtask.setFont(new Font("Times New Roman", Font.BOLD, 33));
-		
-		tasktypes.add(newtask);
-		
-		JLabel newtask2 = new JLabel("<html>ormation into the designated boxes. "
-				+ "<html>", SwingConstants.LEFT);
-		newtask2.setFont(new Font("Times New Roman", Font.BOLD, 33));
-		
-	
-		tasktypes.add(newtask2);
-		
-		// name
-		JLabel name = new JLabel("The Name of the Task: ", SwingConstants.RIGHT);
-		JTextField nameField = new JTextField("");
-				
-		Font newTaskFont = new Font("Times New Roman", Font.PLAIN, 32);
-		name.setFont(newTaskFont);
-		nameField.setFont(newTaskFont);
-		
-		tasktypes.add(name);
-		tasktypes.add(nameField);
-		
-		// due date
-		JLabel dueDate = new JLabel("The Date Due: ", SwingConstants.RIGHT);
-		JTextField dueField = new JTextField("");
-		
-		dueDate.setFont(newTaskFont);
-		dueField.setFont(newTaskFont);
-		
-		tasktypes.add(dueDate);
-		tasktypes.add(dueField);
-		
-		// difficulty
-		JLabel difficulty = new JLabel("How You Would Rate It's Difficulty: ", SwingConstants.RIGHT);
-		JTextField diffField = new JTextField("");
-		
-		difficulty.setFont(newTaskFont);
-		diffField.setFont(newTaskFont);	
-		
-		tasktypes.add(difficulty);
-		tasktypes.add(diffField);
-		
-		
-		// hours
-		JLabel hours = new JLabel("How Many Hours It Will Take To Finish: ", SwingConstants.RIGHT);
-		JTextField hoursField = new JTextField("");
-		
-		hours.setFont(newTaskFont);
-		hoursField.setFont(newTaskFont);
-		
-		tasktypes.add(hours);
-		tasktypes.add(hoursField);
-	
-		
-		// type
-		JLabel type = new JLabel("The Type of Task: ", SwingConstants.RIGHT);
-		JTextField typeField = new JTextField("");
-		
-		type.setFont(newTaskFont);
-		typeField.setFont(newTaskFont);
-		
-		tasktypes.add(type);
-		tasktypes.add(typeField);
-		
-		
->>>>>>> origin/master
 		// space for right side of window
 		JLabel space = new JLabel("   				", SwingConstants.RIGHT);
 		space.setFont(new Font("Times New Roman", Font.PLAIN, 90));
@@ -762,7 +621,6 @@ public class GraphicalView {
 		backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 30));
 
 		enter.add(enterbutton);
-<<<<<<< HEAD
 		enter.add(backtomenu);
 
 
@@ -804,52 +662,9 @@ public class GraphicalView {
 		contentPane.validate();
 		frame.setContentPane(contentPane);
 		frame.setVisible(true);
-=======
-		enter.add(backtomenu);		
-		
-		JPanel dropdown = makeDropDownMenu();
-		
-		
-		enterbutton.addActionListener((event) ->
-		{
-				//use the getText to get the text for the new task
-				//TODO make this smoother somehow? fix issues with allowed input types
-				try {
-					int duedate = Integer.valueOf(dueField.getDocument().getText(0, dueField.getDocument().getLength()));
-					int diff = Integer.valueOf(diffField.getDocument().getText(0, diffField.getDocument().getLength()));
-					int hourst = Integer.valueOf(hoursField.getDocument().getText(0, hoursField.getDocument().getLength()));
-					String typet = typeField.getDocument().getText(0, typeField.getDocument().getLength());
-					String namet = nameField.getDocument().getText(0, nameField.getDocument().getLength());
-					driver.addTask(namet, typet, duedate, hourst, false, diff);
-					
-					dueField.setText("");
-					diffField.setText("");
-					hoursField.setText("");
-					typeField.setText("");
-					nameField.setText("");
-					
-				} catch (BadLocationException e) {
-					e.printStackTrace();
-				}
-		
-		
-		});
-		
-		backtomenu.addActionListener(this::welcomePane);
-		
-		
-		//finalization code
-		newtaskPanel.add(tasktypes, BorderLayout.CENTER);
-		newtaskPanel.add(dropdown, BorderLayout.NORTH);
-		newtaskPanel.add(enter, BorderLayout.SOUTH);
-		newtaskPanel.add(space, BorderLayout.EAST);
-		newtaskPanel.validate();
-		return newtaskPanel;
->>>>>>> origin/master
 	}
 
 	private void makeExistingTasksPanel(ActionEvent ae) {
-<<<<<<< HEAD
 		//initialization code
 		frame.setVisible(false);
 
@@ -940,46 +755,10 @@ public class GraphicalView {
 		removeAllTasks.addActionListener( (ActionEvent e) -> {
 			ListIterator<Task> tasklist = driver.getTasks();
 			while(tasklist.hasNext())
-=======
-
-			//initialization code
-			frame.setVisible(false);
-			
-			//contentpane code
-			JPanel contentpane = new JPanel();
-			contentpane.setLayout(new BoxLayout(contentpane, BoxLayout.Y_AXIS));
-			
-			
-			JPanel weltxt1 = new JPanel();
-			
-			JLabel welcome1 = new JLabel("Here are the Existing Tasks. Please choose which one "
-					+ "you wish to view by typing in the task name in the given text box.");
-			
-			welcome1.setFont(new Font("Times New Roman", Font.PLAIN, 24));
-			
-			JPanel buttons1 = new JPanel();
-			
-			contentpane.setLayout(new GridLayout(5,2));
-			
-			buttons1.setLayout(new GridLayout(16, 2));
-			buttons1.setPreferredSize(new Dimension((int)1000000,1000000));
-			
-			weltxt1.add(welcome1);
-			
-			//TODO update task list without recreating this panel
-			//try something like this
-			int i = 0;
-			int count = 0;
-			for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
->>>>>>> origin/master
 			{
-				Task t = tasks.next();
-				JLabel nt = new JLabel((i + 1) + ": " + t.getName(), SwingConstants.CENTER);
-				nt.setFont(new Font("Times New Roman", Font.PLAIN, 32));
-				buttons1.add(nt);
-				count++;
+				Task t = tasklist.next();
+				tasklist = driver.removeTask(t);
 			}
-<<<<<<< HEAD
 			//TODO no, the next two lines are bad. 
 			frame.setVisible(false);
 			exist();
@@ -1008,68 +787,6 @@ public class GraphicalView {
 	private static void edittasks(TaskMgrDriver driver2) {
 
 
-=======
-			
-			if (count == 0) {
-				JLabel none = new JLabel("No tasks to display", SwingConstants.CENTER);
-				buttons1.add(none);
-				none.setFont(new Font("Times New Roman", Font.PLAIN, 32));
-			}
-			
-			
-			JPanel tasks = new JPanel();
-			
-			tasks.setLayout(new BoxLayout(tasks, BoxLayout.Y_AXIS));
-			
-			tasks.add(buttons1);
-			
-			contentpane.add(weltxt1);
-			
-			JPanel textme = new JPanel();
-			
-	//		addATextField("", textme);
-	
-			JButton removeAllTasks = new JButton("Remove All Tasks");
-			removeAllTasks.setFont(removeAllTasks.getFont().deriveFont(Font.BOLD, 24));
-			
-			
-			textme.add(removeAllTasks);
-			
-			removeAllTasks.addActionListener( (ActionEvent e) -> {
-				ListIterator<Task> tasklist = driver.getTasks();
-				while(tasklist.hasNext())
-				{
-					Task t = tasklist.next();
-					tasklist = driver.removeTask(t);
-				}
-				//TODO no, the next line is bad
-				makeExistingTasksPanel(null);
-			});
-			
-			JPanel back = new JPanel();
-			
-			JButton backtomenu = new JButton("Back To Main Menu");
-			backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 24));
-			
-			back.add(backtomenu);
-			
-			contentpane.add(back);
-			
-			contentpane.add(tasks);
-			contentpane.add(textme);
-			
-			backtomenu.addActionListener(this::welcomePane);
-			
-			//finalization code
-			contentpane.validate();
-			frame.setContentPane(contentpane);
-			frame.setVisible(true);
-		}
-
-	private void edittasks(TaskMgrDriver driver2) {
-		
-		
->>>>>>> origin/master
 		JFrame tester = new JFrame();
 
 		//for( int i = 0; i < driver2.getTasks().)
