@@ -170,19 +170,19 @@ public class GraphicalView {
 		contentPane.setLayout(new BorderLayout());
 
 		JPanel tasktypes = new JPanel();
-		tasktypes.setLayout(new GridLayout(6,2, 12, 40));
+		tasktypes.setLayout(new GridLayout(6,2, 1, 60));
 		tasktypes.setPreferredSize(new Dimension((int)10,10));
 		
 		// title
-		JLabel newtask = new JLabel("<html>Please input the specified "
+		JLabel newtask = new JLabel("<html>Please input the specified inf"
 				+ "<html>", SwingConstants.RIGHT);
-		newtask.setFont(new Font("Times New Roman", Font.PLAIN, 35));
+		newtask.setFont(new Font("Times New Roman", Font.BOLD, 33));
 		
 		tasktypes.add(newtask);
 		
-		JLabel newtask2 = new JLabel("<html>information into the designated boxes. "
+		JLabel newtask2 = new JLabel("<html>ormation into the designated boxes. "
 				+ "<html>", SwingConstants.LEFT);
-		newtask2.setFont(new Font("Times New Roman", Font.PLAIN, 35));
+		newtask2.setFont(new Font("Times New Roman", Font.BOLD, 33));
 		
 	
 		tasktypes.add(newtask2);
@@ -257,7 +257,7 @@ public class GraphicalView {
 		JButton enterbutton = new JButton("Enter");
 		JButton backtomenu = new JButton("Back");
 		
-		enter.setLayout(new FlowLayout(FlowLayout.CENTER, 45, 5));
+		enter.setLayout(new FlowLayout(FlowLayout.CENTER, 45, 20));
 		
         enterbutton.setFont(enterbutton.getFont().deriveFont(Font.BOLD, 30));
 		backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 30));
