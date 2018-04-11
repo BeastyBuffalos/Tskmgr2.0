@@ -691,6 +691,7 @@ public class GraphicalView {
 
 
 		String[] switchit = new String[100];
+
 		int i = 0;
 		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
 		{
@@ -709,15 +710,15 @@ public class GraphicalView {
 			{
 				Task t = tasks.next();
 				if (t.getName() == item){
-					System.out.println(item + " item");
+					System.out.print(item + " item");
 					chosentask = t;
 					break;
 				}
 			}
-
+			
 			//ENTER NEW PAGE SWITCH INFO HERE FOR EDITING TASKS 
 			//pass the chosentask variable as the argument for the task to edit
-
+			
 		});
 
 
