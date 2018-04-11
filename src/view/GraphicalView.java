@@ -167,15 +167,24 @@ public class GraphicalView {
 		JPanel newtaskPanel = new JPanel();
 		newtaskPanel.setLayout(new BorderLayout());
 		
-		// title
-		JLabel newtask = new JLabel("<html>Please input the specified information into the designated boxes. 	<br/> 	 "
-				+ "<br/>		<html>", SwingConstants.CENTER);
-		newtask.setFont(new Font("Times New Roman", Font.PLAIN, 40));
-		
 		//TASK FIELDS
 		JPanel tasktypes = new JPanel();
-		tasktypes.setLayout(new GridLayout(6,2, 10, 40));
+		tasktypes.setLayout(new GridLayout(6,2, 1, 60));
 		tasktypes.setPreferredSize(new Dimension((int)10,10));
+		
+		// title
+		JLabel newtask = new JLabel("<html>Please input the specified inf"
+				+ "<html>", SwingConstants.RIGHT);
+		newtask.setFont(new Font("Times New Roman", Font.BOLD, 33));
+		
+		tasktypes.add(newtask);
+		
+		JLabel newtask2 = new JLabel("<html>ormation into the designated boxes. "
+				+ "<html>", SwingConstants.LEFT);
+		newtask2.setFont(new Font("Times New Roman", Font.BOLD, 33));
+		
+	
+		tasktypes.add(newtask2);
 		
 		// name
 		JLabel name = new JLabel("The Name of the Task: ", SwingConstants.RIGHT);
@@ -186,7 +195,7 @@ public class GraphicalView {
 		nameField.setFont(newTaskFont);
 				
 		tasktypes.add(name);
-		tasktypes.add(nameField);		
+		tasktypes.add(nameField);
 		
 		// due date
 		JLabel dueDate = new JLabel("The Date Due: ", SwingConstants.RIGHT);
@@ -242,7 +251,7 @@ public class GraphicalView {
 		JButton enterbutton = new JButton("Enter");
 		JButton backtomenu = new JButton("Back");
 		
-		enter.setLayout(new FlowLayout(FlowLayout.CENTER, 45, 5));
+		enter.setLayout(new FlowLayout(FlowLayout.CENTER, 45, 20));
 		
         enterbutton.setFont(enterbutton.getFont().deriveFont(Font.BOLD, 30));
 		backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 30));
@@ -251,7 +260,32 @@ public class GraphicalView {
 		enter.add(backtomenu);
 		
 		
+		String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
+		JComboBox changescreen = new JComboBox(switchit);
+		changescreen.setSelectedIndex(0);
+		//changescreen.addActionListener(this);
 		
+		JPanel dropdown = new JPanel();
+		dropdown.setLayout(new GridLayout(0,8));
+		
+		JLabel blank = new JLabel("");
+		JLabel blank1 = new JLabel("");
+		JLabel blank2 = new JLabel("");
+		JLabel blank3 = new JLabel("");
+		JLabel blank4 = new JLabel("");
+		JLabel blank5 = new JLabel("");
+		JLabel blank6 = new JLabel("");
+		JLabel blank7 = new JLabel("");
+		
+		dropdown.add(changescreen);
+		dropdown.add(blank);
+		dropdown.add(blank1);
+		dropdown.add(blank2);
+		dropdown.add(blank3);
+		dropdown.add(blank4);
+		dropdown.add(blank5);
+		dropdown.add(blank6);
+		dropdown.add(blank7);
 		
 		enterbutton.addActionListener((event) ->
 		{
