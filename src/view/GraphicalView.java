@@ -264,7 +264,7 @@ public class GraphicalView {
 		
 		enter.add(enterbutton);
 		enter.add(backtomenu);
-		
+				
 		
 		String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
 		JComboBox changescreen = new JComboBox(switchit);
@@ -273,10 +273,10 @@ public class GraphicalView {
 		
 		JPanel dropdown = new JPanel();
 		dropdown.setLayout(new GridLayout(0,8));
-		
-		JLabel blank = new JLabel("");
-		JLabel blank1 = new JLabel("");
-		JLabel blank2 = new JLabel("");
+				
+		JLabel blank = new JLabel("		");
+		JLabel blank1 = new JLabel("			");
+		JLabel blank2 = new JLabel("				");
 		JLabel blank3 = new JLabel("");
 		JLabel blank4 = new JLabel("");
 		JLabel blank5 = new JLabel("");
@@ -287,11 +287,16 @@ public class GraphicalView {
 		dropdown.add(blank);
 		dropdown.add(blank1);
 		dropdown.add(blank2);
-		dropdown.add(blank3);
-		dropdown.add(blank4);
-		dropdown.add(blank5);
-		dropdown.add(blank6);
-		dropdown.add(blank7);
+//		dropdown.add(blank3);
+//		dropdown.add(blank4);
+//		dropdown.add(blank5);
+//		dropdown.add(blank6);
+//		dropdown.add(blank7);
+		
+		// Added task message
+				JLabel taskAdded = new JLabel("");
+				dropdown.add(taskAdded);
+
 		
 		enterbutton.addActionListener((event) ->
 		{
@@ -304,6 +309,8 @@ public class GraphicalView {
 					String typet = listen4.getDocument().getText(0, listen4.getDocument().getLength());
 					String namet = listen5.getDocument().getText(0, listen5.getDocument().getLength());
 					driver.addTask(namet, typet, duedate, hourst, false, diff);
+					taskAdded.setText("Task Added");
+					taskAdded.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 					
 					listen1.setText("");
 					listen2.setText("");
