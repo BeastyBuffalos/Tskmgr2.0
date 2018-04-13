@@ -82,7 +82,6 @@ public class GraphicalView {
 	
 	private JPanel makeDropDownMenu()
 	{
-		//dropdown menu code
 		String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
 		JComboBox changescreen = new JComboBox(switchit);
 		changescreen.setSelectedIndex(0);
@@ -93,8 +92,32 @@ public class GraphicalView {
 		
 		dropdown.add(changescreen);
 		
+		changescreen.addActionListener((event) ->
+		{
+			JComboBox cd = (JComboBox)event.getSource();
+			Object menu = cd.getSelectedItem();
+			if(menu.equals("Main Menu")) {
+				
+				makeWelcomeText();
+				
+			} else if ( menu.equals("New Task")) {
+				
+				makeTaskCreationPanel(null);
+			
+			} else if ( menu.equals("Edit Tasks")) {
+			
+				makeExistingTasksPanel(null);
+			
+			}
+	
+	
+	
+	});
+	
+		
 		return dropdown;
 	}
+	
 	
 	private JPanel makeWelcomeText()
 	{
@@ -294,14 +317,8 @@ public class GraphicalView {
 		
 		JPanel weltxt1 = new JPanel();
 		
-		String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
-		JComboBox changescreen = new JComboBox(switchit);
-		changescreen.setSelectedIndex(0);
-		//changescreen.addActionListener(this);
 		
-		JPanel dropdown = new JPanel();
-		dropdown.setLayout(new GridLayout(0,13));
-		dropdown.add(changescreen);
+		JPanel dropdown = makeDropDownMenu();
 		
 		
 		JLabel welcome1 = new JLabel("Here are the Existing Tasks. Please choose which one "
@@ -392,11 +409,6 @@ public class GraphicalView {
 		
 		JFrame tester = new JFrame();
 		
-		//for( int i = 0; i < driver2.getTasks().)
-		
-//		String name = new String("Task Name");
-//		
-//		JLabel name1 = new JLabel(name);
 		
 		Font newTaskFont = new Font("Times New Roman", Font.PLAIN, 32);
 		
@@ -498,20 +510,16 @@ public class GraphicalView {
 		
 		tester.setVisible(true);
 		tester.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//contentpane.add(windowpanel1);
 		
 		enterbutton.addActionListener((event) ->
 		{
-				//use the getText to get the text for the new task
-				//System.out.println(listen1.getText());
+				
 				try {
 					int duedate = Integer.valueOf(listen1.getDocument().getText(0, listen1.getDocument().getLength()));
 					int diff = Integer.valueOf(listen2.getDocument().getText(0, listen2.getDocument().getLength()));
 					int hourst = Integer.valueOf(listen3.getDocument().getText(0, listen3.getDocument().getLength()));
 					String typet = listen4.getDocument().getText(0, listen4.getDocument().getLength());
 					String namet = listen5.getDocument().getText(0, listen5.getDocument().getLength());
-					
-				//	driver.editTask(driver, name, typet, duedate, hourst, false, diff);
 					
 					listen1.setText("");
 					listen2.setText("");
@@ -526,15 +534,11 @@ public class GraphicalView {
 		
 		});
 		
-//		backtomenu.addActionListener((event) ->
-//		{
-//				contentpane.setVisible(false);
-//				JFrame mainmenu = new JFrame();
-//				starterup(mainmenu);
-//		});
-		
 		
 	}
+
+
+	
 		
 	
 }
