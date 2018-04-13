@@ -57,11 +57,13 @@ public class GraphicalView {
 		contentPane.setLayout(new BorderLayout());
 		frame.setSize(1200, 800);
 		
+		JPanel dropdown = makeDropDownMenu();
+		contentPane.add(dropdown, BorderLayout.NORTH);
 		//unsorted code
 		Color backCol = new Color(200, 210, 230);
 		frame.setLayout(new CardLayout());
 		
-		//seet up contents of the window
+		//set up contents of the window
 		welcomePane(null);
 		
 		//finalization code
@@ -258,7 +260,7 @@ public class GraphicalView {
 		enter.add(enterbutton);
 		enter.add(backtomenu);		
 		
-		JPanel dropdown = makeDropDownMenu();
+	//	JPanel dropdown = makeDropDownMenu();
 		
 		
 		enterbutton.addActionListener((event) ->
@@ -291,7 +293,7 @@ public class GraphicalView {
 		
 		//finalization code
 		newtaskPanel.add(tasktypes, BorderLayout.CENTER);
-		newtaskPanel.add(dropdown, BorderLayout.NORTH);
+	//	newtaskPanel.add(dropdown, BorderLayout.NORTH);
 		newtaskPanel.add(enter, BorderLayout.SOUTH);
 		newtaskPanel.add(space, BorderLayout.EAST);
 		newtaskPanel.validate();
@@ -376,6 +378,8 @@ public class GraphicalView {
 			back.add(backtomenu);
 
 			//finalization code
+		//	JPanel dropdown = makeDropDownMenu();
+			//contentpane.add(dropdown);
 			contentpane.add(weltxt1);
 			contentpane.add(back);
 			contentpane.add(tasks);
@@ -523,13 +527,6 @@ public class GraphicalView {
 		
 		
 		});
-		
-//		backtomenu.addActionListener((event) ->
-//		{
-//				contentpane.setVisible(false);
-//				JFrame mainmenu = new JFrame();
-//				starterup(mainmenu);
-//		});
 		
 		
 	}
