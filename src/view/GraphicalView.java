@@ -306,23 +306,22 @@ public class GraphicalView {
 			//contentpane code
 			JPanel contentpane = new JPanel();
 			contentpane.setLayout(new BoxLayout(contentpane, BoxLayout.Y_AXIS));
+			contentpane.setLayout(new GridLayout(5,2));
 			
 			
+			//info text
 			JPanel weltxt1 = new JPanel();
 			
 			JLabel welcome1 = new JLabel("Here are the Existing Tasks. Please choose which one "
 					+ "you wish to view by typing in the task name in the given text box.");
 			
 			welcome1.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+			weltxt1.add(welcome1);
 			
-			JPanel buttons1 = new JPanel();
-			
-			contentpane.setLayout(new GridLayout(5,2));
-			
+			//task list
+			JPanel buttons1 = new JPanel();		
 			buttons1.setLayout(new GridLayout(16, 2));
 			buttons1.setPreferredSize(new Dimension((int)1000000,1000000));
-			
-			weltxt1.add(welcome1);
 			
 			//TODO update task list without recreating this panel
 			//try something like this
@@ -342,20 +341,14 @@ public class GraphicalView {
 				buttons1.add(none);
 				none.setFont(new Font("Times New Roman", Font.PLAIN, 32));
 			}
-			
-			
 			JPanel tasks = new JPanel();
 			
 			tasks.setLayout(new BoxLayout(tasks, BoxLayout.Y_AXIS));
 			
 			tasks.add(buttons1);
-			
-			contentpane.add(weltxt1);
-			
-			JPanel textme = new JPanel();
-			
-	//		addATextField("", textme);
 	
+			//remove tasks
+			JPanel textme = new JPanel();
 			JButton removeAllTasks = new JButton("Remove All Tasks");
 			removeAllTasks.setFont(removeAllTasks.getFont().deriveFont(Font.BOLD, 24));
 			
@@ -373,25 +366,24 @@ public class GraphicalView {
 				makeExistingTasksPanel(null);
 			});
 			
+			//back buttons?
+			
 			JPanel back = new JPanel();
 			
 			JButton backtomenu = new JButton("Back To Main Menu");
 			backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 24));
-			
+			backtomenu.addActionListener(this::welcomePane);
 			back.add(backtomenu);
-			
+
+			//finalization code
+			contentpane.add(weltxt1);
 			contentpane.add(back);
-			
 			contentpane.add(tasks);
 			contentpane.add(textme);
-			
-			backtomenu.addActionListener(this::welcomePane);
-			
-			//finalization code
 			contentpane.validate();
 			frame.setContentPane(contentpane);
 			frame.setVisible(true);
-		}
+	}
 
 	private void edittasks(TaskMgrDriver driver2) {
 		
