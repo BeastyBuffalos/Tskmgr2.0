@@ -1,30 +1,37 @@
 package model;
-public class Task {
+
+import java.io.Serializable;
+public class Task implements Serializable {
 
 	int duedate = 0; //https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.html
-					//https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.Builder.html
-	
-	int difficulty = 0;
+	//https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.Builder.html
 
-	String name = " ";
+	private int difficulty = 0;
+
+	private String name = " ";
 
 	String type = " ";
 
-	int hourstodo = 0;
-
+	private int hourstodo = 0;
 	boolean complete = false;
+	private boolean isOverride = false;
+	private double weightOverride = 0;
+	
+	private double weight;
 	
 	private boolean moved = false;
-
+	private int newHours;
+	private int newDifficulty;
+	private int newDueDate;
+	
 	public Task(String name1, String type1, int due, int hours, boolean comp, int diff) {
-		
+
 		name = name1;
 		type = type1;
 		duedate = due;
 		hourstodo = hours;
 		complete = comp;
 		difficulty = diff;
-
 	}
 
 	public void setDue(int due) {
@@ -34,7 +41,9 @@ public class Task {
 	}
 
 	public int getDue() {
-
+		if(isOverride()){
+			return newDueDate;
+		}
 		return duedate;
 
 	}
@@ -58,7 +67,9 @@ public class Task {
 	}
 
 	public int getHours() {
-
+		if(isOverride()){
+			return newHours;
+		}
 		return hourstodo;
 
 	}
@@ -80,13 +91,15 @@ public class Task {
 		difficulty = diff;
 
 	}
-	
-	public int getDifficulty() {
 
+	public int getDifficulty() {
+		if(isOverride()){
+			return newDifficulty;
+		}
 		return difficulty;
 
 	}
-	
+
 	public void setType(String typeis) {
 
 		type = typeis;
@@ -116,8 +129,40 @@ public class Task {
 		return type;
 
 	}
+	
+	
+	public boolean isOverride(){
+		return isOverride;
+	}
 
-	protected boolean getMoved()
+	public void setOverride(boolean override){
+		isOverride = override;
+	}
+	public void setHrsOverride(int newHrs){
+		newHours = newHrs;
+	}
+	public void setDifficultyOverride(int newDiff){
+		newDifficulty = newDiff;
+	}
+	public void setDueDateOverride(int newDue){
+		newDueDate = newDue;
+	}
+	
+	public int getHrsOverride(){
+		return newHours;
+	}
+	public int getDifficultyOverride(){
+		return newDifficulty;
+	}
+	public int getDueDateOverride(){
+		return newDueDate;
+	}
+	void setMoved(boolean moved)
+	{
+		this.moved = moved;
+	}
+	
+	boolean getMoved()
 	{
 		return moved;
 	}

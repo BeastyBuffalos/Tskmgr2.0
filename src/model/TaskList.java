@@ -1,93 +1,332 @@
 package model;
 
 import java.util.*;
-import Structures.OrderedPQ;
-import Structures.PQEntry;
+import java.io.Serializable;
+import java.io.*;
+import java.util.function.IntSupplier;
 
 /**
  * 
  * @author ejoverwe
  *
  */
-public class TaskList {
+public class TaskList{
+
 	
-	private final Comparator<Task> c = (Task t1, Task t2) -> 
-	{
-		return (weight(t1) < weight(t2)) ? -1 : ((weight(t1) == weight(t2)) ? 0 : -1);
-	};
-	private OrderedPQ<Task, TaskWrapper> tasks = new OrderedPQ<Task, TaskWrapper>(c);
-	
+	private ArrayList<Task> tasks = new ArrayList<>();
+
 	public TaskList() {
 		//TODO
 	}
-	
+
 	public void insertTask(Task task){
-		tasks.insert(task, new TaskWrapper(task));
+		tasks.add(task);
+		
+		radixsort(tasks);
 	}
-	
+
 	public Task removeTask(Task task){
-		int size1 = tasks.size();
-		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task, TaskWrapper>(c);
-		while(!(tasks.isEmpty())){
-			PQEntry<Task,TaskWrapper> removed = tasks.removeMin();
-			if (removed.getValue().get() != task)
-				pq2.insert(removed.getKey(), removed.getValue());
-		}
-		if (tasks.size() == size1)
-			System.out.println("Invalid task to remove.");
-		tasks = pq2;
+		tasks.remove(task);
+
+		radixsort(tasks);
+		
 		return task;
+
 	}
+
+	public Task editTask(Task task, 
+			String name1, String type1, int due, int hours, boolean comp, int diff){
+
+		Task updated = new Task(name1, type1, due, hours, comp, diff);
+		tasks.remove(task);
+		tasks.add(updated);
+
+		radixsort(tasks);
+
+		return updated;
+	}
+
+
+
+	private void radixsort(ArrayList<Task> tasklist) {
+
+		ArrayList<Integer> tempdiff = new ArrayList<Integer>(); 
+		ArrayList<Integer> temphou = new ArrayList<Integer>(); 
+		ArrayList<Integer> tempdue = new ArrayList<Integer>(); 
+
+		for(int i = 0; i < tasklist.size(); i++) {
+
+			tempdiff.add(tasklist.get(i).getDifficulty());
+
+		}
+
+		for(int i = 0; i < tasklist.size(); i++) {
+
+			temphou.add(tasklist.get(i).getHours());
+
+		}
+
+
+
+		for(int i = 0; i < tasklist.size(); i++) {
+
+			tempdue.add(tasklist.get(i).getDue());
+
+		}
+		countsortdiff(tasklist, tempdiff);
+		countsorthour(tasklist, temphou);
+		countsortdue(tasklist, tempdue);
+	}
+
+	private void countsortdiff(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
+
+		ArrayList<Task> Rtemp = new ArrayList<Task>();
+
+		MergeSort.sort(temp);
+
 	
-	//TODO
-	public Task editTask(Task task, String name1, String type1, int due, int hours, boolean comp, int diff){
-		OrderedPQ pq = Singleton.INSTANCE.getPQ();
-		OrderedPQ<Task,TaskWrapper> pq2 = new OrderedPQ<Task,TaskWrapper>(c);
-		while(!(pq.isEmpty())){
-			PQEntry<Task,TaskWrapper> removed = pq.removeMin();
-			if (removed.getValue().get() != task)
-				pq2.insert(removed.getKey(), removed.getValue());
-			else{
-				tasks.insert(task,new TaskWrapper(task));
+
+		for(int i = 0; i < tasklist.size(); i++) {
+			Rtemp.add(tasklist.get(i));
+		}
+
+		for(int i = 0; i < temp.size(); i++) {
+
+			for(int j = 0; j < Rtemp.size(); j++) {
+
+				if( temp.get(i) == Rtemp.get(j).getDifficulty() ) {
+
+					tasklist.set(i, Rtemp.get(j));
+
+				}
+
 			}
 		}
-		Singleton.INSTANCE.setPQ(pq2);
-		return task;
-	}
-
-	private double weight(Task task){
-		int difficulty = task.getDifficulty();
-		int duedate = task.getDue();
-		int time = task.getHours();
-		String tasktype = task.getType();
-		boolean isComplete = task.getComplete();
 		
-		if (task.getComplete()){
-			return 0;
-		}
-
-		//Temporary weighting, to be adjusted at a later date or possibly by users convienience
-		return (difficulty * 2) + (10 / duedate) + (time * 2);
+		Collections.sort(tasklist, Collections.reverseOrder(this::compareDiff));
 	}
 	
+	private int taskComparator(Task a, Task b, IntSupplier sa, IntSupplier sb)
+	{
+		return (sa.getAsInt() > sb.getAsInt()) ? -1 : 
+			(sa.getAsInt() < sb.getAsInt()) ? 1 : 0;
+	}
+	
+	private int compareDiff(Task a, Task b)
+	{
+		return taskComparator(a, b, a::getDifficulty, b::getDifficulty);
+	}
+	
+	private int compareHour(Task a, Task b)
+	{
+		return taskComparator(a, b, a::getHours, b::getHours);
+	}
+
+	private void countsorthour(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
+
+		ArrayList<Task> Rtemp = new ArrayList<Task>();
+
+		MergeSort.sort(temp);
+
+
+		for(int i = 0; i < tasklist.size(); i++) {
+			Rtemp.add(tasklist.get(i));
+		}
+
+		for(int i = 0; i < temp.size(); i++) {
+
+			for(int j = 0; j < Rtemp.size(); j++) {
+
+				if( temp.get(i) == Rtemp.get(j).getHours() ) {
+
+					tasklist.set(i, Rtemp.get(j));
+
+				}
+
+			}
+		}
+
+		Collections.sort(tasklist, Collections.reverseOrder(this::compareHour));
+		
+	}
+
+	private void countsortdue(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
+
+		ArrayList<Task> Rtemp = new ArrayList<Task>();
+
+		MergeSort.sort(temp);
+
+		for(int i = 0; i < tasklist.size(); i++) {
+			Rtemp.add(tasklist.get(i));
+		}
+
+		for(int i = 0; i < temp.size(); i++) {
+
+			for(int j = 0; j < Rtemp.size(); j++) {
+
+				if( temp.get(i) == Rtemp.get(j).getDue() ) {
+
+					tasklist.set(i, Rtemp.get(j));
+
+				}
+
+			}
+		}
+
+	}
+
+
+	public void overrideOrder(int placement){
+
+		Task prior, post;
+
+		if (placement == 0){
+			tasks.get(placement).setDueDateOverride(0);
+			tasks.get(placement).setHrsOverride(9);
+			tasks.get(placement).setDifficultyOverride(9);
+		}
+
+		else if (placement == tasks.size()){
+			tasks.get(placement).setDueDateOverride(9);
+			tasks.get(placement).setHrsOverride(0);
+			tasks.get(placement).setDifficultyOverride(0);
+		}
+
+		else{
+			prior = tasks.get(placement - 1);
+			post = tasks.get(placement + 1);
+			
+			int pridue = prior.getDue();
+			int prihrs = prior.getHours();
+			int pridiff = prior.getDifficulty();
+
+			int postdue = post.getDue();
+			int posthrs = post.getHours();
+			int postdiff = post.getDifficulty();
+			
+			if(prior.isOverride()){
+				pridue = prior.getDueDateOverride();
+				prihrs = prior.getHrsOverride();
+				pridiff = prior.getDifficultyOverride();
+			}
+			if(post.isOverride()){
+				postdue = post.getDueDateOverride();
+				posthrs = post.getHrsOverride();
+				postdiff = post.getDifficultyOverride();
+			}
+
+			int diffdelta = (postdiff - pridiff) / 2;
+			int hrsdelta = (posthrs - prihrs) / 2;
+			int duedelta = (postdue - pridue) / 2;
+
+			tasks.get(placement).setDueDateOverride(postdue - duedelta);
+			tasks.get(placement).setHrsOverride(posthrs - hrsdelta);
+			tasks.get(placement).setDifficultyOverride(postdiff - diffdelta);
+		}
+	}
+
+	public void save(String path)
+	{
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));)
+		{
+			oos.writeObject(tasks);
+		}catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public void printTasks()
+	{
+		for(Task t: tasks)
+		{
+			System.out.println(t.getName());
+		}
+	}
+
+	public void load(String path)
+	{
+		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path));)
+		{
+			tasks = (ArrayList<Task>) ois.readObject();
+		}catch(IOException e)
+		{
+			e.printStackTrace();
+		}catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * 
 	 * @author ejoverwe
 	 *
 	 */
-	private class TaskWrapper
-	{
+	private class TaskWrapper implements Serializable{
 		private Task t;
-		private int pos = 0;
-		private boolean moved = false; 
-		public TaskWrapper(Task t)
-		{
+		private boolean moved = false;
+		public TaskWrapper(Task t){
 			this.t = t;
 		}
-		
+
 		public Task get() { return t; }
-		
+
 		public void setMoved(boolean moved) { this.moved = moved; }
-		public void setPos(int pos) { this.pos = pos; }
 	}
+
+	public ListIterator<Task> getListIterator()
+	{
+		return new ListIterator<Task>()
+		{
+			private ListIterator<Task> it = tasks.listIterator();
+
+			@Override
+			public void add(Task e) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public boolean hasNext() {
+				return it.hasNext();
+			}
+
+			@Override
+			public boolean hasPrevious() {
+				return it.hasPrevious();
+			}
+
+			@Override
+			public Task next() {
+				return it.next();
+			}
+
+			@Override
+			public int nextIndex() {
+				return 0;
+			}
+
+			@Override
+			public Task previous() {
+				return it.previous();
+			}
+
+			@Override
+			public int previousIndex() {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public void remove() {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public void set(Task e) {
+				throw new UnsupportedOperationException();
+			}
+
+		};
+	}
+
 }
