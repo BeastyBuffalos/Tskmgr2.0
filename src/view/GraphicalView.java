@@ -99,8 +99,32 @@ public class GraphicalView {
 		
 		dropdown.add(changescreen);
 		
+		changescreen.addActionListener((event) ->
+		{
+			JComboBox cd = (JComboBox)event.getSource();
+			Object menu = cd.getSelectedItem();
+			if(menu.equals("Main Menu")) {
+				
+				makeWelcomeText();
+				
+			} else if ( menu.equals("New Task")) {
+				
+				makeTaskCreation();
+			
+			} else if ( menu.equals("Edit Tasks")) {
+			
+				makeExistingTasksPanel(null);
+			
+			}
+	
+	
+	
+		});
+	
+		
 		return dropdown;
 	}
+
 	
 	private JPanel makeWelcomeText()
 	{
@@ -298,49 +322,65 @@ public class GraphicalView {
 			//contentpane code
 			JPanel contentpane = new JPanel();
 			contentpane.setLayout(new BoxLayout(contentpane, BoxLayout.Y_AXIS));
-			contentpane.setLayout(new GridLayout(5,2));
 			
 			
-			//info text
 			JPanel weltxt1 = new JPanel();
 			
 			JLabel welcome1 = new JLabel("Here are the Existing Tasks. Please choose which one "
 					+ "you wish to view by typing in the task name in the given text box.");
 			
 			welcome1.setFont(new Font("Times New Roman", Font.PLAIN, 24));
-			weltxt1.add(welcome1);
 			
-			//task list
-			JPanel buttons1 = new JPanel();		
+			JPanel buttons1 = new JPanel();
+			
+			contentpane.setLayout(new GridLayout(5,2));
+			
 			buttons1.setLayout(new GridLayout(16, 2));
 			buttons1.setPreferredSize(new Dimension((int)1000000,1000000));
 			
-			//TODO update task list without recreating this panel
-			//try something like this
+			weltxt1.add(welcome1);
+			
+			String[] switchit = new String[100];
 			int i = 0;
-			int count = 0;
 			for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
 			{
 				Task t = tasks.next();
-				JLabel nt = new JLabel((i + 1) + ": " + t.getName(), SwingConstants.CENTER);
-				nt.setFont(new Font("Times New Roman", Font.PLAIN, 32));
-				buttons1.add(nt);
-				count++;
+				System.out.println(t.getName());
+				switchit[i] = t.getName();
 			}
+
+			JComboBox changetask = new JComboBox(switchit);
+			changetask.setSelectedIndex(-1);
+			changetask.addActionListener((ActionEvent e) -> {
+				Task chosentask = null;
+				int j = 0;
+				Object item = changetask.getSelectedItem();
+				for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); j++)
+				{
+					Task t = tasks.next();
+					if (t.getName() == item){
+						System.out.println(item + " item");
+						chosentask = t;
+						break;
+					}
+				}
+
+				//ENTER NEW PAGE SWITCH INFO HERE FOR EDITING TASKS 
+				//pass the chosentask variable as the argument for the task to edit
+			});
 			
-			if (count == 0) {
-				JLabel none = new JLabel("No tasks to display", SwingConstants.CENTER);
-				buttons1.add(none);
-				none.setFont(new Font("Times New Roman", Font.PLAIN, 32));
-			}
 			JPanel tasks = new JPanel();
 			
 			tasks.setLayout(new BoxLayout(tasks, BoxLayout.Y_AXIS));
 			
-			tasks.add(buttons1);
-	
-			//remove tasks
+			tasks.add(changetask);
+			
+			contentpane.add(weltxt1);
+			
 			JPanel textme = new JPanel();
+			
+	//		addATextField("", textme);
+	
 			JButton removeAllTasks = new JButton("Remove All Tasks");
 			removeAllTasks.setFont(removeAllTasks.getFont().deriveFont(Font.BOLD, 24));
 			
@@ -358,24 +398,25 @@ public class GraphicalView {
 				makeExistingTasksPanel(null);
 			});
 			
-			//back buttons?
-			
 			JPanel back = new JPanel();
 			
 			JButton backtomenu = new JButton("Back To Main Menu");
 			backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 24));
-			backtomenu.addActionListener(this::welcomePane);
+			
 			back.add(backtomenu);
-
-			//finalization code
-			contentpane.add(weltxt1);
+			
 			contentpane.add(back);
+			
 			contentpane.add(tasks);
 			contentpane.add(textme);
+			
+			backtomenu.addActionListener(this::welcomePane);
+			
+			//finalization code
 			contentpane.validate();
 			frame.setContentPane(contentpane);
 			frame.setVisible(true);
-	}
+		}
 
 	private void edittasks(TaskMgrDriver driver2) {
 		
