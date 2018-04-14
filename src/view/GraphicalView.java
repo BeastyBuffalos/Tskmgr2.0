@@ -13,6 +13,7 @@ import javax.swing.text.BadLocationException;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -105,14 +106,29 @@ public class GraphicalView {
 	{
 		//welcome text
 		JPanel weltxt = new JPanel();
+		weltxt.setLayout(new BoxLayout(weltxt, BoxLayout.Y_AXIS));
 		
-		JLabel welcome = new JLabel("Welcome to TaskManager 2.0!"
-				+ "    What would you like to do today?");
-		JLabel welcome2 = new JLabel("Create a new task, or view existing tasks?");
-		welcome.setFont(new Font("Times New Roman", Font.PLAIN, 42));
-		welcome2.setFont(new Font("Times New Roman", Font.PLAIN, 37));
+		JLabel welcome = new JLabel("TaskManager 2.0", SwingConstants.CENTER);
+		JLabel welcome3 = new JLabel("Would you like to create a new task, or view existing tasks?", SwingConstants.CENTER);
+		JLabel men = new JLabel("2.0", SwingConstants.RIGHT);
+		JLabel spaces = new JLabel(" 		");
+		
+		welcome.setFont(new Font("Times New Roman", Font.BOLD, 42));
+		welcome3.setFont(new Font("Times New Roman", Font.PLAIN, 40));
+		spaces.setFont(new Font("Times New Roman", Font.PLAIN, 40));
+		men.setFont(new Font("Times New Roman", Font.PLAIN, 400));
+		
+		welcome.setAlignmentX(Component.CENTER_ALIGNMENT);
+		men.setAlignmentX(Component.CENTER_ALIGNMENT);
+		spaces.setAlignmentX(Component.CENTER_ALIGNMENT);
+		welcome3.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		men.setForeground(new Color(10, 10, 10, 20));
+		
 		weltxt.add(welcome);
-		weltxt.add(welcome2);
+		weltxt.add(spaces);
+		weltxt.add(welcome3);
+		weltxt.add(men);
 		return weltxt;
 	}
 	
@@ -127,7 +143,7 @@ public class GraphicalView {
 		newtask.setFont(newtask.getFont().deriveFont(Font.BOLD, 24));
 		existing.setFont(existing.getFont().deriveFont(Font.BOLD, 24));
 		
-		buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+		buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		
 		buttons.add(newtask);
 		buttons.add(existing);
