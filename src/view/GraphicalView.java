@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.text.BadLocationException;
 
 import java.awt.BorderLayout;
@@ -25,6 +26,7 @@ import controller.TaskMgrDriver;
 import javafx.scene.layout.Border;
 
 import java.util.ListIterator;
+
 import model.Task;
 
 public class GraphicalView {
@@ -275,6 +277,19 @@ public class GraphicalView {
 		enter.add(backtomenu);		
 		
 		JPanel dropdown = makeDropDownMenu();
+		JLabel fill1 = new JLabel("");
+		JLabel fill2 = new JLabel("");
+		JLabel fill3 = new JLabel("");
+		JLabel fill4 = new JLabel("");
+		JLabel fill5 = new JLabel("");
+		dropdown.add(fill1);
+		dropdown.add(fill2);
+		dropdown.add(fill3);
+		dropdown.add(fill4);
+		dropdown.add(fill5);
+		JLabel taskAdded = new JLabel("");
+		taskAdded.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		dropdown.add(taskAdded);
 		
 		
 		enterbutton.addActionListener((event) ->
@@ -294,6 +309,14 @@ public class GraphicalView {
 					hoursField.setText("");
 					typeField.setText("");
 					nameField.setText("");
+					taskAdded.setText("Task Added");
+					int delay = 3000;
+					ActionListener taskPerformer = new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+								taskAdded.setText("");
+						}
+					};
+					new Timer(delay, taskPerformer).start();
 					
 				} catch (BadLocationException e) {
 					e.printStackTrace();
