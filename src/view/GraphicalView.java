@@ -278,9 +278,6 @@ public class GraphicalView {
 		enter.add(enterbutton);
 		enter.add(backtomenu);		
 		
-<<<<<<< HEAD
-	//	JPanel dropdown = makeDropDownMenu();
-=======
 		JPanel dropdown = makeDropDownMenu();
 		JLabel fill1 = new JLabel("");
 		JLabel fill2 = new JLabel("");
@@ -295,8 +292,7 @@ public class GraphicalView {
 		JLabel taskAdded = new JLabel("");
 		taskAdded.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		dropdown.add(taskAdded);
->>>>>>> master
-		
+
 		
 		enterbutton.addActionListener((event) ->
 		{
@@ -433,15 +429,12 @@ public class GraphicalView {
 			backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 24));
 			
 			back.add(backtomenu);
-<<<<<<< HEAD
 
 			//finalization code
 		//	JPanel dropdown = makeDropDownMenu();
 			//contentpane.add(dropdown);
 			contentpane.add(weltxt1);
-=======
-			
->>>>>>> master
+
 			contentpane.add(back);
 			
 			contentpane.add(tasks);
