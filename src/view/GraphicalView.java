@@ -103,17 +103,11 @@ public class GraphicalView {
 			JComboBox cd = (JComboBox)event.getSource();
 			Object menu = cd.getSelectedItem();
 			if(menu.equals("Main Menu")) {
-				
-				makeWelcomeText();
-				
+				welcomePane(null);
 			} else if ( menu.equals("New Task")) {
-				
-				makeTaskCreation();
-			
+				taskCreationPane(null);
 			} else if ( menu.equals("Edit Tasks")) {
-			
-				makeExistingTasksPanel(null);
-			
+				makeExistingTasksPanel(null);			
 			}
 	
 	
@@ -366,23 +360,25 @@ public class GraphicalView {
 				makeExistingTasksPanel(null);
 			});
 			
-			//back buttons?
-			
-			JPanel back = new JPanel();
-			
-			JButton backtomenu = new JButton("Back To Main Menu");
-			backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 24));
-			backtomenu.addActionListener(this::welcomePane);
-			back.add(backtomenu);
-
 			//finalization code
 			contentpane.add(weltxt1);
-			contentpane.add(back);
+			contentpane.add(makeBackButton());
 			contentpane.add(tasks);
 			contentpane.add(textme);
 			contentpane.validate();
 			frame.setContentPane(contentpane);
 			frame.setVisible(true);
+	}
+	
+	private JPanel makeBackButton()
+	{
+		JPanel back = new JPanel();
+		
+		JButton backtomenu = new JButton("Back To Main Menu");
+		backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 24));
+		backtomenu.addActionListener(this::welcomePane);
+		back.add(backtomenu);
+		return back;
 	}
 
 	private void edittasks(TaskMgrDriver driver2) {
