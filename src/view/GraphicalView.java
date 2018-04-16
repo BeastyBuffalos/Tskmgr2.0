@@ -8,11 +8,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.text.BadLocationException;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -24,6 +26,7 @@ import controller.TaskMgrDriver;
 import javafx.scene.layout.Border;
 
 import java.util.ListIterator;
+
 import model.Task;
 
 public class GraphicalView {
@@ -123,14 +126,29 @@ public class GraphicalView {
 	{
 		//welcome text
 		JPanel weltxt = new JPanel();
+		weltxt.setLayout(new BoxLayout(weltxt, BoxLayout.Y_AXIS));
 		
-		JLabel welcome = new JLabel("Welcome to TaskManager 2.0!"
-				+ "    What would you like to do today?");
-		JLabel welcome2 = new JLabel("Create a new task, or view existing tasks?");
-		welcome.setFont(new Font("Times New Roman", Font.PLAIN, 42));
-		welcome2.setFont(new Font("Times New Roman", Font.PLAIN, 37));
+		JLabel welcome = new JLabel("TaskManager 2.0", SwingConstants.CENTER);
+		JLabel welcome3 = new JLabel("Would you like to create a new task, or view existing tasks?", SwingConstants.CENTER);
+		JLabel men = new JLabel("2.0", SwingConstants.RIGHT);
+		JLabel spaces = new JLabel(" 		");
+		
+		welcome.setFont(new Font("Times New Roman", Font.BOLD, 42));
+		welcome3.setFont(new Font("Times New Roman", Font.PLAIN, 40));
+		spaces.setFont(new Font("Times New Roman", Font.PLAIN, 40));
+		men.setFont(new Font("Times New Roman", Font.PLAIN, 400));
+		
+		welcome.setAlignmentX(Component.CENTER_ALIGNMENT);
+		men.setAlignmentX(Component.CENTER_ALIGNMENT);
+		spaces.setAlignmentX(Component.CENTER_ALIGNMENT);
+		welcome3.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		men.setForeground(new Color(10, 10, 10, 20));
+		
 		weltxt.add(welcome);
-		weltxt.add(welcome2);
+		weltxt.add(spaces);
+		weltxt.add(welcome3);
+		weltxt.add(men);
 		return weltxt;
 	}
 	
@@ -145,7 +163,7 @@ public class GraphicalView {
 		newtask.setFont(newtask.getFont().deriveFont(Font.BOLD, 24));
 		existing.setFont(existing.getFont().deriveFont(Font.BOLD, 24));
 		
-		buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+		buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		
 		buttons.add(newtask);
 		buttons.add(existing);
@@ -253,6 +271,19 @@ public class GraphicalView {
 		enter.add(backtomenu);		
 		
 		JPanel dropdown = makeDropDownMenu();
+		JLabel fill1 = new JLabel("");
+		JLabel fill2 = new JLabel("");
+		JLabel fill3 = new JLabel("");
+		JLabel fill4 = new JLabel("");
+		JLabel fill5 = new JLabel("");
+		dropdown.add(fill1);
+		dropdown.add(fill2);
+		dropdown.add(fill3);
+		dropdown.add(fill4);
+		dropdown.add(fill5);
+		JLabel taskAdded = new JLabel("");
+		taskAdded.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		dropdown.add(taskAdded);
 		
 		
 		enterbutton.addActionListener((event) ->
@@ -272,6 +303,14 @@ public class GraphicalView {
 					hoursField.setText("");
 					typeField.setText("");
 					nameField.setText("");
+					taskAdded.setText("Task Added");
+					int delay = 3000;
+					ActionListener taskPerformer = new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+								taskAdded.setText("");
+						}
+					};
+					new Timer(delay, taskPerformer).start();
 					
 				} catch (BadLocationException e) {
 					e.printStackTrace();
@@ -300,49 +339,65 @@ public class GraphicalView {
 			//contentpane code
 			JPanel contentpane = new JPanel();
 			contentpane.setLayout(new BoxLayout(contentpane, BoxLayout.Y_AXIS));
-			contentpane.setLayout(new GridLayout(5,2));
 			
 			
-			//info text
 			JPanel weltxt1 = new JPanel();
 			
 			JLabel welcome1 = new JLabel("Here are the Existing Tasks. Please choose which one "
 					+ "you wish to view by typing in the task name in the given text box.");
 			
 			welcome1.setFont(new Font("Times New Roman", Font.PLAIN, 24));
-			weltxt1.add(welcome1);
 			
-			//task list
-			JPanel buttons1 = new JPanel();		
+			JPanel buttons1 = new JPanel();
+			
+			contentpane.setLayout(new GridLayout(5,2));
+			
 			buttons1.setLayout(new GridLayout(16, 2));
 			buttons1.setPreferredSize(new Dimension((int)1000000,1000000));
 			
-			//TODO update task list without recreating this panel
-			//try something like this
+			weltxt1.add(welcome1);
+			
+			String[] switchit = new String[100];
 			int i = 0;
-			int count = 0;
 			for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
 			{
 				Task t = tasks.next();
-				JLabel nt = new JLabel((i + 1) + ": " + t.getName(), SwingConstants.CENTER);
-				nt.setFont(new Font("Times New Roman", Font.PLAIN, 32));
-				buttons1.add(nt);
-				count++;
+				System.out.println(t.getName());
+				switchit[i] = t.getName();
 			}
+
+			JComboBox changetask = new JComboBox(switchit);
+			changetask.setSelectedIndex(-1);
+			changetask.addActionListener((ActionEvent e) -> {
+				Task chosentask = null;
+				int j = 0;
+				Object item = changetask.getSelectedItem();
+				for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); j++)
+				{
+					Task t = tasks.next();
+					if (t.getName() == item){
+						System.out.println(item + " item");
+						chosentask = t;
+						break;
+					}
+				}
+
+				//ENTER NEW PAGE SWITCH INFO HERE FOR EDITING TASKS 
+				//pass the chosentask variable as the argument for the task to edit
+			});
 			
-			if (count == 0) {
-				JLabel none = new JLabel("No tasks to display", SwingConstants.CENTER);
-				buttons1.add(none);
-				none.setFont(new Font("Times New Roman", Font.PLAIN, 32));
-			}
 			JPanel tasks = new JPanel();
 			
 			tasks.setLayout(new BoxLayout(tasks, BoxLayout.Y_AXIS));
 			
-			tasks.add(buttons1);
-	
-			//remove tasks
+			tasks.add(changetask);
+			
+			contentpane.add(weltxt1);
+			
 			JPanel textme = new JPanel();
+			
+	//		addATextField("", textme);
+	
 			JButton removeAllTasks = new JButton("Remove All Tasks");
 			removeAllTasks.setFont(removeAllTasks.getFont().deriveFont(Font.BOLD, 24));
 			
@@ -365,6 +420,8 @@ public class GraphicalView {
 			contentpane.add(makeBackButton());
 			contentpane.add(tasks);
 			contentpane.add(textme);
+			
+			//finalization code
 			contentpane.validate();
 			frame.setContentPane(contentpane);
 			frame.setVisible(true);
