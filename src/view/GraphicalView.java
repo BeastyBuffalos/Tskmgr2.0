@@ -285,6 +285,7 @@ public class GraphicalView {
 		enter.add(enterbutton);
 		enter.add(backtomenu);		
 		
+		
 		JPanel dropdown = makeDropDownMenu();
 		JLabel fill1 = new JLabel("");
 		JLabel fill2 = new JLabel("");
@@ -378,10 +379,9 @@ public class GraphicalView {
 		{
 			switchit[i] = tasks.next();
 		}
-
 		JComboBox<Task> changetask = new JComboBox<Task>(switchit);
 		changetask.setSelectedIndex(-1);
-		changetask.addActionListener((ActionEvent e) -> {
+		changetask.addActionListener((e) -> {
 			Task chosentask = null;
 			int j = 0;
 			Object item = changetask.getSelectedItem();
@@ -394,7 +394,6 @@ public class GraphicalView {
 					break;
 				}
 			}
-
 			//ENTER NEW PAGE SWITCH INFO HERE FOR EDITING TASKS 
 			//pass the chosentask variable as the argument for the task to edit
 		});
@@ -405,6 +404,7 @@ public class GraphicalView {
 		
 		tasks.add(changetask);
 		return tasks;
+
 	}
 	
 	private JPanel makeRemoveAllTasks()
