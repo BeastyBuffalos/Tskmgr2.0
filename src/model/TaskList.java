@@ -18,6 +18,11 @@ public class TaskList{
 	public TaskList() {
 		//TODO
 	}
+	
+	public int getSize()
+	{
+		return tasks.size();
+	}
 
 	public void insertTask(Task task){
 		tasks.add(task);
@@ -27,11 +32,8 @@ public class TaskList{
 
 	public Task removeTask(Task task){
 		tasks.remove(task);
-
 		radixsort(tasks);
-		
 		return task;
-
 	}
 
 	public Task editTask(Task task, 
