@@ -108,17 +108,11 @@ public class GraphicalView {
 			JComboBox cd = (JComboBox)event.getSource();
 			Object menu = cd.getSelectedItem();
 			if(menu.equals("Main Menu")) {
-				
-				makeWelcomeText();
-				
+				welcomePane(null);
 			} else if ( menu.equals("New Task")) {
-				
-				makeTaskCreation();
-			
+				taskCreationPane(null);
 			} else if ( menu.equals("Edit Tasks")) {
-			
-				makeExistingTasksPanel(null);
-			
+				makeExistingTasksPanel(null);			
 			}
 	
 	
@@ -423,6 +417,7 @@ public class GraphicalView {
 				makeExistingTasksPanel(null);
 			});
 			
+<<<<<<< HEAD
 			JPanel back = new JPanel();
 			
 			JButton backtomenu = new JButton("Back To Main Menu");
@@ -437,16 +432,30 @@ public class GraphicalView {
 
 			contentpane.add(back);
 			
+=======
+			//finalization code
+			contentpane.add(weltxt1);
+			contentpane.add(makeBackButton());
+>>>>>>> master
 			contentpane.add(tasks);
 			contentpane.add(textme);
-			
-			backtomenu.addActionListener(this::welcomePane);
 			
 			//finalization code
 			contentpane.validate();
 			frame.setContentPane(contentpane);
 			frame.setVisible(true);
-		}
+	}
+	
+	private JPanel makeBackButton()
+	{
+		JPanel back = new JPanel();
+		
+		JButton backtomenu = new JButton("Back To Main Menu");
+		backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 24));
+		backtomenu.addActionListener(this::welcomePane);
+		back.add(backtomenu);
+		return back;
+	}
 
 	private void edittasks(TaskMgrDriver driver2) {
 		
