@@ -417,7 +417,7 @@ public class GraphicalView {
 				makeExistingTasksPanel(null);
 			});
 			
-<<<<<<< HEAD
+
 			JPanel back = new JPanel();
 			
 			JButton backtomenu = new JButton("Back To Main Menu");
@@ -432,11 +432,11 @@ public class GraphicalView {
 
 			contentpane.add(back);
 			
-=======
+
 			//finalization code
 			contentpane.add(weltxt1);
 			contentpane.add(makeBackButton());
->>>>>>> master
+
 			contentpane.add(tasks);
 			contentpane.add(textme);
 			
