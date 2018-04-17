@@ -98,8 +98,32 @@ public class GraphicalView {
 		
 		dropdown.add(changescreen);
 		
+		changescreen.addActionListener((event) ->
+		{
+			JComboBox cd = (JComboBox)event.getSource();
+			Object menu = cd.getSelectedItem();
+			if(menu.equals("Main Menu")) {
+				
+				makeWelcomeText();
+				
+			} else if ( menu.equals("New Task")) {
+				
+				makeTaskCreation();
+			
+			} else if ( menu.equals("Edit Tasks")) {
+			
+				makeExistingTasksPanel(null);
+			
+			}
+	
+	
+	
+		});
+	
+		
 		return dropdown;
 	}
+
 	
 	private JPanel makeWelcomeText()
 	{
@@ -380,6 +404,8 @@ public class GraphicalView {
 			});
 			panel.add(changetask);
 			
+			JPanel tasks = new JPanel();
+			
 			panel.add(name);
 			panel.add(nameField);
 			
@@ -394,7 +420,6 @@ public class GraphicalView {
 		
 			panel.add(type);
 			panel.add(typeField);
-			
 			
 			
 			
