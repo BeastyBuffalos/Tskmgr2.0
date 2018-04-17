@@ -306,8 +306,6 @@ public class GraphicalView {
 			//contentpane code
 			JPanel contentpane = new JPanel();
 			contentpane.setLayout(new BoxLayout(contentpane, BoxLayout.Y_AXIS));
-			
-			
 			JPanel weltxt1 = new JPanel();
 			
 			JLabel welcome1 = new JLabel("Here are the Existing Tasks. Please choose which one "
@@ -315,12 +313,60 @@ public class GraphicalView {
 			
 			welcome1.setFont(new Font("Times New Roman", Font.PLAIN, 24));
 			
-			JPanel buttons1 = new JPanel();
+			//JPanel buttons1 = new JPanel();
 			
-			contentpane.setLayout(new GridLayout(5,2));
+			//TASK FIELDS
+			JPanel panel = new JPanel();
+			panel.setLayout(new GridLayout(6,2, 1, 60));
+			panel.setPreferredSize(new Dimension((int)10,10));
 			
-			buttons1.setLayout(new GridLayout(16, 2));
-			buttons1.setPreferredSize(new Dimension((int)1000000,1000000));
+			// name
+			JLabel name = new JLabel("The Name of the Task: ", SwingConstants.RIGHT);
+			JTextField nameField = new JTextField("");
+					
+			Font newTaskFont = new Font("Times New Roman", Font.PLAIN, 32);
+			name.setFont(newTaskFont);
+			nameField.setFont(newTaskFont);
+			
+
+			
+			// due date
+			JLabel dueDate = new JLabel("The Date Due: ", SwingConstants.RIGHT);
+			JTextField dueField = new JTextField("");
+			
+			dueDate.setFont(newTaskFont);
+			dueField.setFont(newTaskFont);
+		
+			
+			// difficulty
+			JLabel difficulty = new JLabel("How You Would Rate It's Difficulty: ", SwingConstants.RIGHT);
+			JTextField diffField = new JTextField("");
+			
+			difficulty.setFont(newTaskFont);
+			diffField.setFont(newTaskFont);	
+			
+			
+			// hours
+			JLabel hours = new JLabel("How Many Hours It Will Take To Finish: ", SwingConstants.RIGHT);
+			JTextField hoursField = new JTextField("");
+			
+			hours.setFont(newTaskFont);
+			hoursField.setFont(newTaskFont);
+			
+	
+			// type
+			JLabel type = new JLabel("The Type of Task: ", SwingConstants.RIGHT);
+			JTextField typeField = new JTextField("");
+			
+			type.setFont(newTaskFont);
+			typeField.setFont(newTaskFont);
+			
+			
+			
+			// space for right side of window
+			JLabel space = new JLabel("   				", SwingConstants.RIGHT);
+			space.setFont(new Font("Times New Roman", Font.PLAIN, 90));
+			
 			
 			weltxt1.add(welcome1);
 			
@@ -343,27 +389,44 @@ public class GraphicalView {
 				{
 					Task t = tasks.next();
 					if (t.getName() == item){
-						System.out.println(item + " item");
+						System.out.println(item + " chosen");
 						chosentask = t;
+						diffField.setText(Integer.toString(chosentask.getDifficulty()));
+						nameField.setText(chosentask.getName());
+						hoursField.setText(Integer.toString(chosentask.getHours()));
+						dueField.setText(Integer.toString(chosentask.getDue()));
+						typeField.setText(chosentask.getType());
 						break;
 					}
+
 				}
 
-				//ENTER NEW PAGE SWITCH INFO HERE FOR EDITING TASKS 
-				//pass the chosentask variable as the argument for the task to edit
 			});
+			panel.add(changetask);
 			
 			JPanel tasks = new JPanel();
 			
-			tasks.setLayout(new BoxLayout(tasks, BoxLayout.Y_AXIS));
+			panel.add(name);
+			panel.add(nameField);
 			
-			tasks.add(changetask);
+			panel.add(dueDate);
+			panel.add(dueField);
 			
+			panel.add(difficulty);
+			panel.add(diffField);
+			
+			panel.add(hours);
+			panel.add(hoursField);
+		
+			panel.add(type);
+			panel.add(typeField);
+			
+			
+			
+			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 			contentpane.add(weltxt1);
 			
 			JPanel textme = new JPanel();
-			
-	//		addATextField("", textme);
 	
 			JButton removeAllTasks = new JButton("Remove All Tasks");
 			removeAllTasks.setFont(removeAllTasks.getFont().deriveFont(Font.BOLD, 24));
@@ -391,7 +454,7 @@ public class GraphicalView {
 			
 			contentpane.add(back);
 			
-			contentpane.add(tasks);
+			contentpane.add(panel);
 			contentpane.add(textme);
 			
 			backtomenu.addActionListener(this::welcomePane);
