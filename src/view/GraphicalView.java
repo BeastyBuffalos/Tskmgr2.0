@@ -270,6 +270,7 @@ public class GraphicalView {
 		enter.add(enterbutton);
 		enter.add(backtomenu);		
 		
+		
 		JPanel dropdown = makeDropDownMenu();
 		JLabel fill1 = new JLabel("");
 		JLabel fill2 = new JLabel("");
