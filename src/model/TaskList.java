@@ -97,7 +97,7 @@ public class TaskList{
 				if( temp.get(i) == Rtemp.get(j).getDifficulty() ) {
 
 					tasklist.set(i, Rtemp.get(j));
-
+					break;
 				}
 
 			}
@@ -130,17 +130,16 @@ public class TaskList{
 
 
 		for(int i = 0; i < tasklist.size(); i++) {
-			Rtemp.add(tasklist.get(i));
+			Rtemp.set(i, tasklist.get(i));
 		}
 
 		for(int i = 0; i < temp.size(); i++) {
 
 			for(int j = 0; j < Rtemp.size(); j++) {
 
-				if( temp.get(i) == Rtemp.get(j).getHours() ) {
-
+				if(temp.get(i).equals(Rtemp.get(j).getHours())) {
 					tasklist.set(i, Rtemp.get(j));
-
+					break;
 				}
 
 			}
@@ -157,17 +156,16 @@ public class TaskList{
 		MergeSort.sort(temp);
 
 		for(int i = 0; i < tasklist.size(); i++) {
-			Rtemp.add(tasklist.get(i));
+			Rtemp.set(i, tasklist.get(i));
 		}
 
 		for(int i = 0; i < temp.size(); i++) {
 
 			for(int j = 0; j < Rtemp.size(); j++) {
 
-				if( temp.get(i) == Rtemp.get(j).getDue() ) {
-
+				if(temp.get(i).equals(Rtemp.get(j).getDue())) {
 					tasklist.set(i, Rtemp.get(j));
-
+					break;
 				}
 
 			}
