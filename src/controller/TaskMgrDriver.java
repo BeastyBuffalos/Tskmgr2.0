@@ -93,11 +93,6 @@ public class TaskMgrDriver {
 		return tasks.getListIterator();
 	}
 	
-	public int numberOfTasks()
-	{
-		return tasks.getSize();
-	}
-	
 	
 	public ListIterator<Task> editTask(Task task, 
 			String name1, String type1, int due, int hours, boolean comp, int diff)
