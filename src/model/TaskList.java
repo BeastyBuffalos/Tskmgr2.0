@@ -74,8 +74,8 @@ public class TaskList{
 
 		}
 		countsortdiff(tasklist, tempdiff);
-		countsorthour(tasklist, temphou);
-		countsortdue(tasklist, tempdue);
+//		countsorthour(tasklist, temphou);
+//		countsortdue(tasklist, tempdue);
 	}
 
 	private void countsortdiff(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
@@ -95,8 +95,10 @@ public class TaskList{
 			for(int j = 0; j < Rtemp.size(); j++) {
 
 				if( temp.get(i) == Rtemp.get(j).getDifficulty() ) {
-
+					
 					tasklist.set(i, Rtemp.get(j));
+					System.out.println(tasklist);
+					break;
 
 				}
 
@@ -140,7 +142,7 @@ public class TaskList{
 				if( temp.get(i) == Rtemp.get(j).getHours() ) {
 
 					tasklist.set(i, Rtemp.get(j));
-
+					break;
 				}
 
 			}
@@ -167,7 +169,7 @@ public class TaskList{
 				if( temp.get(i) == Rtemp.get(j).getDue() ) {
 
 					tasklist.set(i, Rtemp.get(j));
-
+					break;
 				}
 
 			}
