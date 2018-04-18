@@ -342,11 +342,11 @@ public class GraphicalView {
 			contentpane.setLayout(new BoxLayout(contentpane, BoxLayout.Y_AXIS));
 			JPanel weltxt1 = new JPanel();
 			
-			JLabel welcome1 = new JLabel("Here are the Existing Tasks. Please choose which one "
-					+ "you wish to view by typing in the task name in the given text box.");
-			
-			welcome1.setFont(new Font("Times New Roman", Font.PLAIN, 24));
-			
+//			JLabel welcome1 = new JLabel("Here are the Existing Tasks. Please choose which one "
+//					+ "you wish to view by typing in the task name in the given text box.");
+//			
+//			welcome1.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+//			
 			//JPanel buttons1 = new JPanel();
 			
 			//TASK FIELDS
@@ -402,7 +402,7 @@ public class GraphicalView {
 			space.setFont(new Font("Times New Roman", Font.PLAIN, 90));
 			
 			
-			weltxt1.add(welcome1);
+		//	weltxt1.add(welcome1);
 			
 			String[] switchit = new String[100];
 			int i = 0;
@@ -436,6 +436,10 @@ public class GraphicalView {
 				}
 
 			});
+			
+			JLabel tasklistname = new JLabel("Task List: ");
+			tasklistname.setFont(newTaskFont);
+			panel.add(tasklistname);
 			panel.add(changetask);
 			
 			JPanel tasks = new JPanel();
@@ -479,15 +483,15 @@ public class GraphicalView {
 				makeExistingTasksPanel(null);
 			});
 			
-			JPanel back = new JPanel();
-			
-			JButton backtomenu = new JButton("Back To Main Menu");
-			backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 24));
-			
-			back.add(backtomenu);
-			
-			contentpane.add(back);
-			
+//			JPanel back = new JPanel();
+//			
+//			JButton backtomenu = new JButton("Back To Main Menu");
+//			backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 24));
+//			
+//			back.add(backtomenu);
+//			
+//			contentpane.add(back);
+//			
 			contentpane.add(panel);
 			//finalization code
 			contentpane.add(weltxt1);
