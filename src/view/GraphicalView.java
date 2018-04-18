@@ -2,14 +2,18 @@ package view;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.text.BadLocationException;
+
+import com.sun.webkit.PopupMenu;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -412,7 +416,7 @@ public class GraphicalView {
 			{
 				Task t = tasks.next();
 				if (t.getName() == item){
-					System.out.println(item + " chosen");
+					//System.out.println(item + " chosen");
 					chosentask = t;
 					diffField.setText(Integer.toString(chosentask.getDifficulty()));
 					nameField.setText(chosentask.getName());
@@ -473,8 +477,29 @@ public class GraphicalView {
 		panel.add(type);
 		panel.add(typeField);
 
-		panel.add(enterbutton);
+		JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
 
+		JTextField typewhere = new JTextField("");
+		typewhere.setEnabled(false);
+		
+		
+		movepos.addActionListener((ActionEvent e) -> {
+			
+			if( movepos.isSelected()) {
+				typewhere.setEnabled(true);
+			
+			} else {
+				typewhere.setEnabled(false);
+			}
+		
+		});
+		
+		
+		
+		panel.add(movepos);
+		panel.add(typewhere);
+		panel.add(enterbutton);
+		
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
 		JPanel textme = new JPanel();
@@ -507,6 +532,8 @@ public class GraphicalView {
 		contentpane.validate();
 		frame.setContentPane(contentpane);
 		frame.setVisible(true);
+		
+	
 	}
 
 	private JPanel makeBackButton()

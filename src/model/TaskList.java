@@ -179,7 +179,8 @@ public class TaskList{
 			tasks.get(placement).setDifficultyOverride(0);
 		}
 
-		else{
+		else {
+			
 			prior = tasks.get(placement - 1);
 			post = tasks.get(placement + 1);
 			
