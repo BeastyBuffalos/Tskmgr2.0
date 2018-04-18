@@ -80,28 +80,23 @@ public class TaskList{
 
 	private void countsortdiff(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
 
-		ArrayList<Task> Rtemp = new ArrayList<Task>(0);
-
+		ArrayList<Task> Rtemp = tasklist;
+		ArrayList<Task> Rtemp2 = new ArrayList<Task>();
 		MergeSort.sort(temp);
 
 	
-
-		for(int i = 0; i < tasklist.size(); i++) {
-			Rtemp.add(tasklist.get(i));
-		}
 
 		for(int i = 0; i < temp.size(); i++) {
 
 			for(int j = 0; j < Rtemp.size(); j++) {
 
 				if( temp.get(i) == Rtemp.get(j).getDifficulty() ) {
-
-					tasklist.set(i, Rtemp.get(j));
+					Rtemp2.add(Rtemp.get(j));
 					break;
 				}
-
 			}
 		}
+		tasklist = Rtemp2;
 		
 		Collections.sort(tasklist, Collections.reverseOrder(this::compareDiff));
 	}
@@ -124,26 +119,23 @@ public class TaskList{
 
 	private void countsorthour(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
 
-		ArrayList<Task> Rtemp = new ArrayList<Task>();
-
+		ArrayList<Task> Rtemp = tasklist;
+		ArrayList<Task> Rtemp2 = new ArrayList<Task>();
 		MergeSort.sort(temp);
 
-
-		for(int i = 0; i < tasklist.size(); i++) {
-			Rtemp.set(i, tasklist.get(i));
-		}
 
 		for(int i = 0; i < temp.size(); i++) {
 
 			for(int j = 0; j < Rtemp.size(); j++) {
 
 				if(temp.get(i).equals(Rtemp.get(j).getHours())) {
-					tasklist.set(i, Rtemp.get(j));
+					Rtemp2.add(Rtemp.get(j));
 					break;
 				}
 
 			}
 		}
+		tasklist = Rtemp2;
 
 		Collections.sort(tasklist, Collections.reverseOrder(this::compareHour));
 		
@@ -151,26 +143,23 @@ public class TaskList{
 
 	private void countsortdue(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
 
-		ArrayList<Task> Rtemp = new ArrayList<Task>();
-
+		ArrayList<Task> Rtemp = tasklist;
+		ArrayList<Task> Rtemp2 = new ArrayList<Task>();
 		MergeSort.sort(temp);
 
-		for(int i = 0; i < tasklist.size(); i++) {
-			Rtemp.set(i, tasklist.get(i));
-		}
 
 		for(int i = 0; i < temp.size(); i++) {
 
 			for(int j = 0; j < Rtemp.size(); j++) {
 
 				if(temp.get(i).equals(Rtemp.get(j).getDue())) {
-					tasklist.set(i, Rtemp.get(j));
+					Rtemp2.add(Rtemp.get(j));
 					break;
 				}
 
 			}
 		}
-
+		tasklist = Rtemp2;
 	}
 
 

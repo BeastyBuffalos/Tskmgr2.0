@@ -341,13 +341,6 @@ public class GraphicalView {
 		contentpane.setLayout(new BoxLayout(contentpane, BoxLayout.Y_AXIS));
 		JPanel weltxt1 = new JPanel();
 
-		JLabel welcome1 = new JLabel("Here are the Existing Tasks. Please choose which one "
-				+ "you wish to view by typing in the task name in the given text box.");
-
-		welcome1.setFont(new Font("Times New Roman", Font.PLAIN, 24));
-
-		//JPanel buttons1 = new JPanel();
-
 		//TASK FIELDS
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(6,2, 1, 60));
@@ -401,14 +394,11 @@ public class GraphicalView {
 		space.setFont(new Font("Times New Roman", Font.PLAIN, 90));
 
 
-		weltxt1.add(welcome1);
-
 		String[] switchit = new String[100];
 		int i = 0;
 		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
 		{
 			Task t = tasks.next();
-			System.out.println(t.getName());
 			switchit[i] = t.getName();
 		}
 		Task globtask = null;
@@ -480,6 +470,10 @@ public class GraphicalView {
 			}
 
 		});
+		
+		JLabel tasklistlist = new JLabel("Task List: ");
+		tasklistlist.setFont(newTaskFont);
+		panel.add(tasklistlist);
 		panel.add(changetask);
 
 		JPanel tasks = new JPanel();
@@ -502,7 +496,6 @@ public class GraphicalView {
 		panel.add(enterbutton);
 
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		contentpane.add(weltxt1);
 
 		JPanel textme = new JPanel();
 
@@ -522,15 +515,6 @@ public class GraphicalView {
 			//TODO no, the next line is bad
 			makeExistingTasksPanel(null);
 		});
-
-		JPanel back = new JPanel();
-
-		JButton backtomenu = new JButton("Back To Main Menu");
-		backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 24));
-
-		back.add(backtomenu);
-
-		contentpane.add(back);
 
 		contentpane.add(panel);
 		//finalization code
@@ -561,6 +545,7 @@ public class GraphicalView {
 	
 =======
 
+<<<<<<< HEAD
 	private void edittasks(TaskMgrDriver driver2) {
 
 
@@ -711,5 +696,7 @@ public class GraphicalView {
 	}
 
 
+>>>>>>> master
+=======
 >>>>>>> master
 }
