@@ -80,7 +80,7 @@ public class TaskList{
 
 	private void countsortdiff(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
 
-		ArrayList<Task> Rtemp = new ArrayList<Task>();
+		ArrayList<Task> Rtemp = new ArrayList<Task>(0);
 
 		MergeSort.sort(temp);
 
