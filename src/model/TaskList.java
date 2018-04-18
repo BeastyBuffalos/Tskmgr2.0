@@ -83,13 +83,10 @@ public class TaskList{
 
 	private void countsortdiff(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
 
-		ArrayList<Task> Rtemp = new ArrayList<Task>();
+		ArrayList<Task> Rtemp = tasklist;
+		ArrayList<Task> R2Temp = new ArrayList<Task>();
 
 		MergeSort.sort(temp);
-
-		for(int i = 0; i < tasklist.size(); i++) {
-			Rtemp.add(tasklist.get(i));
-		}
 
 		for(int i = 0; i < temp.size(); i++) {
 
@@ -97,7 +94,7 @@ public class TaskList{
 
 				if( temp.get(i) == Rtemp.get(j).getDifficulty() ) {
 					
-					tasklist.set(i, Rtemp.get(j));
+					R2Temp.add(Rtemp.get(j));
 					System.out.println(tasklist);
 					break;
 
@@ -106,64 +103,62 @@ public class TaskList{
 			}
 		}
 		
+		tasklist = R2Temp;
+		
 		Collections.sort(tasklist, Collections.reverseOrder(this::compareDiff));
 	}
 	
 	private void countsorthour(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
 	
-		ArrayList<Task> Rtemp = new ArrayList<Task>();
-	
-		MergeSort.sort(temp);
-	
-	
-		for(int i = 0; i < tasklist.size(); i++) {
-			Rtemp.add(tasklist.get(i));
-		}
-	
-		for(int i = 0; i < temp.size(); i++) {
-	
-			for(int j = 0; j < Rtemp.size(); j++) {
-	
-				if( temp.get(i) == Rtemp.get(j).getHours() ) {
-	
-					tasklist.set(i, Rtemp.get(j));
+		ArrayList<Task> Rtemp = tasklist;
+		ArrayList<Task> R2Temp = new ArrayList<Task>();
 
+		MergeSort.sort(temp);
+
+		for(int i = 0; i < temp.size(); i++) {
+
+			for(int j = 0; j < Rtemp.size(); j++) {
+
+				if( temp.get(i) == Rtemp.get(j).getDifficulty() ) {
+					
+					R2Temp.add(Rtemp.get(j));
+					System.out.println(tasklist);
 					break;
 
 				}
-	
+
 			}
 		}
-	
+		
+		tasklist = R2Temp;
+		
 		Collections.sort(tasklist, Collections.reverseOrder(this::compareHour));
 		
 	}
 
 	private void countsortdue(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
 	
-		ArrayList<Task> Rtemp = new ArrayList<Task>();
-	
+		ArrayList<Task> Rtemp = tasklist;
+		ArrayList<Task> R2Temp = new ArrayList<Task>();
+
 		MergeSort.sort(temp);
-	
-		for(int i = 0; i < tasklist.size(); i++) {
-			Rtemp.add(tasklist.get(i));
-		}
-	
+
 		for(int i = 0; i < temp.size(); i++) {
-	
+
 			for(int j = 0; j < Rtemp.size(); j++) {
-	
-				if( temp.get(i) == Rtemp.get(j).getDue() ) {
-	
-					tasklist.set(i, Rtemp.get(j));
-	
+
+				if( temp.get(i) == Rtemp.get(j).getDifficulty() ) {
+					
+					R2Temp.add(Rtemp.get(j));
+					System.out.println(tasklist);
 					break;
 
 				}
-	
+
 			}
 		}
-	
+		
+		tasklist = R2Temp;
 	}
 
 	private int taskComparator(Task a, Task b, IntSupplier sa, IntSupplier sb)
