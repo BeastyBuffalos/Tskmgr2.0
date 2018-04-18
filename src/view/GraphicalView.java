@@ -30,9 +30,15 @@ import java.util.ListIterator;
 import model.Task;
 
 public class GraphicalView {
-	
-	private TaskMgrDriver driver;	
+	private TaskMgrDriver driver;
 	private JFrame frame;
+	
+	public GraphicalView(TaskMgrDriver driver) {
+		this.driver = driver;
+		tasklist = makeTaskList();
+		existingtasks = makeExistingTasksPane();
+		initialize();
+	}
 	
 	private JPanel mainmenu = new JPanel();
 	{
@@ -46,9 +52,19 @@ public class GraphicalView {
 	
 	private JPanel newtasks = makeTaskCreation();
 	
-	public GraphicalView(TaskMgrDriver driver) {
-		this.driver = driver;
-		initialize();
+	private JPanel tasklist;
+	private JPanel existingtasks;
+	
+	private JPanel makeExistingTasksPane() 
+	{
+		JPanel existingTasks = new JPanel();
+		existingTasks.setLayout(new BoxLayout(existingTasks, BoxLayout.Y_AXIS));
+		existingTasks.add(makeExistingTasksWelcomeText());
+		existingTasks.add(makeExistingTasksBackButton());
+		existingTasks.add(tasklist);
+		existingTasks.add(makeRemoveAllTasks());
+		existingTasks.validate();
+		return existingTasks;
 	}
 
 	
@@ -56,21 +72,19 @@ public class GraphicalView {
 	{
 		frame = new JFrame("Task Manager 2.0");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel contentPane = new JPanel();
-		contentPane.setLayout(new BorderLayout());
 		frame.setSize(1200, 800);
+<<<<<<< HEAD
 		
 //		JPanel dropdown = makeDropDownMenu();
 //		contentPane.add(dropdown, BorderLayout.NORTH);
 //		//unsorted code
 		Color backCol = new Color(200, 210, 230);
+=======
+>>>>>>> master
 		frame.setLayout(new CardLayout());
 		
 		//set up contents of the window
 		welcomePane(null);
-		
-		//finalization code
-		frame.setVisible(true);
 	}
 
 	private void welcomePane(ActionEvent ae)
@@ -89,12 +103,22 @@ public class GraphicalView {
 		frame.setContentPane(newtasks);
 		frame.setVisible(true);
 	}
+	
+	private void existingTasksPane(ActionEvent ae) {
+
+		//initialization code
+		frame.setVisible(false);
+		tasklist = makeTaskList();
+		existingtasks.validate();
+		frame.setContentPane(existingtasks);
+		frame.setVisible(true);
+	}
 
 	private JPanel makeDropDownMenu()
 	{
 		//dropdown menu code
 		String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
-		JComboBox changescreen = new JComboBox(switchit);
+		JComboBox<String> changescreen = new JComboBox<String>(switchit);
 		changescreen.setSelectedIndex(0);
 		//changescreen.addActionListener(this);
 		
@@ -105,6 +129,7 @@ public class GraphicalView {
 		
 		changescreen.addActionListener((event) ->
 		{
+<<<<<<< HEAD
 			
 			/*
 			 * newtask.addActionListener(this::taskCreationPane);
@@ -124,6 +149,17 @@ public class GraphicalView {
 	
 	
 	
+=======
+			JComboBox<String> cd = (JComboBox<String>)event.getSource();
+			Object menu = cd.getSelectedItem();
+			if(menu.equals("Main Menu")) {
+				welcomePane(null);
+			} else if ( menu.equals("New Task")) {
+				taskCreationPane(null);
+			} else if ( menu.equals("Edit Tasks")) {
+				existingTasksPane(null);			
+			}	
+>>>>>>> master
 		});
 	
 		
@@ -177,7 +213,7 @@ public class GraphicalView {
 		buttons.add(newtask);
 		buttons.add(existing);
 		newtask.addActionListener(this::taskCreationPane);
-		existing.addActionListener(this::makeExistingTasksPanel);
+		existing.addActionListener(this::existingTasksPane);
 		return buttons;
 	}
 	
@@ -342,6 +378,7 @@ public class GraphicalView {
 		return newtaskPanel;
 	}
 	
+<<<<<<< HEAD
 	private void makeExistingTasksPanel(ActionEvent ae) {
 
 			//initialization code
@@ -434,8 +471,67 @@ public class GraphicalView {
 						break;
 					}
 
+=======
+	private JPanel makeExistingTasksBackButton()
+	{
+		JPanel back = new JPanel();
+		
+		JButton backtomenu = new JButton("Back To Main Menu");
+		backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 24));
+		backtomenu.addActionListener(this::welcomePane);
+		back.add(backtomenu);
+		return back;
+	}
+	
+	private JPanel makeExistingTasksWelcomeText()
+	{
+		JPanel weltxt1 = new JPanel();
+		
+		JLabel welcome1 = new JLabel("Here are the Existing Tasks. Please choose which one "
+				+ "you wish to view by typing in the task name in the given text box.");
+		
+		welcome1.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+		weltxt1.add(welcome1);
+		return weltxt1;
+	}
+	
+	private JPanel makeTaskList()
+	{
+		//task list code
+		Task[] switchit = new Task[driver.numberOfTasks()];
+		int i = 0;
+		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
+		{
+			switchit[i] = tasks.next();
+		}
+		JComboBox<Task> changetask = new JComboBox<Task>(switchit);
+		changetask.setSelectedIndex(-1);
+		changetask.addActionListener((e) -> {
+			Task chosentask = null;
+			int j = 0;
+			Object item = changetask.getSelectedItem();
+			for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); j++)
+			{
+				Task t = tasks.next();
+				if (t.getName() == item){
+					System.out.println(item + " item");
+					chosentask = t;
+					break;
+>>>>>>> master
 				}
+			}
+			//ENTER NEW PAGE SWITCH INFO HERE FOR EDITING TASKS 
+			//pass the chosentask variable as the argument for the task to edit
+		});
+		
+		JPanel tasks = new JPanel();
+		
+		tasks.setLayout(new BoxLayout(tasks, BoxLayout.Y_AXIS));
+		
+		tasks.add(changetask);
+		return tasks;
 
+<<<<<<< HEAD
 			});
 			
 			JLabel tasklistgroup = new JLabel("Task List: ");
@@ -495,17 +591,31 @@ public class GraphicalView {
 			contentpane.validate();
 			frame.setContentPane(contentpane);
 			frame.setVisible(true);
+=======
+>>>>>>> master
 	}
 	
-	private JPanel makeBackButton()
+	private JPanel makeRemoveAllTasks()
 	{
-		JPanel back = new JPanel();
+		//remove tasks code
+		JPanel removetasks = new JPanel();
+
+		JButton removeAllTasks = new JButton("Remove All Tasks");
+		removeAllTasks.setFont(removeAllTasks.getFont().deriveFont(Font.BOLD, 24));
 		
-		JButton backtomenu = new JButton("Back To Main Menu");
-		backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 24));
-		backtomenu.addActionListener(this::welcomePane);
-		back.add(backtomenu);
-		return back;
+		
+		removetasks.add(removeAllTasks);
+		
+		removeAllTasks.addActionListener( (ActionEvent e) -> {
+			ListIterator<Task> tasklist = driver.getTasks();
+			while(tasklist.hasNext())
+			{
+				Task t = tasklist.next();
+				tasklist = driver.removeTask(t);
+			}
+			existingTasksPane(null);
+		});
+		return removetasks;
 	}
 
 	

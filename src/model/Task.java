@@ -157,6 +157,9 @@ public class Task implements Serializable {
 	public int getDueDateOverride(){
 		return newDueDate;
 	}
+	
+	public String toString() { return name; }
+	
 	void setMoved(boolean moved)
 	{
 		this.moved = moved;
