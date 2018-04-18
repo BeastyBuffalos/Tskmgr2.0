@@ -80,7 +80,7 @@ public class TaskList{
 
 	private void countsortdiff(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
 
-		ArrayList<Task> Rtemp = new ArrayList<Task>();
+		ArrayList<Task> Rtemp = new ArrayList<Task>(0);
 
 		MergeSort.sort(temp);
 
@@ -97,7 +97,7 @@ public class TaskList{
 				if( temp.get(i) == Rtemp.get(j).getDifficulty() ) {
 
 					tasklist.set(i, Rtemp.get(j));
-
+					break;
 				}
 
 			}
@@ -140,7 +140,7 @@ public class TaskList{
 				if( temp.get(i) == Rtemp.get(j).getHours() ) {
 
 					tasklist.set(i, Rtemp.get(j));
-
+					break;
 				}
 
 			}
@@ -167,7 +167,7 @@ public class TaskList{
 				if( temp.get(i) == Rtemp.get(j).getDue() ) {
 
 					tasklist.set(i, Rtemp.get(j));
-
+					break;
 				}
 
 			}
