@@ -423,7 +423,7 @@ public class GraphicalView {
 				{
 					Task t = tasks.next();
 					if (t.getName() == item){
-						System.out.println(item + " chosen");
+						//System.out.println(item + " chosen");
 						chosentask = t;
 						diffField.setText(Integer.toString(chosentask.getDifficulty()));
 						nameField.setText(chosentask.getName());
