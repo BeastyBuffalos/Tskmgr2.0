@@ -73,6 +73,7 @@ public class TaskList{
 			tempdue.add(tasklist.get(i).getDue());
 
 		}
+		
 		countsortdiff(tasklist, tempdiff);
 		countsorthour(tasklist, temphou);
 		countsortdue(tasklist, tempdue);
@@ -83,8 +84,6 @@ public class TaskList{
 		ArrayList<Task> Rtemp = new ArrayList<Task>();
 
 		MergeSort.sort(temp);
-
-	
 
 		for(int i = 0; i < tasklist.size(); i++) {
 			Rtemp.add(tasklist.get(i));
@@ -106,6 +105,59 @@ public class TaskList{
 		Collections.sort(tasklist, Collections.reverseOrder(this::compareDiff));
 	}
 	
+	private void countsorthour(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
+	
+		ArrayList<Task> Rtemp = new ArrayList<Task>();
+	
+		MergeSort.sort(temp);
+	
+	
+		for(int i = 0; i < tasklist.size(); i++) {
+			Rtemp.add(tasklist.get(i));
+		}
+	
+		for(int i = 0; i < temp.size(); i++) {
+	
+			for(int j = 0; j < Rtemp.size(); j++) {
+	
+				if( temp.get(i) == Rtemp.get(j).getHours() ) {
+	
+					tasklist.set(i, Rtemp.get(j));
+	
+				}
+	
+			}
+		}
+	
+		Collections.sort(tasklist, Collections.reverseOrder(this::compareHour));
+		
+	}
+
+	private void countsortdue(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
+	
+		ArrayList<Task> Rtemp = new ArrayList<Task>();
+	
+		MergeSort.sort(temp);
+	
+		for(int i = 0; i < tasklist.size(); i++) {
+			Rtemp.add(tasklist.get(i));
+		}
+	
+		for(int i = 0; i < temp.size(); i++) {
+	
+			for(int j = 0; j < Rtemp.size(); j++) {
+	
+				if( temp.get(i) == Rtemp.get(j).getDue() ) {
+	
+					tasklist.set(i, Rtemp.get(j));
+	
+				}
+	
+			}
+		}
+	
+	}
+
 	private int taskComparator(Task a, Task b, IntSupplier sa, IntSupplier sb)
 	{
 		return (sa.getAsInt() > sb.getAsInt()) ? -1 : 
@@ -121,60 +173,6 @@ public class TaskList{
 	{
 		return taskComparator(a, b, a::getHours, b::getHours);
 	}
-
-	private void countsorthour(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
-
-		ArrayList<Task> Rtemp = new ArrayList<Task>();
-
-		MergeSort.sort(temp);
-
-
-		for(int i = 0; i < tasklist.size(); i++) {
-			Rtemp.add(tasklist.get(i));
-		}
-
-		for(int i = 0; i < temp.size(); i++) {
-
-			for(int j = 0; j < Rtemp.size(); j++) {
-
-				if( temp.get(i) == Rtemp.get(j).getHours() ) {
-
-					tasklist.set(i, Rtemp.get(j));
-
-				}
-
-			}
-		}
-
-		Collections.sort(tasklist, Collections.reverseOrder(this::compareHour));
-		
-	}
-
-	private void countsortdue(ArrayList<Task> tasklist, ArrayList<Integer> temp) {
-
-		ArrayList<Task> Rtemp = new ArrayList<Task>();
-
-		MergeSort.sort(temp);
-
-		for(int i = 0; i < tasklist.size(); i++) {
-			Rtemp.add(tasklist.get(i));
-		}
-
-		for(int i = 0; i < temp.size(); i++) {
-
-			for(int j = 0; j < Rtemp.size(); j++) {
-
-				if( temp.get(i) == Rtemp.get(j).getDue() ) {
-
-					tasklist.set(i, Rtemp.get(j));
-
-				}
-
-			}
-		}
-
-	}
-
 
 	public void overrideOrder(int placement){
 

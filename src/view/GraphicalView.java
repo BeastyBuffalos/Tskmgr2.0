@@ -60,9 +60,9 @@ public class GraphicalView {
 		contentPane.setLayout(new BorderLayout());
 		frame.setSize(1200, 800);
 		
-		JPanel dropdown = makeDropDownMenu();
-		contentPane.add(dropdown, BorderLayout.NORTH);
-		//unsorted code
+//		JPanel dropdown = makeDropDownMenu();
+//		contentPane.add(dropdown, BorderLayout.NORTH);
+//		//unsorted code
 		Color backCol = new Color(200, 210, 230);
 		frame.setLayout(new CardLayout());
 		
@@ -105,14 +105,21 @@ public class GraphicalView {
 		
 		changescreen.addActionListener((event) ->
 		{
-			JComboBox cd = (JComboBox)event.getSource();
-			Object menu = cd.getSelectedItem();
-			if(menu.equals("Main Menu")) {
-				welcomePane(null);
-			} else if ( menu.equals("New Task")) {
-				taskCreationPane(null);
-			} else if ( menu.equals("Edit Tasks")) {
-				makeExistingTasksPanel(null);			
+			
+			/*
+			 * newtask.addActionListener(this::taskCreationPane);
+			 * existing.addActionListener(this::makeExistingTasksPanel); 
+			 */
+			Object menu = changescreen.getSelectedItem();
+			if(menu == "Main Menu") {
+				changescreen.addActionListener(this::welcomePane);
+				//welcomePane(null);
+			} else if ( menu == "New Task") {
+				//taskCreationPane(null);
+				changescreen.addActionListener(this::taskCreationPane);
+			} else if ( menu == "Edit Tasks") {
+				changescreen.addActionListener(this::makeExistingTasksPanel);
+				//makeExistingTasksPanel(null);			
 			}
 	
 	
@@ -286,6 +293,7 @@ public class GraphicalView {
 		dropdown.add(fill5);
 		JLabel taskAdded = new JLabel("");
 		taskAdded.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		
 		dropdown.add(taskAdded);
 
 		
@@ -327,7 +335,7 @@ public class GraphicalView {
 		
 		//finalization code
 		newtaskPanel.add(tasktypes, BorderLayout.CENTER);
-	//	newtaskPanel.add(dropdown, BorderLayout.NORTH);
+		newtaskPanel.add(dropdown, BorderLayout.NORTH);
 		newtaskPanel.add(enter, BorderLayout.SOUTH);
 		newtaskPanel.add(space, BorderLayout.EAST);
 		newtaskPanel.validate();
@@ -342,14 +350,6 @@ public class GraphicalView {
 			//contentpane code
 			JPanel contentpane = new JPanel();
 			contentpane.setLayout(new BoxLayout(contentpane, BoxLayout.Y_AXIS));
-			JPanel weltxt1 = new JPanel();
-			
-			JLabel welcome1 = new JLabel("Here are the Existing Tasks. Please choose which one "
-					+ "you wish to view by typing in the task name in the given text box.");
-			
-			welcome1.setFont(new Font("Times New Roman", Font.PLAIN, 24));
-			
-			//JPanel buttons1 = new JPanel();
 			
 			//TASK FIELDS
 			JPanel panel = new JPanel();
@@ -404,14 +404,13 @@ public class GraphicalView {
 			space.setFont(new Font("Times New Roman", Font.PLAIN, 90));
 			
 			
-			weltxt1.add(welcome1);
 			
 			String[] switchit = new String[100];
 			int i = 0;
 			for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
 			{
 				Task t = tasks.next();
-				System.out.println(t.getName());
+				//System.out.println(t.getName());
 				switchit[i] = t.getName();
 			}
 
@@ -425,7 +424,7 @@ public class GraphicalView {
 				{
 					Task t = tasks.next();
 					if (t.getName() == item){
-						System.out.println(item + " chosen");
+						//System.out.println(item + " chosen");
 						chosentask = t;
 						diffField.setText(Integer.toString(chosentask.getDifficulty()));
 						nameField.setText(chosentask.getName());
@@ -438,6 +437,10 @@ public class GraphicalView {
 				}
 
 			});
+			
+			JLabel tasklistgroup = new JLabel("Task List: ");
+			tasklistgroup.setFont(newTaskFont);
+			panel.add(tasklistgroup);
 			panel.add(changetask);
 			
 			JPanel tasks = new JPanel();
@@ -459,9 +462,8 @@ public class GraphicalView {
 			
 			
 			
-			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-			contentpane.add(weltxt1);
-			
+			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));	
+	
 			JPanel textme = new JPanel();
 	
 			JButton removeAllTasks = new JButton("Remove All Tasks");
@@ -481,34 +483,9 @@ public class GraphicalView {
 				makeExistingTasksPanel(null);
 			});
 			
-<<<<<<< HEAD
-
-=======
->>>>>>> master
-			JPanel back = new JPanel();
-			
-			JButton backtomenu = new JButton("Back To Main Menu");
-			backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 24));
-			
-			back.add(backtomenu);
-<<<<<<< HEAD
-
-			//finalization code
-		//	JPanel dropdown = makeDropDownMenu();
-			//contentpane.add(dropdown);
-			contentpane.add(weltxt1);
-
-			contentpane.add(back);
-			
-
-=======
-			
-			contentpane.add(back);
-			
 			contentpane.add(panel);
->>>>>>> master
+
 			//finalization code
-			contentpane.add(weltxt1);
 			contentpane.add(makeBackButton());
 
 			contentpane.add(tasks);
@@ -531,147 +508,7 @@ public class GraphicalView {
 		return back;
 	}
 
-	private void edittasks(TaskMgrDriver driver2) {
-		
-		
-		JFrame tester = new JFrame();
-		
-		//for( int i = 0; i < driver2.getTasks().)
-		
-//		String name = new String("Task Name");
-//		
-//		JLabel name1 = new JLabel(name);
-		
-		Font newTaskFont = new Font("Times New Roman", Font.PLAIN, 32);
-		
-		//JPanel contentpane = (JPanel) frame.getContentPane();
-		
-		JPanel windowpanel1 = new JPanel();
-		windowpanel1.setLayout(new BorderLayout());
-
-		JPanel tasktypes = new JPanel();
-		tasktypes.setLayout(new GridLayout(6,2, 10, 40));
-		tasktypes.setPreferredSize(new Dimension((int)10,10));
-		
-		//TASK FIELDS
-		
-		// name
-		JLabel name2 = new JLabel("The Name of the Task: ", SwingConstants.RIGHT);
-		JTextField listen5 = new JTextField("The Name Of The Task");
-				
-		name2.setFont(newTaskFont);
-		listen5.setFont(newTaskFont);
-						
-		tasktypes.add(name2);
-		tasktypes.add(listen5);
-				
-		
-		// title
-		JLabel newtask = new JLabel("<html>Please change the information, that you wish to edit, in the appropriate boxes. 	<br/> 	 "
-				+ "<br/>		<html>", SwingConstants.CENTER);
-		newtask.setFont(new Font("Times New Roman", Font.PLAIN, 40));
-		
-		// due date
-		JLabel dueDate = new JLabel("The Date Due: ", SwingConstants.RIGHT);
-		JTextField listen1 = new JTextField("The Current Date It Is Due");
-		
-		dueDate.setFont(newTaskFont);
-		listen1.setFont(newTaskFont);
-		
-		tasktypes.add(dueDate);
-		tasktypes.add(listen1);
-		
-		// difficulty
-		JLabel difficulty = new JLabel("How You Would Rate It's Difficulty: ", SwingConstants.RIGHT);
-		JTextField listen2 = new JTextField("The Current Difficulty Rating");
-		
-		difficulty.setFont(newTaskFont);
-		listen2.setFont(newTaskFont);
-
-
-		
-		tasktypes.add(difficulty);
-		tasktypes.add(listen2);
-		
-		
-		// hours
-		JLabel hours = new JLabel("How Many Hours It Will Take To Finish: ", SwingConstants.RIGHT);
-		JTextField listen3 = new JTextField("The Current Amount of Hours It Will Take");
-		
-		hours.setFont(newTaskFont);
-		listen3.setFont(newTaskFont);
-		
-		tasktypes.add(hours);
-		tasktypes.add(listen3);
 	
-		
-		// type
-		JLabel type = new JLabel("The Type of Task: ", SwingConstants.RIGHT);
-		JTextField listen4 = new JTextField("The Current Type of Task");
-		
-		type.setFont(newTaskFont);
-		listen4.setFont(newTaskFont);
-		
-		tasktypes.add(type);
-		tasktypes.add(listen4);
-		
-		JLabel space = new JLabel("   				", SwingConstants.RIGHT);
-		space.setFont(new Font("Times New Roman", Font.PLAIN, 90));
-		
-		// BUTTONS
-		JPanel enter = new JPanel();
-		
-		JButton enterbutton = new JButton("Enter");
-		JButton backtomenu = new JButton("Back");
-		
-		enter.setLayout(new FlowLayout(FlowLayout.CENTER, 45, 5));
-		
-        enterbutton.setFont(enterbutton.getFont().deriveFont(Font.BOLD, 30));
-		backtomenu.setFont(backtomenu.getFont().deriveFont(Font.BOLD, 30));
-		
-		enter.add(enterbutton);
-		enter.add(backtomenu);
-		
-		
-		windowpanel1.add(tasktypes, BorderLayout.CENTER);
-		windowpanel1.add(newtask, BorderLayout.NORTH);
-		windowpanel1.add(enter, BorderLayout.SOUTH);
-		windowpanel1.add(space, BorderLayout.EAST);
-		
-		tester.add(windowpanel1);
-		
-		tester.setVisible(true);
-		tester.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//contentpane.add(windowpanel1);
-		
-		enterbutton.addActionListener((event) ->
-		{
-				//use the getText to get the text for the new task
-				//System.out.println(listen1.getText());
-				try {
-					int duedate = Integer.valueOf(listen1.getDocument().getText(0, listen1.getDocument().getLength()));
-					int diff = Integer.valueOf(listen2.getDocument().getText(0, listen2.getDocument().getLength()));
-					int hourst = Integer.valueOf(listen3.getDocument().getText(0, listen3.getDocument().getLength()));
-					String typet = listen4.getDocument().getText(0, listen4.getDocument().getLength());
-					String namet = listen5.getDocument().getText(0, listen5.getDocument().getLength());
-					
-				//	driver.editTask(driver, name, typet, duedate, hourst, false, diff);
-					
-					listen1.setText("");
-					listen2.setText("");
-					listen3.setText("");
-					listen4.setText("");
-					listen5.setText("");
-					
-				} catch (BadLocationException e) {
-					e.printStackTrace();
-				}
-		
-		
-		});
-		
-		
-	}
 		
 	
 }
