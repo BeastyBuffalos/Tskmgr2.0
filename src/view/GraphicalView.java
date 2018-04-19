@@ -468,7 +468,7 @@ public class GraphicalView {
 
 		panel.add(changetask);
 
-
+		
 	//	JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
 
 		movepos.setFont(new Font("Times New Roman", Font.PLAIN, 18));
@@ -477,6 +477,7 @@ public class GraphicalView {
 		typewhere.setMaximumSize(typewhere.getPreferredSize());
 		typewhere.setEnabled(false);
 
+		
 		movepos.setAlignmentX(Component.LEFT_ALIGNMENT);
 		
 		JPanel move = new JPanel();
@@ -527,7 +528,7 @@ public class GraphicalView {
 				String typet = typeField.getDocument().getText(0, typeField.getDocument().getLength());
 				String namet = nameField.getDocument().getText(0, nameField.getDocument().getLength());
 				driver.editTask(chosentask, namet, typet, duedate, hourst, false, diff);
-				if( !typewhere.isEditable() && !(typewhere.getText() == "" )) {
+				if( !typewhere.isEditable() && !typewhere.equals("") ) {
 					int wheres = Integer.parseInt(typewhere.getDocument().getText(0, typewhere.getDocument().getLength()));
 					driver.overrideTask(wheres, chosentask);
 					
@@ -574,12 +575,10 @@ public class GraphicalView {
 
 		
 
-
-		panel.add(movepos);
-		panel.add(typewhere);
-		panel.add(delete);
-		panel.add(enterbutton);
-
+//		panel.add(movepos);
+//		panel.add(typewhere);
+//		panel.add(delete);
+//		panel.add(enterbutton);
 
 		JLabel tasklistlist = new JLabel("Task List");
 		tasklistlist.setFont(new Font("Times New Roman", Font.BOLD, 30));
