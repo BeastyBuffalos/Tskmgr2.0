@@ -572,18 +572,12 @@ public class GraphicalView {
 		space8.setFont(new Font("Times New Roman", Font.PLAIN, 10));
 		space9.setFont(spaceFont);
 
-		
-
-<<<<<<< HEAD
 
 		panel.add(movepos);
 		panel.add(typewhere);
 		panel.add(delete);
 		panel.add(enterbutton);
-
-=======
->>>>>>> 8d90cd478bed15f2ee5b3481a520f1962526c7f4
-
+		
 		JLabel tasklistlist = new JLabel("Task List");
 		tasklistlist.setFont(new Font("Times New Roman", Font.BOLD, 30));
 
