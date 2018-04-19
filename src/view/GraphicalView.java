@@ -467,12 +467,7 @@ public class GraphicalView {
 
 		panel.add(changetask);
 
-		
-<<<<<<< HEAD
-	//	JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
 
-=======
->>>>>>> jhschult
 		movepos.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		typewhere.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		typewhere.setMaximumSize(typewhere.getPreferredSize());
@@ -574,16 +569,7 @@ public class GraphicalView {
 		space8.setFont(new Font("Times New Roman", Font.PLAIN, 10));
 		space9.setFont(spaceFont);
 
-<<<<<<< HEAD
-		
 
-//		panel.add(movepos);
-//		panel.add(typewhere);
-//		panel.add(delete);
-//		panel.add(enterbutton);
-
-=======
->>>>>>> jhschult
 		JLabel tasklistlist = new JLabel("Task List");
 		tasklistlist.setFont(new Font("Times New Roman", Font.BOLD, 30));
 
