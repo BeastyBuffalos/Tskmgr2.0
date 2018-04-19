@@ -429,6 +429,25 @@ public class GraphicalView {
 			}
 		});
 
+		
+		JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
+
+		JTextField typewhere = new JTextField("");
+		typewhere.setEnabled(false);
+		
+		
+		movepos.addActionListener((ActionEvent e) -> {
+			
+			if( movepos.isSelected()) {
+				typewhere.setEnabled(true);
+			
+			} else {
+				typewhere.setEnabled(false);
+			}
+		
+		});
+		
+		
 		JButton enterbutton = new JButton("Enter");
 		enterbutton.addActionListener((ActionEvent e) -> {
 			try {
@@ -447,6 +466,11 @@ public class GraphicalView {
 				String typet = typeField.getDocument().getText(0, typeField.getDocument().getLength());
 				String namet = nameField.getDocument().getText(0, nameField.getDocument().getLength());
 				driver.editTask(chosentask, namet, typet, duedate, hourst, false, diff);
+				if( !typewhere.equals(null) ) {
+					int wheres = Integer.parseInt(typewhere.getDocument().getText(0, typewhere.getDocument().getLength()));
+					driver.overrideTask(wheres, chosentask);
+				}
+					
 				makeExistingTasksPanel(null);
 				changetask.setSelectedItem(item);
 			} catch (BadLocationException f) {
@@ -477,24 +501,6 @@ public class GraphicalView {
 		panel.add(type);
 		panel.add(typeField);
 
-		JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
-
-		JTextField typewhere = new JTextField("");
-		typewhere.setEnabled(false);
-		
-		
-		movepos.addActionListener((ActionEvent e) -> {
-			
-			if( movepos.isSelected()) {
-				typewhere.setEnabled(true);
-			
-			} else {
-				typewhere.setEnabled(false);
-			}
-		
-		});
-		
-		
 		
 		panel.add(movepos);
 		panel.add(typewhere);
