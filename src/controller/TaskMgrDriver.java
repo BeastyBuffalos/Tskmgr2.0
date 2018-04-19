@@ -93,6 +93,13 @@ public class TaskMgrDriver {
 		return tasks.getListIterator();
 	}
 	
+	public ListIterator<Task> deleteTask(Task task) {
+		
+		tasks.deleteTask(task);
+		saveTaskList();
+		return getTasks();
+		
+	}
 	
 	public ListIterator<Task> editTask(Task task, 
 			String name1, String type1, int due, int hours, boolean comp, int diff)

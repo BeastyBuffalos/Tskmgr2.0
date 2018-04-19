@@ -46,6 +46,12 @@ public class TaskList{
 		return updated;
 	}
 
+	public void deleteTask(Task task) {
+		
+		tasks.remove(task);
+		radixsort(tasks);
+		
+	}
 
 	private void radixsort(ArrayList<Task> tasklist) {
 
@@ -212,6 +218,8 @@ public class TaskList{
 			task.setHrsOverride(posthrs - hrsdelta);
 			task.setDifficultyOverride(postdiff - diffdelta);
 		}
+//		task.setOverride(true);
+//		radixsort(tasks);
 	}
 
 	public void save(String path)
