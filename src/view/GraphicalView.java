@@ -13,6 +13,7 @@ import javax.swing.text.BadLocationException;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Checkbox;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -28,6 +29,7 @@ import javafx.scene.layout.Border;
 import java.util.ListIterator;
 
 import model.Task;
+import model.TaskList;
 
 public class GraphicalView {
 
@@ -296,14 +298,27 @@ public class GraphicalView {
 				int hourst = Integer.valueOf(hoursField.getDocument().getText(0, hoursField.getDocument().getLength()));
 				String typet = typeField.getDocument().getText(0, typeField.getDocument().getLength());
 				String namet = nameField.getDocument().getText(0, nameField.getDocument().getLength());
-				driver.addTask(namet, typet, duedate, hourst, false, diff);
+				int i = 0;
+				boolean isOriginal = true;
+				for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++){
+					Task t = tasks.next();
+					if (namet.equals(t.getName()))
+						isOriginal = false;
+					taskAdded.setText("Error.");
+					
+					nameField.setText("");
+				}
+				if (isOriginal){
+					driver.addTask(namet, typet, duedate, hourst, false, diff);
+					taskAdded.setText("Task Added");
+					dueField.setText("");
+					diffField.setText("");
+					hoursField.setText("");
+					typeField.setText("");
+					nameField.setText("");
+				}
 
-				dueField.setText("");
-				diffField.setText("");
-				hoursField.setText("");
-				typeField.setText("");
-				nameField.setText("");
-				taskAdded.setText("Task Added");
+				//taskAdded.setText("Task Added");
 				int delay = 3000;
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
@@ -331,6 +346,19 @@ public class GraphicalView {
 		return newtaskPanel;
 	}
 
+	private JComboBox renderDrop(int currentTask){
+		String[] switchit = new String[100];
+		int i = 0;
+		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
+		{
+			Task t = tasks.next();
+			System.out.println(t.getName());
+			switchit[i] = t.getName();
+		}
+		JComboBox changetask = new JComboBox(switchit);
+		changetask.setSelectedIndex(currentTask);
+		return changetask;
+	}
 	private void makeExistingTasksPanel(ActionEvent ae) {
 
 		//initialization code
@@ -403,17 +431,7 @@ public class GraphicalView {
 
 		weltxt1.add(welcome1);
 
-		String[] switchit = new String[100];
-		int i = 0;
-		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
-		{
-			Task t = tasks.next();
-			System.out.println(t.getName());
-			switchit[i] = t.getName();
-		}
-		Task globtask = null;
-		JComboBox changetask = new JComboBox(switchit);
-		changetask.setSelectedIndex(-1);
+		JComboBox changetask = renderDrop(-1);
 		changetask.addActionListener((ActionEvent e) -> {
 			Task chosentask = null;
 			int j = 0;
@@ -431,10 +449,11 @@ public class GraphicalView {
 					typeField.setText(chosentask.getType());
 					break;
 				}
-
 			}
 		});
-
+		Checkbox overrideButton = new Checkbox();
+		panel.add(changetask);
+		panel.add(overrideButton);
 		JButton enterbutton = new JButton("Enter");
 		enterbutton.addActionListener((ActionEvent e) -> {
 			try {
@@ -445,6 +464,7 @@ public class GraphicalView {
 					Task t = tasks.next();
 					if (t.getName() == item){
 						chosentask = t;
+						break;
 					}
 				}
 				int duedate = Integer.valueOf(dueField.getDocument().getText(0, dueField.getDocument().getLength()));
@@ -454,13 +474,12 @@ public class GraphicalView {
 				String namet = nameField.getDocument().getText(0, nameField.getDocument().getLength());
 				driver.editTask(chosentask, namet, typet, duedate, hourst, false, diff);
 				makeExistingTasksPanel(null);
-				changetask.setSelectedItem(item);
 			} catch (BadLocationException f) {
 				f.printStackTrace();
 			}
 
 		});
-		panel.add(changetask);
+		
 
 		JPanel tasks = new JPanel();
 

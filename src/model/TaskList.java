@@ -47,7 +47,6 @@ public class TaskList{
 	}
 
 
-
 	private void radixsort(ArrayList<Task> tasklist) {
 
 		ArrayList<Integer> tempdiff = new ArrayList<Integer>(); 
@@ -163,20 +162,20 @@ public class TaskList{
 	}
 
 
-	public void overrideOrder(int placement){
+	public void overrideOrder(int placement, Task task){
 
 		Task prior, post;
 
 		if (placement == 0){
-			tasks.get(placement).setDueDateOverride(0);
-			tasks.get(placement).setHrsOverride(9);
-			tasks.get(placement).setDifficultyOverride(9);
+			task.setDueDateOverride(0);
+			task.setHrsOverride(999);
+			task.setDifficultyOverride(999);
 		}
 
-		else if (placement == tasks.size()){
-			tasks.get(placement).setDueDateOverride(9);
-			tasks.get(placement).setHrsOverride(0);
-			tasks.get(placement).setDifficultyOverride(0);
+		else if (placement == tasks.size()-1){
+			task.setDueDateOverride(9);
+			task.setHrsOverride(0);
+			task.setDifficultyOverride(0);
 		}
 
 		else{
@@ -206,9 +205,9 @@ public class TaskList{
 			int hrsdelta = (posthrs - prihrs) / 2;
 			int duedelta = (postdue - pridue) / 2;
 
-			tasks.get(placement).setDueDateOverride(postdue - duedelta);
-			tasks.get(placement).setHrsOverride(posthrs - hrsdelta);
-			tasks.get(placement).setDifficultyOverride(postdiff - diffdelta);
+			task.setDueDateOverride(postdue - duedelta);
+			task.setHrsOverride(posthrs - hrsdelta);
+			task.setDifficultyOverride(postdiff - diffdelta);
 		}
 	}
 
