@@ -7,14 +7,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.text.BadLocationException;
-
-import com.sun.webkit.PopupMenu;
-
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -25,12 +21,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import controller.TaskMgrDriver;
-import javafx.scene.layout.Border;
-
 import java.util.ListIterator;
-
 import model.Task;
 
 public class GraphicalView {

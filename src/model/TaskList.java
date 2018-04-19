@@ -167,13 +167,15 @@ public class TaskList{
 
 		Task prior, post;
 
-		if (placement <= 1){
+		placement -= 1;
+		
+		if (placement == 0){
 			task.setDueDateOverride(0);
 			task.setHrsOverride(999);
 			task.setDifficultyOverride(999);
 		}
 
-		else if (placement >= tasks.size()){
+		else if (placement == tasks.size()){
 			task.setDueDateOverride(9);
 			task.setHrsOverride(0);
 			task.setDifficultyOverride(0);
