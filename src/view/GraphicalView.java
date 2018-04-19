@@ -7,16 +7,13 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.text.BadLocationException;
-
-import com.sun.webkit.PopupMenu;
-
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Checkbox;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -25,13 +22,10 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import controller.TaskMgrDriver;
-import javafx.scene.layout.Border;
-
 import java.util.ListIterator;
-
 import model.Task;
+import model.TaskList;
 
 public class GraphicalView {
 
@@ -300,14 +294,27 @@ public class GraphicalView {
 				int hourst = Integer.valueOf(hoursField.getDocument().getText(0, hoursField.getDocument().getLength()));
 				String typet = typeField.getDocument().getText(0, typeField.getDocument().getLength());
 				String namet = nameField.getDocument().getText(0, nameField.getDocument().getLength());
-				driver.addTask(namet, typet, duedate, hourst, false, diff);
+				int i = 0;
+				boolean isOriginal = true;
+				for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++){
+					Task t = tasks.next();
+					if (namet.equals(t.getName()))
+						isOriginal = false;
+					taskAdded.setText("Error.");
+					
+					nameField.setText("");
+				}
+				if (isOriginal){
+					driver.addTask(namet, typet, duedate, hourst, false, diff);
+					taskAdded.setText("Task Added");
+					dueField.setText("");
+					diffField.setText("");
+					hoursField.setText("");
+					typeField.setText("");
+					nameField.setText("");
+				}
 
-				dueField.setText("");
-				diffField.setText("");
-				hoursField.setText("");
-				typeField.setText("");
-				nameField.setText("");
-				taskAdded.setText("Task Added");
+				//taskAdded.setText("Task Added");
 				int delay = 3000;
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
@@ -335,6 +342,19 @@ public class GraphicalView {
 		return newtaskPanel;
 	}
 
+	private JComboBox renderDrop(int currentTask){
+		String[] switchit = new String[100];
+		int i = 0;
+		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
+		{
+			Task t = tasks.next();
+			System.out.println(t.getName());
+			switchit[i] = t.getName();
+		}
+		JComboBox changetask = new JComboBox(switchit);
+		changetask.setSelectedIndex(currentTask);
+		return changetask;
+	}
 	private void makeExistingTasksPanel(ActionEvent ae) {
 
 		//initialization code
@@ -343,7 +363,6 @@ public class GraphicalView {
 		//contentpane code
 		JPanel contentpane = new JPanel();
 		contentpane.setLayout(new BoxLayout(contentpane, BoxLayout.Y_AXIS));
-		JPanel weltxt1 = new JPanel();
 
 		//TASK FIELDS
 		JPanel panel = new JPanel();
@@ -398,16 +417,8 @@ public class GraphicalView {
 		space.setFont(new Font("Times New Roman", Font.PLAIN, 90));
 
 
-		String[] switchit = new String[100];
-		int i = 0;
-		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
-		{
-			Task t = tasks.next();
-			switchit[i] = t.getName();
-		}
-		Task globtask = null;
-		JComboBox changetask = new JComboBox(switchit);
-		changetask.setSelectedIndex(-1);
+
+		JComboBox changetask = renderDrop(-1);
 		changetask.addActionListener((ActionEvent e) -> {
 			Task chosentask = null;
 			int j = 0;
@@ -425,10 +436,32 @@ public class GraphicalView {
 					typeField.setText(chosentask.getType());
 					break;
 				}
-
 			}
 		});
+<<<<<<< HEAD
+		panel.add(changetask);
+=======
 
+		
+		JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
+
+		JTextField typewhere = new JTextField("");
+		typewhere.setEnabled(false);
+		
+		
+		movepos.addActionListener((ActionEvent e) -> {
+			
+			if( movepos.isSelected()) {
+				typewhere.setEnabled(true);
+			
+			} else {
+				typewhere.setEnabled(false);
+			}
+		
+		});
+		
+		
+>>>>>>> jhschult
 		JButton enterbutton = new JButton("Enter");
 		enterbutton.addActionListener((ActionEvent e) -> {
 			try {
@@ -439,6 +472,7 @@ public class GraphicalView {
 					Task t = tasks.next();
 					if (t.getName() == item){
 						chosentask = t;
+						break;
 					}
 				}
 				int duedate = Integer.valueOf(dueField.getDocument().getText(0, dueField.getDocument().getLength()));
@@ -447,8 +481,12 @@ public class GraphicalView {
 				String typet = typeField.getDocument().getText(0, typeField.getDocument().getLength());
 				String namet = nameField.getDocument().getText(0, nameField.getDocument().getLength());
 				driver.editTask(chosentask, namet, typet, duedate, hourst, false, diff);
+				if( !typewhere.equals(null) ) {
+					int wheres = Integer.parseInt(typewhere.getDocument().getText(0, typewhere.getDocument().getLength()));
+					driver.overrideTask(wheres, chosentask);
+				}
+					
 				makeExistingTasksPanel(null);
-				changetask.setSelectedItem(item);
 			} catch (BadLocationException f) {
 				f.printStackTrace();
 			}
@@ -477,24 +515,6 @@ public class GraphicalView {
 		panel.add(type);
 		panel.add(typeField);
 
-		JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
-
-		JTextField typewhere = new JTextField("");
-		typewhere.setEnabled(false);
-		
-		
-		movepos.addActionListener((ActionEvent e) -> {
-			
-			if( movepos.isSelected()) {
-				typewhere.setEnabled(true);
-			
-			} else {
-				typewhere.setEnabled(false);
-			}
-		
-		});
-		
-		
 		
 		panel.add(movepos);
 		panel.add(typewhere);
@@ -523,7 +543,6 @@ public class GraphicalView {
 
 		contentpane.add(panel);
 		//finalization code
-		contentpane.add(weltxt1);
 		contentpane.add(makeBackButton());
 		contentpane.add(tasks);
 		contentpane.add(textme);
