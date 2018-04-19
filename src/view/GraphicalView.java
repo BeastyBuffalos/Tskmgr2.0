@@ -440,7 +440,7 @@ public class GraphicalView {
 		space.setFont(new Font("Times New Roman", Font.PLAIN, 90));
 
 		JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
-		JTextField typewhere = new JTextField("");
+		JTextField typewhere = new JTextField("", 5);
 		JCheckBox delete = new JCheckBox("Delete This Task?");
 		typewhere.setEnabled(false);
 
@@ -472,7 +472,7 @@ public class GraphicalView {
 	//	JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
 
 		movepos.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		//JTextField typewhere = new JTextField("", 10);
+	//	JTextField typewhere = new JTextField("", 10);
 		typewhere.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		typewhere.setMaximumSize(typewhere.getPreferredSize());
 		typewhere.setEnabled(false);
@@ -574,12 +574,15 @@ public class GraphicalView {
 
 		
 
+<<<<<<< HEAD
 
 		panel.add(movepos);
 		panel.add(typewhere);
 		panel.add(delete);
 		panel.add(enterbutton);
 
+=======
+>>>>>>> 8d90cd478bed15f2ee5b3481a520f1962526c7f4
 
 		JLabel tasklistlist = new JLabel("Task List");
 		tasklistlist.setFont(new Font("Times New Roman", Font.BOLD, 30));
