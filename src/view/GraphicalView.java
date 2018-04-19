@@ -575,10 +575,10 @@ public class GraphicalView {
 
 		
 
-		panel.add(movepos);
-		panel.add(typewhere);
-		panel.add(delete);
-		panel.add(enterbutton);
+//		panel.add(movepos);
+//		panel.add(typewhere);
+//		panel.add(delete);
+//		panel.add(enterbutton);
 
 		JLabel tasklistlist = new JLabel("Task List");
 		tasklistlist.setFont(new Font("Times New Roman", Font.BOLD, 30));
