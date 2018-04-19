@@ -526,7 +526,7 @@ public class GraphicalView {
 				String typet = typeField.getDocument().getText(0, typeField.getDocument().getLength());
 				String namet = nameField.getDocument().getText(0, nameField.getDocument().getLength());
 				driver.editTask(chosentask, namet, typet, duedate, hourst, false, diff);
-				if( !typewhere.isEditable() && typewhere.getText() != "" ) {
+				if( !typewhere.isEditable() && !(typewhere.getText() == "" )) {
 					int wheres = Integer.parseInt(typewhere.getDocument().getText(0, typewhere.getDocument().getLength()));
 					driver.overrideTask(wheres, chosentask);
 					
