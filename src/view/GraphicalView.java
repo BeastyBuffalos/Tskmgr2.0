@@ -438,9 +438,9 @@ public class GraphicalView {
 				}
 			}
 		});
-<<<<<<< HEAD
+
 		panel.add(changetask);
-=======
+
 
 		
 		JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
@@ -461,7 +461,6 @@ public class GraphicalView {
 		});
 		
 		
->>>>>>> jhschult
 		JButton enterbutton = new JButton("Enter");
 		enterbutton.addActionListener((ActionEvent e) -> {
 			try {

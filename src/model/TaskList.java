@@ -174,11 +174,8 @@ public class TaskList{
 			task.setDifficultyOverride(999);
 		}
 
-<<<<<<< HEAD
+
 		else if (placement == tasks.size()-1){
-=======
-		else if (placement == tasks.size()){
->>>>>>> jhschult
 			task.setDueDateOverride(9);
 			task.setHrsOverride(0);
 			task.setDifficultyOverride(0);
