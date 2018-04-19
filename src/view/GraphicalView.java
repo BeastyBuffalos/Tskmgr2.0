@@ -287,7 +287,6 @@ public class GraphicalView {
 		enterbutton.addActionListener((event) ->
 		{
 			//use the getText to get the text for the new task
-			//TODO make this smoother somehow? fix issues with allowed input types
 			try {
 				int duedate = Integer.valueOf(dueField.getDocument().getText(0, dueField.getDocument().getLength()));
 				int diff = Integer.valueOf(diffField.getDocument().getText(0, diffField.getDocument().getLength()));
@@ -469,10 +468,7 @@ public class GraphicalView {
 		panel.add(changetask);
 
 		
-	//	JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
-
 		movepos.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		//JTextField typewhere = new JTextField("", 10);
 		typewhere.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		typewhere.setMaximumSize(typewhere.getPreferredSize());
 		typewhere.setEnabled(false);
@@ -572,13 +568,6 @@ public class GraphicalView {
 		space7.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		space8.setFont(new Font("Times New Roman", Font.PLAIN, 10));
 		space9.setFont(spaceFont);
-
-		
-
-//		panel.add(movepos);
-//		panel.add(typewhere);
-//		panel.add(delete);
-//		panel.add(enterbutton);
 
 		JLabel tasklistlist = new JLabel("Task List");
 		tasklistlist.setFont(new Font("Times New Roman", Font.BOLD, 30));
