@@ -46,13 +46,6 @@ public class TaskList{
 		return updated;
 	}
 
-	public void deleteTask(Task task) {
-		
-		tasks.remove(task);
-		radixsort(tasks);
-		
-	}
-
 	private void radixsort(ArrayList<Task> tasklist) {
 
 		ArrayList<Integer> tempdiff = new ArrayList<Integer>(); 
