@@ -416,7 +416,9 @@ public class GraphicalView {
 		JLabel space = new JLabel("   				", SwingConstants.RIGHT);
 		space.setFont(new Font("Times New Roman", Font.PLAIN, 90));
 
-
+		JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
+		JTextField typewhere = new JTextField("");
+		typewhere.setEnabled(false);
 
 		JComboBox changetask = renderDrop(-1);
 		changetask.addActionListener((ActionEvent e) -> {
@@ -434,19 +436,14 @@ public class GraphicalView {
 					hoursField.setText(Integer.toString(chosentask.getHours()));
 					dueField.setText(Integer.toString(chosentask.getDue()));
 					typeField.setText(chosentask.getType());
+					if (chosentask.isOverride())
+						movepos.setSelected(true);
 					break;
 				}
 			}
 		});
 
 		panel.add(changetask);
-
-
-		
-		JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
-
-		JTextField typewhere = new JTextField("");
-		typewhere.setEnabled(false);
 		
 		
 		movepos.addActionListener((ActionEvent e) -> {
@@ -456,10 +453,13 @@ public class GraphicalView {
 			
 			} else {
 				typewhere.setEnabled(false);
+				
 			}
 		
 		});
 		
+		
+		//JCheckBox delete = new JCheckBox
 		
 		JButton enterbutton = new JButton("Enter");
 		enterbutton.addActionListener((ActionEvent e) -> {
@@ -483,6 +483,7 @@ public class GraphicalView {
 				if( !typewhere.equals(null) ) {
 					int wheres = Integer.parseInt(typewhere.getDocument().getText(0, typewhere.getDocument().getLength()));
 					driver.overrideTask(wheres, chosentask);
+					
 				}
 					
 				makeExistingTasksPanel(null);

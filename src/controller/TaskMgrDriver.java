@@ -104,6 +104,7 @@ public class TaskMgrDriver {
 	
 	public ListIterator<Task> overrideTask(int placement, Task task){
 		tasks.overrideOrder(placement, task);
+		task.setOverride(true);
 		saveTaskList();
 		return getTasks();
 	}
