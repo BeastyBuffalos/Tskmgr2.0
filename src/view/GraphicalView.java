@@ -7,14 +7,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.text.BadLocationException;
-
-import com.sun.webkit.PopupMenu;
-
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Checkbox;
@@ -26,12 +22,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import controller.TaskMgrDriver;
-import javafx.scene.layout.Border;
-
 import java.util.ListIterator;
-
 import model.Task;
 import model.TaskList;
 
@@ -446,7 +438,30 @@ public class GraphicalView {
 				}
 			}
 		});
+<<<<<<< HEAD
 		panel.add(changetask);
+=======
+
+		
+		JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
+
+		JTextField typewhere = new JTextField("");
+		typewhere.setEnabled(false);
+		
+		
+		movepos.addActionListener((ActionEvent e) -> {
+			
+			if( movepos.isSelected()) {
+				typewhere.setEnabled(true);
+			
+			} else {
+				typewhere.setEnabled(false);
+			}
+		
+		});
+		
+		
+>>>>>>> jhschult
 		JButton enterbutton = new JButton("Enter");
 		enterbutton.addActionListener((ActionEvent e) -> {
 			try {
@@ -466,6 +481,11 @@ public class GraphicalView {
 				String typet = typeField.getDocument().getText(0, typeField.getDocument().getLength());
 				String namet = nameField.getDocument().getText(0, nameField.getDocument().getLength());
 				driver.editTask(chosentask, namet, typet, duedate, hourst, false, diff);
+				if( !typewhere.equals(null) ) {
+					int wheres = Integer.parseInt(typewhere.getDocument().getText(0, typewhere.getDocument().getLength()));
+					driver.overrideTask(wheres, chosentask);
+				}
+					
 				makeExistingTasksPanel(null);
 			} catch (BadLocationException f) {
 				f.printStackTrace();
@@ -495,24 +515,6 @@ public class GraphicalView {
 		panel.add(type);
 		panel.add(typeField);
 
-		JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
-
-		JTextField typewhere = new JTextField("");
-		typewhere.setEnabled(false);
-		
-		
-		movepos.addActionListener((ActionEvent e) -> {
-			
-			if( movepos.isSelected()) {
-				typewhere.setEnabled(true);
-			
-			} else {
-				typewhere.setEnabled(false);
-			}
-		
-		});
-		
-		
 		
 		panel.add(movepos);
 		panel.add(typewhere);
