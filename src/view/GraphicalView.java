@@ -36,7 +36,6 @@ public class GraphicalView {
 	{
 		mainmenu.setLayout(new BorderLayout());
 		//finalization code
-		mainmenu.add(makeDropDownMenu(), BorderLayout.NORTH);
 		mainmenu.add(makeWelcomeText(), BorderLayout.CENTER);
 		mainmenu.add(makeMainButtons(), BorderLayout.SOUTH);
 		mainmenu.validate();
@@ -86,38 +85,6 @@ public class GraphicalView {
 		frame.setVisible(true);
 	}
 
-	private JPanel makeDropDownMenu()
-	{
-		//dropdown menu code
-		String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
-		JComboBox changescreen = new JComboBox(switchit);
-		changescreen.setSelectedIndex(0);
-		//changescreen.addActionListener(this);
-
-		JPanel dropdown = new JPanel();
-		dropdown.setLayout(new GridLayout(0,13));
-
-		dropdown.add(changescreen);
-
-		changescreen.addActionListener((event) ->
-		{
-			JComboBox cd = (JComboBox)event.getSource();
-			Object menu = cd.getSelectedItem();
-			if(menu.equals("Main Menu")) {
-				welcomePane(null);
-			} else if ( menu.equals("New Task")) {
-				taskCreationPane(null);
-			} else if ( menu.equals("Edit Tasks")) {
-				makeExistingTasksPanel(null);			
-			}
-
-
-
-		});
-
-
-		return dropdown;
-	}
 
 
 	private JPanel makeWelcomeText()
@@ -268,26 +235,18 @@ public class GraphicalView {
 		enter.add(enterbutton);
 		enter.add(backtomenu);		
 
-		JPanel dropdown = makeDropDownMenu();
-		JLabel fill1 = new JLabel("");
-		JLabel fill2 = new JLabel("");
-		JLabel fill3 = new JLabel("");
-		JLabel fill4 = new JLabel("");
-		JLabel fill5 = new JLabel("");
-		dropdown.add(fill1);
-		dropdown.add(fill2);
-		dropdown.add(fill3);
-		dropdown.add(fill4);
-		dropdown.add(fill5);
-		JLabel taskAdded = new JLabel("");
+		JPanel dropdown = new JPanel();
+		dropdown.setLayout(new FlowLayout());
+		
+		JLabel taskAdded = new JLabel(" ");
 		taskAdded.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		dropdown.add(taskAdded);
 
 
+		
 		enterbutton.addActionListener((event) ->
 		{
 			//use the getText to get the text for the new task
-			//TODO make this smoother somehow? fix issues with allowed input types
 			try {
 				int duedate = Integer.valueOf(dueField.getDocument().getText(0, dueField.getDocument().getLength()));
 				int diff = Integer.valueOf(diffField.getDocument().getText(0, diffField.getDocument().getLength()));
@@ -300,28 +259,32 @@ public class GraphicalView {
 					Task t = tasks.next();
 					if (namet.equals(t.getName()))
 						isOriginal = false;
-					taskAdded.setText("Error.");
+					taskAdded.setText("Error. Name already exists");
 					
 					nameField.setText("");
 				}
 				if (isOriginal){
 					driver.addTask(namet, typet, duedate, hourst, false, diff);
-					taskAdded.setText("Task Added");
+					taskAdded.setText(namet + " added");
 					dueField.setText("");
 					diffField.setText("");
 					hoursField.setText("");
 					typeField.setText("");
 					nameField.setText("");
+					
 				}
 
-				//taskAdded.setText("Task Added");
+				
+				
 				int delay = 3000;
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
-						taskAdded.setText("");
+						taskAdded.setText(" ");
 					}
 				};
-				new Timer(delay, taskPerformer).start();
+				Timer time = new Timer(delay, taskPerformer);
+				time.start();
+				
 
 			} catch (BadLocationException e) {
 				e.printStackTrace();
@@ -348,8 +311,6 @@ public class GraphicalView {
 		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
 		{
 			Task t = tasks.next();
-			System.out.println(t.getName());
-			//switchit[i] = (i+1) + ": " + t.getName();
 			switchit[i] = t.getName();
 		}
 		JComboBox changetask = new JComboBox(switchit);
@@ -440,8 +401,14 @@ public class GraphicalView {
 		space.setFont(new Font("Times New Roman", Font.PLAIN, 90));
 
 		JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
-		JTextField typewhere = new JTextField("");
-		JCheckBox delete = new JCheckBox("Delete This Task?");
+
+		JTextField typewhere = new JTextField("", 5);
+		
+		
+		
+		JButton delete = new JButton("Delete Task");
+		delete.setFont(delete.getFont().deriveFont(Font.BOLD, 24));
+		
 		typewhere.setEnabled(false);
 
 		JComboBox changetask = renderDrop(-1);
@@ -468,11 +435,8 @@ public class GraphicalView {
 
 		panel.add(changetask);
 
-		
-	//	JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
 
 		movepos.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		//JTextField typewhere = new JTextField("", 10);
 		typewhere.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		typewhere.setMaximumSize(typewhere.getPreferredSize());
 		typewhere.setEnabled(false);
@@ -483,8 +447,10 @@ public class GraphicalView {
 		JPanel move = new JPanel();
 		move.setLayout(new BoxLayout(move, BoxLayout.X_AXIS));
 		
-		JLabel spacer = new JLabel("    	");
+		JLabel spacer = new JLabel("spac");
 		spacer.setFont(newTaskFont);
+		spacer.setForeground(new Color(1, 1, 1, 0));
+
 		
 		move.add(spacer);
 		move.add(movepos);
@@ -494,6 +460,7 @@ public class GraphicalView {
 		move2.setLayout(new BorderLayout());
 		move2.add(move, BorderLayout.WEST);
 		
+				
 		
 		movepos.addActionListener((ActionEvent e) -> {
 			
@@ -507,7 +474,26 @@ public class GraphicalView {
 		
 		});
 		
-		
+		delete.addActionListener((e) -> {
+				Task chosentask = null;
+				Object item = changetask.getSelectedItem();
+				int j = 0;
+				for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); j++){
+					Task t = tasks.next();
+					if (t.getName() == item){
+						chosentask = t;
+						break;
+					}
+				}
+				driver.removeTask(chosentask);
+				
+				nameField.setText("");
+				dueField.setText("");
+				hoursField.setText("");
+				diffField.setText("");
+				typeField.setText("");
+				makeExistingTasksPanel(null);
+		});
 		
 		JButton enterbutton = new JButton("Enter");
 		enterbutton.addActionListener((ActionEvent e) -> {
@@ -533,13 +519,13 @@ public class GraphicalView {
 					driver.overrideTask(wheres, chosentask);
 					
 				}
-				if( delete.isSelected() ) {
-					driver.deleteTask(chosentask);
-					for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); j++){
-						Task t = tasks.next();
-						System.out.println(t.getName());
-						}
-				}
+//				if( delete.isSelected() ) {
+//					driver.deleteTask(chosentask);
+//					for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); j++){
+//						Task t = tasks.next();
+//						System.out.println(t.getName());
+//						}
+//				}
 					
 				makeExistingTasksPanel(null);
 			} catch (BadLocationException f) {
@@ -573,12 +559,6 @@ public class GraphicalView {
 		space8.setFont(new Font("Times New Roman", Font.PLAIN, 10));
 		space9.setFont(spaceFont);
 
-		
-
-//		panel.add(movepos);
-//		panel.add(typewhere);
-//		panel.add(delete);
-//		panel.add(enterbutton);
 
 		JLabel tasklistlist = new JLabel("Task List");
 		tasklistlist.setFont(new Font("Times New Roman", Font.BOLD, 30));
@@ -592,6 +572,7 @@ public class GraphicalView {
 		panel.add(space1);		
 		panel.add(fields);
 		panel.add(move2);
+		
 
 		JPanel textme = new JPanel();
 		textme.setLayout(new BorderLayout());
@@ -617,6 +598,7 @@ public class GraphicalView {
 		
 		but.add(makeBackButton());
 		but.add(textme);
+		but.add(delete);
 		but.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel.add(but);
 		
