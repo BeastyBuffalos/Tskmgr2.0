@@ -311,8 +311,6 @@ public class GraphicalView {
 		for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); i++)
 		{
 			Task t = tasks.next();
-			System.out.println(t.getName());
-			//switchit[i] = (i+1) + ": " + t.getName();
 			switchit[i] = t.getName();
 		}
 		JComboBox changetask = new JComboBox(switchit);
@@ -403,9 +401,18 @@ public class GraphicalView {
 		space.setFont(new Font("Times New Roman", Font.PLAIN, 90));
 
 		JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
+<<<<<<< HEAD
 		JTextField typewhere = new JTextField("");
 		JCheckBox delete = new JCheckBox("Delete This Task?");
 		delete.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+=======
+		JTextField typewhere = new JTextField("", 5);
+		
+		
+		JButton delete = new JButton("Delete Task");
+		delete.setFont(delete.getFont().deriveFont(Font.BOLD, 24));
+		
+>>>>>>> jjschrau
 		typewhere.setEnabled(false);
 
 		JComboBox changetask = renderDrop(-1);
@@ -458,20 +465,6 @@ public class GraphicalView {
 		move2.add(move, BorderLayout.WEST);
 		
 				
-		JPanel removeCheck = new JPanel();
-		removeCheck.setLayout(new BoxLayout(removeCheck, BoxLayout.X_AXIS));
-		
-		JLabel spacer1 = new JLabel("spac");
-		spacer1.setFont(newTaskFont);
-		spacer1.setForeground(new Color(1, 1, 1, 0));
-
-
-		removeCheck.add(spacer1);
-		removeCheck.add(delete);
-		
-		JPanel rem2 = new JPanel();
-		rem2.setLayout(new BorderLayout());
-		rem2.add(removeCheck, BorderLayout.WEST);
 		
 		movepos.addActionListener((ActionEvent e) -> {
 			
@@ -485,7 +478,26 @@ public class GraphicalView {
 		
 		});
 		
-		
+		delete.addActionListener((e) -> {
+				Task chosentask = null;
+				Object item = changetask.getSelectedItem();
+				int j = 0;
+				for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); j++){
+					Task t = tasks.next();
+					if (t.getName() == item){
+						chosentask = t;
+						break;
+					}
+				}
+				driver.removeTask(chosentask);
+				
+				nameField.setText("");
+				dueField.setText("");
+				hoursField.setText("");
+				diffField.setText("");
+				typeField.setText("");
+				makeExistingTasksPanel(null);
+		});
 		
 		JButton enterbutton = new JButton("Enter");
 		enterbutton.addActionListener((ActionEvent e) -> {
@@ -511,13 +523,13 @@ public class GraphicalView {
 					driver.overrideTask(wheres, chosentask);
 					
 				}
-				if( delete.isSelected() ) {
-					driver.deleteTask(chosentask);
-					for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); j++){
-						Task t = tasks.next();
-						System.out.println(t.getName());
-						}
-				}
+//				if( delete.isSelected() ) {
+//					driver.deleteTask(chosentask);
+//					for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); j++){
+//						Task t = tasks.next();
+//						System.out.println(t.getName());
+//						}
+//				}
 					
 				makeExistingTasksPanel(null);
 			} catch (BadLocationException f) {
@@ -564,7 +576,7 @@ public class GraphicalView {
 		panel.add(space1);		
 		panel.add(fields);
 		panel.add(move2);
-		panel.add(rem2);
+		
 
 		JPanel textme = new JPanel();
 		textme.setLayout(new BorderLayout());
@@ -590,6 +602,7 @@ public class GraphicalView {
 		
 		but.add(makeBackButton());
 		but.add(textme);
+		but.add(delete);
 		but.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel.add(but);
 		
