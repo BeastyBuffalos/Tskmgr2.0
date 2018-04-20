@@ -520,9 +520,6 @@ public class GraphicalView {
 					int wheres = Integer.parseInt(typewhere.getDocument().getText(0, typewhere.getDocument().getLength()));
 					driver.overrideTask(wheres, chosentask);
 				}
-<<<<<<< HEAD
-					
-=======
 				driver.editTask(chosentask, namet, typet, duedate, hourst, false, diff);
 /*
 				if( delete.isSelected() ) {
@@ -533,7 +530,6 @@ public class GraphicalView {
 						}
 				}
 					*/
->>>>>>> Eli
 				makeExistingTasksPanel(null);
 			} catch (BadLocationException f) {
 				f.printStackTrace();

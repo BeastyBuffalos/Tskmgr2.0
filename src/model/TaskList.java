@@ -186,23 +186,6 @@ public class TaskList{
 		}
 	}
 
-	/**
-	 * 
-	 * @author ejoverwe
-	 *
-	 */
-	private class TaskWrapper implements Serializable{
-		private Task t;
-		private boolean moved = false;
-		public TaskWrapper(Task t){
-			this.t = t;
-		}
-
-		public Task get() { return t; }
-
-		public void setMoved(boolean moved) { this.moved = moved; }
-	}
-
 	public ListIterator<Task> getListIterator()
 	{
 		return new ListIterator<Task>()
