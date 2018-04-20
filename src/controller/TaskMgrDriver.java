@@ -93,6 +93,13 @@ public class TaskMgrDriver {
 		return tasks.getListIterator();
 	}
 	
+	public ListIterator<Task> deleteTask(Task task) {
+		
+		tasks.removeTask(task);
+		saveTaskList();
+		return getTasks();
+		
+	}
 	
 	public ListIterator<Task> editTask(Task task, 
 			String name1, String type1, int due, int hours, boolean comp, int diff)
@@ -102,10 +109,22 @@ public class TaskMgrDriver {
 		return getTasks();
 	}
 	
-	public ListIterator<Task> overrideTask(int placement){
-		tasks.overrideOrder(placement);
+	public ListIterator<Task> overrideTask(int placement, Task task){
+		tasks.overrideOrder(placement, task);
+		task.setOverride(true);
 		saveTaskList();
 		return getTasks();
+	}
+	
+	public Task toTask(String taskname){
+		int i = 0;
+		Task t = null;
+		for(ListIterator<Task> tasklist = this.getTasks(); tasklist.hasNext(); i++){
+			t = tasklist.next();
+			if (taskname == t.getName())
+					return t;
+		}
+		return t;
 	}
 	
 	public ListIterator<Task> addTask(String name, String type, int due, int hours, boolean comp, int diff) 
