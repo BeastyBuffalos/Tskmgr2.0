@@ -36,7 +36,6 @@ public class GraphicalView {
 	{
 		mainmenu.setLayout(new BorderLayout());
 		//finalization code
-		mainmenu.add(makeDropDownMenu(), BorderLayout.NORTH);
 		mainmenu.add(makeWelcomeText(), BorderLayout.CENTER);
 		mainmenu.add(makeMainButtons(), BorderLayout.SOUTH);
 		mainmenu.validate();
@@ -86,38 +85,6 @@ public class GraphicalView {
 		frame.setVisible(true);
 	}
 
-	private JPanel makeDropDownMenu()
-	{
-		//dropdown menu code
-		String[] switchit = { "Main Menu", "New Task", "Edit Tasks"};
-		JComboBox changescreen = new JComboBox(switchit);
-		changescreen.setSelectedIndex(0);
-		//changescreen.addActionListener(this);
-
-		JPanel dropdown = new JPanel();
-		dropdown.setLayout(new GridLayout(0,13));
-
-		dropdown.add(changescreen);
-
-		changescreen.addActionListener((event) ->
-		{
-			JComboBox cd = (JComboBox)event.getSource();
-			Object menu = cd.getSelectedItem();
-			if(menu.equals("Main Menu")) {
-				welcomePane(null);
-			} else if ( menu.equals("New Task")) {
-				taskCreationPane(null);
-			} else if ( menu.equals("Edit Tasks")) {
-				makeExistingTasksPanel(null);			
-			}
-
-
-
-		});
-
-
-		return dropdown;
-	}
 
 
 	private JPanel makeWelcomeText()
@@ -268,26 +235,18 @@ public class GraphicalView {
 		enter.add(enterbutton);
 		enter.add(backtomenu);		
 
-		JPanel dropdown = makeDropDownMenu();
-		JLabel fill1 = new JLabel("");
-		JLabel fill2 = new JLabel("");
-		JLabel fill3 = new JLabel("");
-		JLabel fill4 = new JLabel("");
-		JLabel fill5 = new JLabel("");
-		dropdown.add(fill1);
-		dropdown.add(fill2);
-		dropdown.add(fill3);
-		dropdown.add(fill4);
-		dropdown.add(fill5);
-		JLabel taskAdded = new JLabel("");
+		JPanel dropdown = new JPanel();
+		dropdown.setLayout(new FlowLayout());
+		
+		JLabel taskAdded = new JLabel(" ");
 		taskAdded.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		dropdown.add(taskAdded);
 
 
+		
 		enterbutton.addActionListener((event) ->
 		{
 			//use the getText to get the text for the new task
-			//TODO make this smoother somehow? fix issues with allowed input types
 			try {
 				int duedate = Integer.valueOf(dueField.getDocument().getText(0, dueField.getDocument().getLength()));
 				int diff = Integer.valueOf(diffField.getDocument().getText(0, diffField.getDocument().getLength()));
@@ -300,28 +259,32 @@ public class GraphicalView {
 					Task t = tasks.next();
 					if (namet.equals(t.getName()))
 						isOriginal = false;
-					taskAdded.setText("Error.");
+					taskAdded.setText("Error. Name already exists");
 					
 					nameField.setText("");
 				}
 				if (isOriginal){
 					driver.addTask(namet, typet, duedate, hourst, false, diff);
-					taskAdded.setText("Task Added");
+					taskAdded.setText(namet + " added");
 					dueField.setText("");
 					diffField.setText("");
 					hoursField.setText("");
 					typeField.setText("");
 					nameField.setText("");
+					
 				}
 
-				//taskAdded.setText("Task Added");
+				
+				
 				int delay = 3000;
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
-						taskAdded.setText("");
+						taskAdded.setText(" ");
 					}
 				};
-				new Timer(delay, taskPerformer).start();
+				Timer time = new Timer(delay, taskPerformer);
+				time.start();
+				
 
 			} catch (BadLocationException e) {
 				e.printStackTrace();
@@ -349,9 +312,12 @@ public class GraphicalView {
 		{
 			Task t = tasks.next();
 			System.out.println(t.getName());
+			//switchit[i] = (i+1) + ": " + t.getName();
 			switchit[i] = t.getName();
 		}
 		JComboBox changetask = new JComboBox(switchit);
+		changetask.setFont(new Font("Times New Roman", Font.PLAIN, 22));
+		((JLabel)changetask.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 		changetask.setSelectedIndex(currentTask);
 		return changetask;
 	}
@@ -362,54 +328,74 @@ public class GraphicalView {
 
 		//contentpane code
 		JPanel contentpane = new JPanel();
-		contentpane.setLayout(new BoxLayout(contentpane, BoxLayout.Y_AXIS));
+		contentpane.setLayout(new BorderLayout());
 
 		//TASK FIELDS
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(6,2, 1, 60));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.setPreferredSize(new Dimension((int)10,10));
-
+		
+		JPanel fields = new JPanel();
+		fields.setLayout(new GridLayout(5,2, 20, 40));
+		
 		// name
 		JLabel name = new JLabel("The Name of the Task: ", SwingConstants.RIGHT);
-		JTextField nameField = new JTextField("");
+		JTextField nameField = new JTextField("", 50);
+		nameField.setMaximumSize(nameField.getPreferredSize());
 
 		Font newTaskFont = new Font("Times New Roman", Font.PLAIN, 32);
 		name.setFont(newTaskFont);
 		nameField.setFont(newTaskFont);
+		
+		fields.add(name);
+		fields.add(nameField);
+		
 
-
-
-		// due date
+		// due date	
 		JLabel dueDate = new JLabel("The Date Due: ", SwingConstants.RIGHT);
-		JTextField dueField = new JTextField("");
+		JTextField dueField = new JTextField("", 50);
+		dueField.setMaximumSize(dueField.getPreferredSize());
 
 		dueDate.setFont(newTaskFont);
 		dueField.setFont(newTaskFont);
 
+		fields.add(dueDate);
+		fields.add(dueField);
 
 		// difficulty
 		JLabel difficulty = new JLabel("How You Would Rate It's Difficulty: ", SwingConstants.RIGHT);
-		JTextField diffField = new JTextField("");
+		JTextField diffField = new JTextField("", 50);
+		diffField.setMaximumSize(diffField.getPreferredSize());
 
 		difficulty.setFont(newTaskFont);
 		diffField.setFont(newTaskFont);	
+		
+		fields.add(difficulty);
+		fields.add(diffField);
 
 
 		// hours
 		JLabel hours = new JLabel("How Many Hours It Will Take To Finish: ", SwingConstants.RIGHT);
-		JTextField hoursField = new JTextField("");
+		JTextField hoursField = new JTextField("", 50);
+		hoursField.setMaximumSize(hoursField.getPreferredSize());
 
 		hours.setFont(newTaskFont);
 		hoursField.setFont(newTaskFont);
+		
+		fields.add(hours);
+		fields.add(hoursField);
 
 
 		// type
 		JLabel type = new JLabel("The Type of Task: ", SwingConstants.RIGHT);
-		JTextField typeField = new JTextField("");
+		JTextField typeField = new JTextField("", 50);
+		typeField.setMaximumSize(typeField.getPreferredSize());
 
 		type.setFont(newTaskFont);
 		typeField.setFont(newTaskFont);
-
+		
+		fields.add(type);
+		fields.add(typeField);
 
 
 		// space for right side of window
@@ -419,6 +405,7 @@ public class GraphicalView {
 		JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
 		JTextField typewhere = new JTextField("");
 		JCheckBox delete = new JCheckBox("Delete This Task?");
+		delete.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		typewhere.setEnabled(false);
 
 		JComboBox changetask = renderDrop(-1);
@@ -430,7 +417,6 @@ public class GraphicalView {
 			{
 				Task t = tasks.next();
 				if (t.getName() == item){
-					//System.out.println(item + " chosen");
 					chosentask = t;
 					diffField.setText(Integer.toString(chosentask.getDifficulty()));
 					nameField.setText(chosentask.getName());
@@ -445,7 +431,47 @@ public class GraphicalView {
 		});
 
 		panel.add(changetask);
+
+
+		movepos.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		typewhere.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		typewhere.setMaximumSize(typewhere.getPreferredSize());
+		typewhere.setEnabled(false);
+
 		
+		movepos.setAlignmentX(Component.LEFT_ALIGNMENT);
+		
+		JPanel move = new JPanel();
+		move.setLayout(new BoxLayout(move, BoxLayout.X_AXIS));
+		
+		JLabel spacer = new JLabel("spac");
+		spacer.setFont(newTaskFont);
+		spacer.setForeground(new Color(1, 1, 1, 0));
+
+		
+		move.add(spacer);
+		move.add(movepos);
+		move.add(typewhere);
+		
+		JPanel move2 = new JPanel();
+		move2.setLayout(new BorderLayout());
+		move2.add(move, BorderLayout.WEST);
+		
+				
+		JPanel removeCheck = new JPanel();
+		removeCheck.setLayout(new BoxLayout(removeCheck, BoxLayout.X_AXIS));
+		
+		JLabel spacer1 = new JLabel("spac");
+		spacer1.setFont(newTaskFont);
+		spacer1.setForeground(new Color(1, 1, 1, 0));
+
+
+		removeCheck.add(spacer1);
+		removeCheck.add(delete);
+		
+		JPanel rem2 = new JPanel();
+		rem2.setLayout(new BorderLayout());
+		rem2.add(removeCheck, BorderLayout.WEST);
 		
 		movepos.addActionListener((ActionEvent e) -> {
 			
@@ -499,44 +525,56 @@ public class GraphicalView {
 			}
 
 		});
+		JPanel change = new JPanel();
+		change.setLayout(new BoxLayout(change, BoxLayout.X_AXIS));
+		JLabel spaces = new JLabel("spacer				", SwingConstants.RIGHT);
+		spaces.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+		spaces.setForeground(new Color(1, 1, 1, 0));
 		
-		JLabel tasklistlist = new JLabel("Task List: ");
-		tasklistlist.setFont(newTaskFont);
+		change.add(spaces);
+		change.add(changetask);
+		
+		JPanel but = new JPanel();
+		but.setLayout(new FlowLayout(FlowLayout.CENTER, 45, 20));
+		enterbutton.setFont(enterbutton.getFont().deriveFont(Font.BOLD, 24));
+		but.add(enterbutton);
+		
+		Font spaceFont = new Font("Times New Roman", Font.PLAIN, 40);
+		
+		JLabel space1 = new JLabel("   ");
+		JLabel space7 = new JLabel("   ");
+		JLabel space8 = new JLabel("   ");
+		JLabel space9 = new JLabel("   ");
+		
+		space1.setFont(spaceFont);
+		space7.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		space8.setFont(new Font("Times New Roman", Font.PLAIN, 10));
+		space9.setFont(spaceFont);
+
+
+		JLabel tasklistlist = new JLabel("Task List");
+		tasklistlist.setFont(new Font("Times New Roman", Font.BOLD, 30));
+
+		
+		panel.add(space8);
 		panel.add(tasklistlist);
-		panel.add(changetask);
-
-		JPanel tasks = new JPanel();
-
-		panel.add(name);
-		panel.add(nameField);
-
-		panel.add(dueDate);
-		panel.add(dueField);
-
-		panel.add(difficulty);
-		panel.add(diffField);
-
-		panel.add(hours);
-		panel.add(hoursField);
-
-		panel.add(type);
-		panel.add(typeField);
-
-		
-		panel.add(movepos);
-		panel.add(typewhere);
-		panel.add(delete);
-		panel.add(enterbutton);
-		
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(space7);
+		panel.add(change);
+		panel.add(space9);
+		panel.add(space1);		
+		panel.add(fields);
+		panel.add(move2);
+		panel.add(rem2);
 
 		JPanel textme = new JPanel();
+		textme.setLayout(new BorderLayout());
+		
 
 		JButton removeAllTasks = new JButton("Remove All Tasks");
 		removeAllTasks.setFont(removeAllTasks.getFont().deriveFont(Font.BOLD, 24));
 
 
-		textme.add(removeAllTasks);
+		textme.add(removeAllTasks, BorderLayout.CENTER);
 
 		removeAllTasks.addActionListener( (ActionEvent e) -> {
 			ListIterator<Task> tasklist = driver.getTasks();
@@ -548,12 +586,16 @@ public class GraphicalView {
 			//TODO no, the next line is bad
 			makeExistingTasksPanel(null);
 		});
+		
+		
+		but.add(makeBackButton());
+		but.add(textme);
+		but.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel.add(but);
+		
 
-		contentpane.add(panel);
-		//finalization code
-		contentpane.add(makeBackButton());
-		contentpane.add(tasks);
-		contentpane.add(textme);
+		contentpane.add(panel, BorderLayout.CENTER);
+		contentpane.add(space, BorderLayout.EAST);
 
 		//finalization code
 		contentpane.validate();

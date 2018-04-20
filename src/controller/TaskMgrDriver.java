@@ -95,7 +95,7 @@ public class TaskMgrDriver {
 	
 	public ListIterator<Task> deleteTask(Task task) {
 		
-		tasks.deleteTask(task);
+		tasks.removeTask(task);
 		saveTaskList();
 		return getTasks();
 		
