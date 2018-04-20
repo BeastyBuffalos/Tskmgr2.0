@@ -519,13 +519,6 @@ public class GraphicalView {
 					driver.overrideTask(wheres, chosentask);
 					
 				}
-//				if( delete.isSelected() ) {
-//					driver.deleteTask(chosentask);
-//					for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); j++){
-//						Task t = tasks.next();
-//						System.out.println(t.getName());
-//						}
-//				}
 					
 				makeExistingTasksPanel(null);
 			} catch (BadLocationException f) {
