@@ -401,18 +401,14 @@ public class GraphicalView {
 		space.setFont(new Font("Times New Roman", Font.PLAIN, 90));
 
 		JCheckBox movepos = new JCheckBox("Manually Assign The Position For This Task?");
-<<<<<<< HEAD
-		JTextField typewhere = new JTextField("");
-		JCheckBox delete = new JCheckBox("Delete This Task?");
-		delete.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-=======
+
 		JTextField typewhere = new JTextField("", 5);
+		
 		
 		
 		JButton delete = new JButton("Delete Task");
 		delete.setFont(delete.getFont().deriveFont(Font.BOLD, 24));
 		
->>>>>>> jjschrau
 		typewhere.setEnabled(false);
 
 		JComboBox changetask = renderDrop(-1);
