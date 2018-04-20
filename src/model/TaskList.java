@@ -12,13 +12,13 @@ import java.util.function.IntSupplier;
  */
 public class TaskList{
 
-	
+
 	private ArrayList<Task> tasks = new ArrayList<>();
 
 	public TaskList() {
 		//TODO
 	}
-	
+
 	public void insertTask(Task task){
 		tasks.add(task);
 		radixsort(tasks);
@@ -28,7 +28,7 @@ public class TaskList{
 		tasks.remove(task);
 
 		radixsort(tasks);
-		
+
 		return task;
 
 	}
@@ -36,20 +36,23 @@ public class TaskList{
 	public Task editTask(Task task, 
 			String name1, String type1, int due, int hours, boolean comp, int diff){
 
-		Task updated = new Task(name1, type1, due, hours, comp, diff);
-		tasks.remove(task);
-		tasks.add(updated);
+		task.setDifficulty(diff);
+		task.setDue(due);
+		task.setType(type1);
+		task.setHours(hours);
+		task.setComplete(comp);
+		task.setName(name1);
 
 		radixsort(tasks);
 
-		return updated;
+		return task;
 	}
 
 	public void deleteTask(Task task) {
-		
+
 		tasks.remove(task);
 		radixsort(tasks);
-		
+
 	}
 
 	private void radixsort(ArrayList<Task> tasklist) {
@@ -69,18 +72,18 @@ public class TaskList{
 	private void sort(ArrayList<Task> temp, Comparator<Task> c) {
 		Collections.sort(temp, Collections.reverseOrder(c));
 	}
-	
+
 	private int taskComparator(Task a, Task b, IntSupplier sa, IntSupplier sb)
 	{
 		return (sa.getAsInt() > sb.getAsInt()) ? -1 : 
 			(sa.getAsInt() < sb.getAsInt()) ? 1 : 0;
 	}
-	
+
 	private int compareDiff(Task a, Task b)
 	{
 		return taskComparator(a, b, a::getDifficulty, b::getDifficulty);
 	}
-	
+
 	private int compareHour(Task a, Task b)
 	{
 		return taskComparator(a, b, a::getHours, b::getHours);
@@ -94,9 +97,8 @@ public class TaskList{
 	public void overrideOrder(int placement, Task task){
 
 		Task prior, post;
-
 		placement -= 1;
-		
+
 		if (placement == 0){
 			task.setDueDateOverride(0);
 			task.setHrsOverride(0);
@@ -104,17 +106,17 @@ public class TaskList{
 		}
 
 
-		else if (placement >= tasks.size()){
+		else if (placement >= tasks.size()-1){
 			placement = tasks.size() - 1;
-			task.setDueDateOverride(9);
-			task.setHrsOverride(0);
-			task.setDifficultyOverride(0);
+			task.setDueDateOverride(100000000);
+			task.setHrsOverride(100000);
+			task.setDifficultyOverride(10000);
 		}
 
 		else{
 			prior = tasks.get(placement - 1);
 			post = tasks.get(placement + 1);
-			
+
 			int pridue = prior.getDue();
 			int prihrs = prior.getHours();
 			int pridiff = prior.getDifficulty();
@@ -122,7 +124,7 @@ public class TaskList{
 			int postdue = post.getDue();
 			int posthrs = post.getHours();
 			int postdiff = post.getDifficulty();
-			
+
 			if(prior.isOverride()){
 				pridue = prior.getDueDateOverride();
 				prihrs = prior.getHrsOverride();
@@ -143,6 +145,11 @@ public class TaskList{
 			task.setDifficultyOverride(postdiff - diffdelta);
 		}
 		task.setOverride(true);
+		System.out.println(task.isOverride());
+		System.out.println(task.getDifficulty());
+		System.out.println(task.getDue());
+		System.out.println(task.getHours());
+
 		radixsort(tasks);
 	}
 
@@ -156,7 +163,7 @@ public class TaskList{
 			e.printStackTrace();
 		}
 	}
-	
+
 	void printTasks()
 	{
 		for(Task t: tasks)

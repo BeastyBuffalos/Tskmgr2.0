@@ -55,7 +55,7 @@ public class GraphicalView {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout());
-		frame.setSize(1200, 800);
+		frame.setSize(1600, 900);
 
 		//unsorted code
 		Color backCol = new Color(200, 210, 230);
@@ -260,7 +260,6 @@ public class GraphicalView {
 					if (namet.equals(t.getName()))
 						isOriginal = false;
 					taskAdded.setText("Error. Name already exists");
-					
 					nameField.setText("");
 				}
 				if (isOriginal){
@@ -421,13 +420,16 @@ public class GraphicalView {
 				Task t = tasks.next();
 				if (t.getName() == item){
 					chosentask = t;
-					diffField.setText(Integer.toString(chosentask.getDifficulty()));
+					diffField.setText(Integer.toString(chosentask.getRealDiff()));
 					nameField.setText(chosentask.getName());
-					hoursField.setText(Integer.toString(chosentask.getHours()));
-					dueField.setText(Integer.toString(chosentask.getDue()));
+					hoursField.setText(Integer.toString(chosentask.getRealHrs()));
+					dueField.setText(Integer.toString(chosentask.getRealDue()));
 					typeField.setText(chosentask.getType());
-					if (chosentask.isOverride())
+					if (chosentask.isOverride()){
+						
 						movepos.setSelected(true);
+						typewhere.setEnabled(true);
+					}
 					break;
 				}
 			}
@@ -513,20 +515,21 @@ public class GraphicalView {
 				int hourst = Integer.valueOf(hoursField.getDocument().getText(0, hoursField.getDocument().getLength()));
 				String typet = typeField.getDocument().getText(0, typeField.getDocument().getLength());
 				String namet = nameField.getDocument().getText(0, nameField.getDocument().getLength());
-				driver.editTask(chosentask, namet, typet, duedate, hourst, false, diff);
-				if( !typewhere.isEditable() && !typewhere.equals("") ) {
+				if(movepos.isSelected() && !typewhere.getText().equals("")) {
+					chosentask.setOverride(true);
 					int wheres = Integer.parseInt(typewhere.getDocument().getText(0, typewhere.getDocument().getLength()));
 					driver.overrideTask(wheres, chosentask);
-					
 				}
-//				if( delete.isSelected() ) {
-//					driver.deleteTask(chosentask);
-//					for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); j++){
-//						Task t = tasks.next();
-//						System.out.println(t.getName());
-//						}
-//				}
-					
+				driver.editTask(chosentask, namet, typet, duedate, hourst, false, diff);
+/*
+				if( delete.isSelected() ) {
+					driver.deleteTask(chosentask);
+					for(ListIterator<Task> tasks = driver.getTasks(); tasks.hasNext(); j++){
+						Task t = tasks.next();
+						System.out.println(t.getName());
+						}
+				}
+					*/
 				makeExistingTasksPanel(null);
 			} catch (BadLocationException f) {
 				f.printStackTrace();
