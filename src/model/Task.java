@@ -40,12 +40,24 @@ public class Task implements Serializable {
 
 	}
 
+	public int getRealDiff() {
+
+		return difficulty;
+	}
+	public int getRealHrs() {
+
+		return hourstodo;
+	}
+	public int getRealDue() {
+
+		return duedate;
+	}
+	
 	public int getDue() {
 		if(isOverride()){
 			return newDueDate;
 		}
 		return duedate;
-
 	}
 
 	public void setName(String name1) {
